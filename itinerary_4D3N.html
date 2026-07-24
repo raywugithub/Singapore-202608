@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🇸🇬 新加坡 4天3夜 小探險家星島大冒險！</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@500;600;700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #FF6B6B;
+            --primary-light: #FF8E8E;
+            --secondary: #4ECDC4;
+            --secondary-dark: #36B5AC;
+            --accent: #FFE66D;
+            --purple: #6C5CE7;
+            --purple-light: #A29BFE;
+            --green: #00B894;
+            --blue: #0984E3;
+            --dark: #2D3436;
+            --gray-bg: #F7F9FC;
+            --card-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            --hover-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --radius-sm: 10px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Quicksand', 'Noto Sans TC', sans-serif;
+            background-color: #F0F4F8;
+            background-image: radial-gradient(#E2E8F0 1.5px, transparent 1.5px);
+            background-size: 24px 24px;
+            color: var(--dark);
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+
+        /* --- Header Banner --- */
+        .hero-banner {
+            background: linear-gradient(135deg, #6C5CE7 0%, #FF6B6B 50%, #FFE66D 100%);
+            color: white;
+            padding: 40px 20px 60px;
+            text-align: center;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            box-shadow: 0 15px 30px rgba(108, 92, 231, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -20%;
+            width: 140%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 60%);
+            animation: pulse 8s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); }
+            100% { transform: scale(1.05); }
+        }
+
+        .floating-icon {
+            position: absolute;
+            font-size: 2.5rem;
+            opacity: 0.85;
+            animation: float 4s ease-in-out infinite;
+        }
+        .icon-1 { top: 15%; left: 8%; animation-delay: 0s; }
+        .icon-2 { top: 20%; right: 10%; animation-delay: 1s; }
+        .icon-3 { bottom: 15%; left: 12%; animation-delay: 2s; }
+        .icon-4 { bottom: 20%; right: 15%; animation-delay: 1.5s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(6deg); }
+        }
+
+        .hero-title-box {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(8px);
+            padding: 6px 18px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        .hero-title {
+            font-family: 'Fredoka', 'Noto Sans TC', sans-serif;
+            font-size: 2.6rem;
+            font-weight: 700;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            margin-bottom: 10px;
+            line-height: 1.25;
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            font-weight: 600;
+            opacity: 0.95;
+            margin-bottom: 20px;
+        }
+
+        .meta-chips-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .meta-chip {
+            background: white;
+            color: var(--dark);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* --- Main Container & Sticky Navigation --- */
+        .container {
+            max-width: 1050px;
+            margin: -30px auto 0;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .nav-tabs-wrapper {
+            background: white;
+            padding: 10px;
+            border-radius: 50px;
+            box-shadow: var(--card-shadow);
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            position: sticky;
+            top: 15px;
+            z-index: 100;
+            margin-bottom: 30px;
+            border: 2px solid rgba(108, 92, 231, 0.1);
+        }
+
+        .nav-tabs-wrapper::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab-btn {
+            flex: 1;
+            min-width: 130px;
+            padding: 12px 16px;
+            border: none;
+            border-radius: 40px;
+            background: transparent;
+            color: #636E72;
+            font-family: 'Fredoka', 'Noto Sans TC', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+
+        .tab-btn:hover {
+            background: #F1F2F6;
+            color: var(--purple);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--purple) 0%, #8E44AD 100%);
+            color: white;
+            box-shadow: 0 6px 16px rgba(108, 92, 231, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .tab-btn.tab-overview.active {
+            background: linear-gradient(135deg, var(--blue) 0%, #00CEC9 100%);
+        }
+        .tab-btn.tab-day1.active {
+            background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+        }
+        .tab-btn.tab-day2.active {
+            background: linear-gradient(135deg, #00B894 0%, #00CEC9 100%);
+        }
+        .tab-btn.tab-day3.active {
+            background: linear-gradient(135deg, #E84393 0%, #FF7675 100%);
+        }
+        .tab-btn.tab-day4.active {
+            background: linear-gradient(135deg, #FDCB6E 0%, #E17055 100%);
+        }
+        .tab-btn.tab-checklist.active {
+            background: linear-gradient(135deg, #6C5CE7 0%, #A29BFE 100%);
+        }
+
+        /* --- Section Content Animations --- */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Card Styles --- */
+        .card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            margin-bottom: 24px;
+            box-shadow: var(--card-shadow);
+            border: 2px solid #F0F3F8;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: var(--hover-shadow);
+            border-color: rgba(108, 92, 231, 0.2);
+        }
+
+        .card-header-title {
+            font-family: 'Fredoka', 'Noto Sans TC', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        /* --- Kid Highlight Box --- */
+        .explorer-highlight {
+            background: linear-gradient(135deg, #FFF9E6 0%, #FFF3C4 100%);
+            border-left: 6px solid #FFC048;
+            padding: 16px 20px;
+            border-radius: var(--radius-md);
+            margin: 16px 0;
+            position: relative;
+        }
+
+        .explorer-highlight-title {
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 700;
+            color: #D63031;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 6px;
+        }
+
+        .explorer-highlight p {
+            font-size: 0.95rem;
+            color: #2D3436;
+            font-weight: 600;
+        }
+
+        /* --- Day Header Card --- */
+        .day-header-card {
+            background: linear-gradient(135deg, #FFFFFF 0%, #F4F7FE 100%);
+            border-radius: var(--radius-lg);
+            padding: 24px 30px;
+            margin-bottom: 28px;
+            box-shadow: var(--card-shadow);
+            border-left: 8px solid var(--primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .day-header-info h2 {
+            font-family: 'Fredoka', 'Noto Sans TC', sans-serif;
+            font-size: 1.8rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .day-header-info p {
+            color: #636E72;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .day-theme-badge {
+            background: linear-gradient(135deg, var(--accent) 0%, #FFC048 100%);
+            color: #D63031;
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 10px rgba(255, 192, 72, 0.3);
+        }
+
+        /* --- Timeline Component --- */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 12px;
+            top: 20px;
+            bottom: 20px;
+            width: 4px;
+            background: #E2E8F0;
+            border-radius: 4px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 28px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -30px;
+            top: 22px;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: white;
+            border: 4px solid var(--purple);
+            box-shadow: 0 0 0 4px rgba(108, 92, 231, 0.15);
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover .timeline-dot {
+            transform: scale(1.25);
+            background: var(--purple);
+        }
+
+        .timeline-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            box-shadow: var(--card-shadow);
+            border: 2px solid #F0F3F8;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .timeline-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--hover-shadow);
+            border-color: rgba(108, 92, 231, 0.3);
+        }
+
+        .timeline-time-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .time-pill {
+            background: #F1F2F6;
+            color: var(--purple);
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .timeline-title {
+            font-family: 'Fredoka', 'Noto Sans TC', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* --- Transport Box --- */
+        .transport-box {
+            background: #F0F7FF;
+            border-radius: var(--radius-md);
+            padding: 12px 16px;
+            margin: 12px 0;
+            border: 1.5px dashed #74B9FF;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.92rem;
+            color: #0984E3;
+            font-weight: 600;
+        }
+
+        .transport-box .t-icon {
+            font-size: 1.2rem;
+            margin-top: 2px;
+        }
+
+        /* --- Accordion Details --- */
+        details.detail-accordion {
+            margin-top: 14px;
+            border-top: 1px solid #F1F2F6;
+            padding-top: 10px;
+        }
+
+        details.detail-accordion summary {
+            font-weight: 700;
+            color: var(--purple);
+            cursor: pointer;
+            padding: 6px 0;
+            outline: none;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.95rem;
+        }
+
+        details.detail-accordion summary:hover {
+            color: #8E44AD;
+        }
+
+        .accordion-content {
+            padding: 12px 0 4px;
+            font-size: 0.95rem;
+            color: #4A5568;
+        }
+
+        .accordion-content ul {
+            padding-left: 20px;
+            margin: 8px 0;
+        }
+
+        .accordion-content li {
+            margin-bottom: 6px;
+        }
+
+        /* --- Food Tag & Badges --- */
+        .food-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: #FFF0F0;
+            color: #D63031;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-right: 6px;
+        }
+
+        .cost-tag {
+            background: #E6FFFA;
+            color: #00B894;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        /* --- Table Styling --- */
+        .custom-table-wrapper {
+            overflow-x: auto;
+            margin: 16px 0;
+            border-radius: var(--radius-md);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        table.custom-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        table.custom-table th {
+            background: linear-gradient(135deg, var(--purple) 0%, #8E44AD 100%);
+            color: white;
+            padding: 14px 16px;
+            font-family: 'Fredoka', 'Noto Sans TC', sans-serif;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        table.custom-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #EDF2F7;
+        }
+
+        table.custom-table tr:nth-child(even) {
+            background-color: #F8FAFC;
+        }
+
+        table.custom-table tr:hover {
+            background-color: #F0F4F8;
+        }
+
+        /* --- Kid Explorer Mission Checklist --- */
+        .checklist-score-card {
+            background: linear-gradient(135deg, #FFE66D 0%, #FF7675 100%);
+            color: white;
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            text-align: center;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 25px rgba(255, 118, 117, 0.3);
+        }
+
+        .score-title {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.15);
+        }
+
+        .progress-bar-container {
+            background: rgba(255, 255, 255, 0.3);
+            height: 18px;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 14px 0;
+            padding: 3px;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: white;
+            width: 0%;
+            border-radius: 20px;
+            transition: width 0.5s ease;
+        }
+
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 16px;
+        }
+
+        .check-item-card {
+            background: white;
+            border-radius: var(--radius-md);
+            padding: 16px 20px;
+            box-shadow: var(--card-shadow);
+            border: 2px solid #F0F3F8;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .check-item-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--secondary);
+        }
+
+        .check-item-card.completed {
+            background: #E6FFFA;
+            border-color: var(--green);
+            text-decoration: line-through;
+            opacity: 0.85;
+        }
+
+        .custom-checkbox {
+            width: 26px;
+            height: 26px;
+            border-radius: 8px;
+            border: 2.5px solid #CBD5E0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: white;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .check-item-card.completed .custom-checkbox {
+            background: var(--green);
+            border-color: var(--green);
+        }
+
+        .check-item-text {
+            font-weight: 700;
+            color: var(--dark);
+            font-size: 1rem;
+        }
+
+        /* --- Alert Box --- */
+        .warning-box {
+            background: #FFF5F5;
+            border-left: 6px solid #E53E3E;
+            padding: 16px 20px;
+            border-radius: var(--radius-md);
+            margin: 16px 0;
+            color: #9B2C2C;
+            font-size: 0.95rem;
+        }
+
+        .warning-box h4 {
+            font-family: 'Fredoka', sans-serif;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #A0AEC0;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* --- Responsive Media Queries --- */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 1.9rem; }
+            .hero-subtitle { font-size: 1rem; }
+            .container { padding: 0 12px; }
+            .nav-tabs-wrapper { padding: 6px; gap: 4px; }
+            .tab-btn { min-width: 100px; padding: 10px 12px; font-size: 0.88rem; }
+            .timeline { padding-left: 20px; }
+            .timeline-dot { left: -20px; width: 22px; height: 22px; }
+            .timeline::before { left: 8px; }
+            .day-header-card { flex-direction: column; align-items: flex-start; }
+            .checklist-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Banner -->
+    <header class="hero-banner">
+        <span class="floating-icon icon-1">🦁</span>
+        <span class="floating-icon icon-2">🦕</span>
+        <span class="floating-icon icon-3">🐬</span>
+        <span class="floating-icon icon-4">🛼</span>
+        
+        <div class="hero-title-box">
+            <span class="hero-badge">FAMILY EXPLORER TRIP 2026</span>
+            <h1 class="hero-title">🇸🇬 新加坡 4天3夜 小探險家大冒險！</h1>
+            <p class="hero-subtitle">恐龍 🦕 ✕ 瀑布 🌊 ✕ 海豚游泳 🐬 ✕ 斜坡滑車 🛼 ✕ 璀璨雙煙火 🎇</p>
+            
+            <div class="meta-chips-container">
+                <div class="meta-chip">👨‍👩‍👧 2 大人 + 1 小孩（8歲）</div>
+                <div class="meta-chip">📅 2026/08/21 (五) – 08/24 (一)</div>
+                <div class="meta-chip">🏨 M Hotel Singapore City Centre (3晚)</div>
+                <div class="meta-chip">💱 匯率參考：1 SGD ≈ NT.25</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <div class="container">
+        
+        <!-- Sticky Navigation Tabs -->
+        <nav class="nav-tabs-wrapper">
+            <button class="tab-btn tab-overview active" onclick="switchTab('overview')">🗺️ 行程總覽</button>
+            <button class="tab-btn tab-day1" onclick="switchTab('day1')">Day 1 ✈️ 瀑布首航</button>
+            <button class="tab-btn tab-day2" onclick="switchTab('day2')">Day 2 🦕 恐龍與雙秀</button>
+            <button class="tab-btn tab-day3" onclick="switchTab('day3')">Day 3 🐬 海豚與滑車</button>
+            <button class="tab-btn tab-day4" onclick="switchTab('day4')">Day 4 🛫 歡樂返航</button>
+            <button class="tab-btn tab-checklist" onclick="switchTab('checklist')">🎒 任務與清單</button>
+        </nav>
+
+        <!-- ==================== TAB 0: OVERVIEW ==================== -->
+        <section id="tab-overview" class="tab-content active">
+            
+            <div class="card">
+                <div class="card-header-title">✈️ 航班與住宿核心資訊</div>
+                <div class="custom-table-wrapper">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>項目</th>
+                                <th>時間 / 詳細資訊</th>
+                                <th>備註說明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>去程航班</strong></td>
+                                <td>8/21（五）<strong>TPE → SIN 01:35–06:00</strong></td>
+                                <td>紅眼航班，清晨抵達新加坡樟宜機場</td>
+                            </tr>
+                            <tr>
+                                <td><strong>回程航班</strong></td>
+                                <td>8/24（一）<strong>SIN → TPE 12:25–17:10</strong></td>
+                                <td>提早 3 小時（09:25）抵達機場從容通關</td>
+                            </tr>
+                            <tr>
+                                <td><strong>飯店住宿</strong></td>
+                                <td><strong>M Hotel Singapore City Centre</strong> (3晚)</td>
+                                <td>地址：81 Anson Road, S079908</td>
+                            </tr>
+                            <tr>
+                                <td><strong>機場往返</strong></td>
+                                <td><strong>一律搭乘計程車 / Grab</strong></td>
+                                <td>帶行李與小孩最省力（約 20 分鐘）</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header-title">🚇 關鍵交通速查卡（飯店出發指南）</div>
+                <p style="font-weight:600; color:#636E72; margin-bottom:12px;">
+                    📍 <strong>M Hotel 地理優勢</strong>：步行約 10–13 分鐘可達 <strong>珊頓道站 Shenton Way (TE19)</strong> 或 <strong>丹戎巴葛站 Tanjong Pagar (EW15)</strong>。
+                </p>
+                <div class="custom-table-wrapper">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>目的地</th>
+                                <th>推薦交通方式</th>
+                                <th>路線細節</th>
+                                <th>時間與費用</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>樟宜機場 ⇄ 飯店</strong></td>
+                                <td>🚖 <strong>計程車 / Grab</strong></td>
+                                <td>直達飯店大門</td>
+                                <td>~20分｜SGD 25–40 (NT 581–930)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>飯店 → 濱海灣花園</strong></td>
+                                <td>🚇 <strong>MRT 環線 CC</strong></td>
+                                <td>Prince Edward Rd (CC32) → 海灣舫 Bayfront (CC1/DT16)</td>
+                                <td>~15-20分｜SGD ~1.5/人 (NT ~35)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>飯店 → 金沙 SkyPark</strong></td>
+                                <td>🚇 <strong>MRT 濱海市區線 DT</strong></td>
+                                <td>至 Bayfront 站 (DT16) 出站步行 3 分鐘直達金沙大堂</td>
+                                <td>~15-20分｜SGD ~1.5/人 (NT ~35)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>飯店 → 聖淘沙島</strong></td>
+                                <td>🚖 <strong>計程車直達（推薦）</strong></td>
+                                <td>直達 RWS 或 Palawan Beach 海灘（避免轉乘遲到）</td>
+                                <td>~15-20分｜SGD 15–20 (NT 349–465)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>飯店 ⇄ 魚尾獅公園</strong></td>
+                                <td>🚇 <strong>MRT 東西線 EW</strong></td>
+                                <td>Tanjong Pagar (EW15) → Raffles Place (EW14) 步行 9 分</td>
+                                <td>~17-20分｜SGD ~1.5/人 (NT ~35)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="explorer-highlight">
+                    <div class="explorer-highlight-title">💡 小探險家搭車指南</div>
+                    <p>1. 帶著大行李箱時：毫不猶豫選計程車（Grab App 很方便）！<br>
+                    2. 去濱海灣看花園恐龍時：搭捷運又快又有冷氣吹！<br>
+                    3. 去聖淘沙看海豚玩滑車時：直接坐計程車開進島上最準時！</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header-title">💰 預算概估總覽（2大1小 8歲）</div>
+                <div class="custom-table-wrapper">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>門票項目</th>
+                                <th>成人 x2</th>
+                                <th>兒童 x1 (8歲)</th>
+                                <th>小計 (SGD)</th>
+                                <th>小計 概估 (TWD)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>濱海灣花園雙館 (Day 2)</strong></td>
+                                <td>SGD 46×2</td>
+                                <td>SGD 32</td>
+                                <td>SGD 124</td>
+                                <td>約 NT$ 2,883</td>
+                            </tr>
+                            <tr>
+                                <td><strong>金沙 SkyPark 觀景台 (Day 2)</strong></td>
+                                <td>SGD 35×2</td>
+                                <td>SGD 31</td>
+                                <td>SGD 101</td>
+                                <td>約 NT$ 2,348</td>
+                            </tr>
+                            <tr>
+                                <td><strong>時光之翼水舞煙火秀 (Day 3)</strong></td>
+                                <td>SGD 22×2</td>
+                                <td>SGD 22</td>
+                                <td>SGD 66</td>
+                                <td>約 NT$ 1,535</td>
+                            </tr>
+                            <tr>
+                                <td><strong>聖淘沙入島費 (Day 3)</strong></td>
+                                <td>SGD 4×2</td>
+                                <td>SGD 4</td>
+                                <td>SGD 12</td>
+                                <td>約 NT$ 279</td>
+                            </tr>
+                            <tr>
+                                <td><strong>海豚體驗 & Skyline Luge</strong></td>
+                                <td>以預約信為準</td>
+                                <td>以預約信為準</td>
+                                <td>官方預購為準</td>
+                                <td>依官網即時公告</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p style="font-size:0.88rem; color:#718096; margin-top:8px;">* 註：匯率以 1 SGD ≈ NT$ 25 計算，餐飲與計程車車資另計。</p>
+            </div>
+
+        </section>
+
+        <!-- ==================== TAB 1: DAY 1 ==================== -->
+        <section id="tab-day1" class="tab-content">
+            
+            <div class="day-header-card" style="border-left-color: var(--primary);">
+                <div class="day-header-info">
+                    <h2>📅 Day 1 — 8/21 (五) 星耀樟宜 🌊 ＋ 魚尾獅 🦁</h2>
+                    <p>清晨落地 ➔ 樟宜寄物 ➔ 星耀瀑布 ➔ 飯店午休 ➔ 魚尾獅公園 ➔ 麥士威美食</p>
+                </div>
+                <span class="day-theme-badge">探險主題：超級大瀑布與噴水獅</span>
+            </div>
+
+            <div class="timeline">
+                
+                <!-- 06:00 - 07:30 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">1</div>
+                    <div class="timeline-card">
+                        <div class="timeline-time-row">
+                            <span class="time-pill">⏰ 06:00 – 07:30</span>
+                            <span class="cost-tag">寄物費約 SGD 24–30</span>
+                        </div>
+                        <h3 class="timeline-title">🛬 抵達新加坡 ＆ 行李大寄存</h3>
+                        <p>清晨 06:00 順利落地，辦理入境與提領行李。因飯店下午才能 check-in，先在機場 L1 櫃檯寄存 2 件大行李箱。</p>
+                        
+                        <div class="explorer-highlight">
+                            <div class="explorer-highlight-title">🦕 探險家亮點提示</div>
+                            <p>樟宜機場是全世界最棒的機場！剛下飛機先放下重重的行李，準備去尋找世界最大的室內瀑布吧！</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 07:30 - 12:00 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">2</div>
+                    <div class="timeline-card">
+                        <div class="timeline-time-row">
+                            <span class="time-pill">⏰ 07:30 – 12:00</span>
+                            <span class="food-badge">🍳 早餐：海南寶 The Hainan Story</span>
+                        </div>
+                        <h3 class="timeline-title">🌊 星耀樟宜 Jewel ＋ 頂樓 Canopy Park 星空花園</h3>
+                        <p>欣賞 40 公尺高的<strong>匯豐雨漩渦（Rain Vortex）</strong>大瀑布，在資生堂森林谷散步。10:00 準時登上頂樓 Canopy Park 玩滑梯與花園走廊！</p>
+
+                        <div class="transport-box">
+                            <span class="t-icon">🚶</span>
+                            <div>步行動線：星耀樟宜商場內（早餐 ➔ 森林谷 ➔ 10:00 頂樓 Canopy Park）。</div>
+                        </div>
+
+                        <details class="detail-accordion">
+                            <summary>📖 查看早餐推薦與備案詳情</summary>
+                            <div class="accordion-content">
+                                <ul>
+                                    <li><strong>海南寶 (Jewel B2-201)</strong>：經典咖椰吐司、海南雞飯與拉茶（人均 SGD 10–15）。</li>
+                                    <li><strong>彈性調整</strong>：若紅眼航班後小朋友太累，可只觀賞瀑布外觀，跳過付費 Canopy Park 提早前往飯店休息。</li>
+                                </ul>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
+                <!-- 12:00 - 14:00 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">3</div>
+                    <div class="timeline-card">
+                        <div class="timeline-time-row">
+                            <span class="time-pill">⏰ 12:00 – 14:00</span>
+                            <span class="cost-tag">計程車 SGD 25–35</span>
+                        </div>
+                        <h3 class="timeline-title">🚖 取行李 ➔ 直達 M Hotel Check-in</h3>
+                        <p>領回寄存行李，搭乘計程車直達飯店（車程約 20 分鐘）。</p>
+
+                        <div class="transport-box">
+                            <span class="t-icon">🚕</span>
+                            <div>計程車直達：樟宜機場 ➔ M Hotel City Centre（約 20 分鐘，含機場附加費）。</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 14:00 - 16:30 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">4</div>
+                    <div class="timeline-card">
+                        <div class="timeline-time-row">
+                            <span class="time-pill">⏰ 14:00 – 16:30</span>
+                        </div>
+                        <h3 class="timeline-title">🏨 飯店 Check-in ＆ 充電午休</h3>
+                        <p>進房間洗澡、補眠休息，為傍晚與夜間的探險補足滿滿體力！</p>
+                    </div>
+                </div>
+
+                <!-- 16:30 - 18:00 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">5</div>
+                    <div class="timeline-card">
+                        <div class="timeline-time-row">
+                            <span class="time-pill">⏰ 16:30 – 18:00</span>
+                        </div>
+                        <h3 class="timeline-title">🦁 魚尾獅公園 Merlion Park 拍照打卡</h3>
+                        <p>與新加坡最知名的噴水魚尾獅合照，欣賞濱海灣大樓美景！</p>
+
+                        <div class="transport-box">
+                            <span class="t-icon">🚇</span>
+                            <div>MRT 路線：步行 6 分至 Tanjong Pagar (EW15) ➔ 搭 EW 線 1 站至 Raffles Place (EW14) ➔ 步行 9 分抵達。</div>
+                        </div>
+
+                        <div class="explorer-highlight">
+                            <div class="explorer-highlight-title">📸 探險家必拍姿勢</div>
+                            <p>張開嘴巴或用接水杯的姿勢，拍出最搞笑的「接魚尾獅聖水」照片吧！</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 18:00 - 20:00 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">6</div>
+                    <div class="timeline-card">
+                        <div class="timeline-time-row">
+                            <span class="time-pill">⏰ 18:00 – 20:00</span>
+                            <span class="food-badge">🍲 晚餐：天天海南雞飯 / 松發肉骨茶</span>
+                        </div>
+                        <h3 class="timeline-title">🍚 牛車水美食冒險（麥士威熟食中心）</h3>
+                        <p>品嚐馳名中外的海南雞飯與濃郁肉骨茶，感受牛車水熱鬧風情。</p>
+
+                        <div class="transport-box">
+                            <span class="t-icon">🚇</span>
+                            <div>MRT 路線：Raffles Place (EW14) 搭 2 站至 Outram Park (EW16) ➔ 轉 TE 線 1 站至 Maxwell (TE18) ➔ 步行 3 分即達。</div>
+                        </div>
+
+                        <details class="detail-accordion">
+                            <summary>📖 查看美味美食清單</summary>
+                            <div class="accordion-content">
+                                <ul>
+                                    <li>🥇 <strong>天天海南雞飯</strong>：鮮嫩多汁白斬雞（人均 SGD 6.5）。</li>
+                                    <li>🥇 <strong>松發肉骨茶 Song Fa（唐城坊分店）</strong>：湯頭香醇不辣，備有兒童椅（人均 SGD 16）。</li>
+                                </ul>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==================== TAB 2: DAY 2 ==================== -->
+        <section id="tab-day2" class="tab-content">
+            
+            <div class="day-header-card" style="border-left-color: var(--green);">
+                <div class="day-header-info">
+                    <h2>📅 Day 2 — 8/22 (六) 濱海灣恐龍 🦕 ＋ 璀璨雙燈光秀 ✨</h2>
+                    <p>雲霧林恐龍 ➔ 迪士尼花穹 ➔ 金沙商場 ➔ 頂樓觀景台 ➔ 免費雙燈光秀壓軸</p>
+                </div>
+                <span class="day-theme-badge">探險主題：侏羅紀恐龍與夢幻夜光樹</span>
+            </div>
+
+            <div class="timeline">
+                
+                <!-- 09:30 - 12:30 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">1</div>
+                    <div class="timeline-card">
+                        <div class="timeline-time-row">
+                            <span class="time-pill">⏰ 09:30 – 12:30</span>
+                            <span class="cost-tag">雙館套票 成人 SGD46 / 兒童 SGD32</span>
+                        </div>
+                        <h3 class="timeline-title">🦕 濱海灣花園 Gardens by the Bay（雲霧林 ＋ 花穹）</h3>
+                        <p>走進全球最大室內溫室！<strong>雲霧林 Cloud Forest</strong> 遇見 <strong>Jurassic World 真人比例巨型恐龍 🦕</strong>！在 <strong>花穹 Flower Dome</strong> 尋找迪士尼夢幻花藝 🎡！</p>
+
+                        <div class="transport-box">
+                            <span class="t-icon">🚇</span>
+                            <div>MRT 路線：飯店步行 5 分至 Prince Edward Rd (CC32) ➔ 搭 CC 環線 2 站至 Bayfront (CC1/DT16) 直達入口。</div>
+                        </div>
+
+                        <div class="explorer-highlight">
+                            <div class="explorer-highlight-title">🦕 小探險家獨家任務</div>
+                            <p>在室內大瀑布旁邊，仔細找找看有幾隻恐龍隱藏在綠色植物裡？別被牠們的叫聲嚇到囉！</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 12:30 - 14:00 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">2</div>
+                    <div class="timeline-card">
+                        <div class="timeline-time-row">
+                            <span class="time-pill">⏰ 12:30 – 14:00</span>
+                            <span class="food-badge">🍴 午餐：Pollen / Rasapura Masters</span>
+                        </div>
+                        <h3 class="timeline-title">🍱 濱海灣景觀美味午餐</h3>
+                        <p>在溫室花園內或金沙美食廣場享用午餐。</p>
+                        <details class="detail-accordion">
+                            <summary>📖 查看餐廳推薦</summary>
+                            <div class="accordion-content">
+                                <ul>
+                                    <li>🥇 <strong>Pollen</strong>：花穹溫室內優雅餐廳（人均 SGD 55起，邊用餐邊賞花園）。</li>
+                                    <li><strong>Rasapura Masters 美食廣場</strong>：金沙商場內，選擇豐富且平價。</li>
+                                </ul>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
+                <!-- 14:00 - 16:30 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">3</div>
+                    <div class="timeline-card">
+                        <div class="timeline-time-row">
+                            <span class="time-pill">⏰ 14:00 – 16:30</span>
+                        </div>
+                        <h3 class="timeline-title">🧬 逛金沙商場、運河船 ＆ 走雙螺旋橋</h3>
+                        <p>漫步於華麗金沙商場，參觀室內室內運河，穿越結構如同 DNA 般的<strong>雙螺旋橋 (Helix Bridge)</strong>。累了在 TWG Tea Salon 喝下午茶。</p>
+                    </div>
+                </div>
+
+                <!-- 17:30 - 19:00 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">4</div>
+                    <div class="timeline-card">
+                        <div class="timeline-time-row">
+                            <span class="time-pill">⏰ 17:30 – 19:00</span>
+                            <span class="cost-tag">觀景台 成人 SGD35 / 兒童 SGD31</span>
+                        </div>
+                        <h3 class="timeline-title">🌅 金沙空中花園 SkyPark 觀景台看日落</h3>
+                        <p>登上 57 樓頂樓觀景台，360 度俯瞰新加坡港灣美麗黃昏與夕陽絕景！</p>
+                    </div>
+                </div>
+
+                <!-- 19:00 - 21:30 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">5</div>
+                    <div class="timeline-card">
+                        <div class="timeline-time-row">
+                            <span class="time-pill">⏰ 19:00 – 21:30</span>
+                            <span class="cost-tag">雙秀皆免費觀賞！</span>
+                        </div>
+                        <h3 class="timeline-title">🎆 雙燈光秀壓軸大連播（Spectra ➔ 超級樹國慶版）</h3>
+                        <p>黃金順序：<br>
+                        1️⃣ <strong>20:00–20:15 Spectra 燈光水舞秀</strong>（金沙水岸 Event Plaza）<br>
+                        2️⃣ 散步 10 分鐘至超級樹叢 🌳<br>
+                        3️⃣ <strong>20:45–21:00 Garden Rhapsody 超級树國慶版音樂燈光秀</strong></p>
+
+                        <div class="explorer-highlight">
+                            <div class="explorer-highlight-title">✨ 超級樹巨靈密技</div>
+                            <p>躺在超級樹地上的草皮上往上看，巨型超級树會隨著音樂變換七彩光芒，就像在星空下魔法森林一樣！</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==================== TAB 3: DAY 3 ==================== -->
+        <section id="tab-day3" class="tab-content">
+            
+            <div class="day-header-card" style="border-left-color: var(--purple);">
+                <div class="day-header-info">
+                    <h2>📅 Day 3 — 8/23 (日) 聖淘沙海豚 🐬 ＋ 滑車 🛼 ＋ 煙火 🎇</h2>
+                    <p>海豚探奇 ➔ RWS午餐 ➔ 海豚伴遊 ➔ 斜坡滑車 ➔ 沙灘晚餐 ➔ 時光之翼煙火秀</p>
+                </div>
+                <span class="day-theme-badge">探險主題：與海豚親親 ＆ 飛馳滑車</span>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ 探險小提醒 (緩衝時間預警)</h4>
+                <p>本日有兩場固定預約海豚體驗！爸爸 14:30 伴遊結束後，請快速沖澡整裝，搭乘免費 Beach Shuttle 接駁車前往 Siloso 海灘玩 Skyline Luge。預約信請隨身攜帶！</p>
+            </div>
+
+            <div class="timeline">
+                
+                <!-- 08:45 Departure -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">1</div>
+                    <div class="timeline-card">
+                        <div class="timeline-time-row">
+                            <span class="time-pill">⏰ 08:45 – 10:15</span>
+                            <span class="cost-tag">計程車 SGD 15–20</span>
+                        </div>
+                        <h3 class="timeline-title">🚖 飯店出發 ➔ 直達聖淘沙海豚體驗報到處</h3>
+                        <p>搭計程車直達 Palawan Beach 海豚體驗區，提早 30–45 分鐘辦理報到、更衣與聆聽安全簡報。</p>
+                        <div class="transport-box">
+                            <span class="t-icon">🚕</span>
+                            <div>計程車直達：M Hotel ➔ RWS / Palawan Beach（車程約 15–20 分鐘，最可靠保證不遲到）。</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 10:30 - 11:30 Mom & Daughter Dolphin Discovery -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">2</div>
+                    <div class="timeline-card">
+                        <div class="timeline-time-row">
+                            <span class="time-pill">⏰ 10:30 – 11:30</span>
+                            <span class="cost-tag">預約制 60 分鐘</span>
+                        </div>
+                        <h3 class="timeline-title">🐬 媽媽 ＋ 女兒：海豚探奇 (Dolphin Discovery)</h3>
+                        <p>下水近距離觸摸可愛海豚、跟海豚握手、親親拍照！爸爸可在拍照區紀錄美好時刻。</p>
+                        
+                        <div class="explorer-highlight">
+                            <div class="explorer-highlight-title">🐬 海豚小知識</div>
+                            <p>海豚是非常聰明又溫柔的海洋好朋友喔！記得摸牠們的時候要輕輕的，聽從訓練師大哥哥大姊姊的指示！</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 11:30 - 13:15 Lunch -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">3</div>
+                    <div class="timeline-card">
+                        <div class="timeline-time-row">
+                            <span class="time-pill">⏰ 11:30 – 13:15</span>
+                            <span class="food-badge">🍔 RWS 園區餐廳</span>
+                        </div>
+                        <h3 class="timeline-title">🍽️ RWS 園區午餐 ＆ 爸爸預備報到</h3>
+                        <p>於 RWS 園區內享用午餐。12:30 預留時間讓爸爸前往海豚伴遊報到處更衣準備。</p>
+                    </div>
+                </div>
+
+                <!-- 13:30 - 14:30 Dad Dolphin Swim -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">4</div>
+                    <div class="timeline-card">
+                        <div class="timeline-time-row">
+                            <span class="time-pill">⏰ 13:30 – 14:30</span>
+                        </div>
+                        <h3 class="timeline-title">🐬 爸爸：海豚伴遊 (Dolphin Swim)</h3>
+                        <p>爸爸下水與海豚悠游！媽媽與女兒可以在 Palawan Beach 沙灘與亞洲大陸最南點吊橋散步拍照。</p>
+                    </div>
+                </div>
+
+                <!-- 15:00 - 17:00 Luge -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">5</div>
+                    <div class="timeline-card">
+                        <div class="timeline-time-row">
+                            <span class="time-pill">⏰ 15:00 – 17:00</span>
+                            <span class="cost-tag">免費海灘接駁車</span>
+                        </div>
+                        <h3 class="timeline-title">🛼 Skyline Luge ＆ Skyride 斜坡滑車空中吊椅</h3>
+                        <p>全家搭乘海灘接駁巴士至 Siloso 海灘，戴上帥氣安全帽，體驗搭吊椅上山、滑車一路飆速下山的刺激快感！</p>
+
+                        <div class="explorer-highlight">
+                            <div class="explorer-highlight-title">🛼 賽車手挑戰</div>
+                            <p>握緊方向盤，拉緊煞車，看看誰是我們家最厲害的小賽車手！</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 18:00 - 19:00 Coastes Dinner -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">6</div>
+                    <div class="timeline-card">
+                        <div class="timeline-time-row">
+                            <span class="time-pill">⏰ 18:00 – 19:00</span>
+                            <span class="food-badge">🍔 晚餐：Coastes 沙灘餐廳</span>
+                        </div>
+                        <h3 class="timeline-title">🏖️ Coastes 海灘晚餐 (腳踏沙灘看夕陽)</h3>
+                        <p>在漂亮的西樂索沙灘旁享用漢堡、披薩與薯條（人均 SGD 17.5），享受悠閒海風。</p>
+                    </div>
+                </div>
+
+                <!-- 19:40 - 20:00 Wings of Time -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">7</div>
+                    <div class="timeline-card">
+                        <div class="timeline-time-row">
+                            <span class="time-pill">⏰ 19:40 – 20:00</span>
+                            <span class="cost-tag">門票 SGD 22起</span>
+                        </div>
+                        <h3 class="timeline-title">🎇 時光之翼 Wings of Time 煙火水舞交響樂</h3>
+                        <p>坐在海灘觀眾席，欣賞結合水舞、火舞、雷射光影與璀璨煙火的國際級壓軸大秀！看完後搭計程車回飯店休息。</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==================== TAB 4: DAY 4 ==================== -->
+        <section id="tab-day4" class="tab-content">
+            
+            <div class="day-header-card" style="border-left-color: var(--accent);">
+                <div class="day-header-info">
+                    <h2>📅 Day 4 — 8/24 (一) 完美收官 🛫 歡樂返航</h2>
+                    <p>飯店早餐 ➔ 退房叫車 ➔ 09:25 到達機場 ➔ 免稅店 ➔ 12:25 順利起飛</p>
+                </div>
+                <span class="day-theme-badge">探險主題：滿載美好回憶回家囉</span>
+            </div>
+
+            <div class="timeline">
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot">1</div>
+                    <div class="timeline-card">
+                        <div class="timeline-time-row">
+                            <span class="time-pill">⏰ 07:00 – 09:00</span>
+                        </div>
+                        <h3 class="timeline-title">🍳 飯店美味早餐 ＆ 輕鬆退房</h3>
+                        <p>悠閒享用飯店早餐，整理行李辦理退房。09:05 準時在飯店大門搭乘計程車前往樟宜機場。</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot">2</div>
+                    <div class="timeline-card">
+                        <div class="timeline-time-row">
+                            <span class="time-pill">⏰ 09:05 – 09:25</span>
+                            <span class="cost-tag">計程車 SGD 20–30</span>
+                        </div>
+                        <h3 class="timeline-title">🚖 直達樟宜機場 (預計 09:25 抵達)</h3>
+                        <p>提早整整 3 小時抵達機場，完全不慌不忙！</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot">3</div>
+                    <div class="timeline-card">
+                        <div class="timeline-time-row">
+                            <span class="time-pill">⏰ 09:25 – 12:00</span>
+                        </div>
+                        <h3 class="timeline-title">🛍️ 辦理登機 ➔ 託運 ➔ 機場管制區逛免稅店</h3>
+                        <p>順利完成通關與行李託運，在管制區內買伴手禮（班蘭蛋糕、綠蛋糕）、享用點心，準備登機。</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot">4</div>
+                    <div class="timeline-card">
+                        <div class="timeline-time-row">
+                            <span class="time-pill">⏰ 12:25 起飛</span>
+                        </div>
+                        <h3 class="timeline-title">✈️ 班機起飛返台 (SIN 12:25 ➔ TPE 17:10)</h3>
+                        <p>帶著滿滿的探險回憶與可愛照片，平平安安飛回台北！</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==================== TAB 5: CHECKLIST ==================== -->
+        <section id="tab-checklist" class="tab-content">
+            
+            <div class="checklist-score-card">
+                <div class="score-title">🎯 小探險家任務成就成就卡</div>
+                <p>點擊下面的任務方塊，完成你在新加坡的冒險清單吧！</p>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill" id="progress-fill"></div>
+                </div>
+                <div id="progress-text" style="font-weight: 700; font-size:1.1rem;">已完成 0 / 12 個探險任務 (0%)</div>
+            </div>
+
+            <div class="card">
+                <div class="card-header-title">🎒 行前必備物品檢查清單</div>
+                <div class="checklist-grid">
+                    <div class="check-item-card" onclick="toggleCheck(this)">
+                        <div class="custom-checkbox">✓</div>
+                        <div class="check-item-text">🏊 泳衣、泳鏡 (Day3海豚下水用)</div>
+                    </div>
+                    <div class="check-item-card" onclick="toggleCheck(this)">
+                        <div class="custom-checkbox">✓</div>
+                        <div class="check-item-text">☀️ 兒童防曬乳 ＆ 太陽眼鏡</div>
+                    </div>
+                    <div class="check-item-card" onclick="toggleCheck(this)">
+                        <div class="custom-checkbox">✓</div>
+                        <div class="check-item-text">👕 換洗衣物與小毛巾</div>
+                    </div>
+                    <div class="check-item-card" onclick="toggleCheck(this)">
+                        <div class="custom-checkbox">✓</div>
+                        <div class="check-item-text">🩴 舒適涼鞋 / 拖鞋</div>
+                    </div>
+                    <div class="check-item-card" onclick="toggleCheck(this)">
+                        <div class="custom-checkbox">✓</div>
+                        <div class="check-item-text">📱 手機叫車 Grab App 已設定完成</div>
+                    </div>
+                    <div class="check-item-card" onclick="toggleCheck(this)">
+                        <div class="custom-checkbox">✓</div>
+                        <div class="check-item-text">🐬 海豚體驗官方預約確認信列印/存檔</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header-title">🌟 8歲小探險家現場打卡任務</div>
+                <div class="checklist-grid">
+                    <div class="check-item-card" onclick="toggleCheck(this)">
+                        <div class="custom-checkbox">✓</div>
+                        <div class="check-item-text">🌊 站在星耀樟宜大瀑布前拍一張帥氣照</div>
+                    </div>
+                    <div class="check-item-card" onclick="toggleCheck(this)">
+                        <div class="custom-checkbox">✓</div>
+                        <div class="check-item-text">🦁 張開大嘴巴和魚尾獅接水合照</div>
+                    </div>
+                    <div class="check-item-card" onclick="toggleCheck(this)">
+                        <div class="custom-checkbox">✓</div>
+                        <div class="check-item-text">🦕 在雲霧林找出隱藏的暴龍裝置</div>
+                    </div>
+                    <div class="check-item-card" onclick="toggleCheck(this)">
+                        <div class="custom-checkbox">✓</div>
+                        <div class="check-item-text">🐬 輕輕觸摸海豚並給牠一個親親</div>
+                    </div>
+                    <div class="check-item-card" onclick="toggleCheck(this)">
+                        <div class="custom-checkbox">✓</div>
+                        <div class="check-item-text">🛼 挑戰斜坡滑車順利滑到終點</div>
+                    </div>
+                    <div class="check-item-card" onclick="toggleCheck(this)">
+                        <div class="custom-checkbox">✓</div>
+                        <div class="check-item-text">🎆 在沙灘上看超炫煙火水舞秀</div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <footer>
+            🇸🇬 新加坡 4D3N 小探險家親子行程網頁 ｜ Designed with ❤️ for Family Explorer 2026
+        </footer>
+
+    </div>
+
+    <!-- JavaScript Interactive Logic -->
+    <script>
+        // Tab switching function
+        function switchTab(tabId) {
+            // Hide all tab content
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            // Deactivate all buttons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Activate target tab & button
+            document.getElementById('tab-' + tabId).classList.add('active');
+            
+            // Find active tab button
+            const activeBtn = document.querySelector(`.tab-btn.tab-${tabId}`);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+            }
+
+            // Scroll to top of tab container
+            window.scrollTo({
+                top: 220,
+                behavior: 'smooth'
+            });
+        }
+
+        // Interactive Checklist function
+        function toggleCheck(cardElement) {
+            cardElement.classList.toggle('completed');
+            updateScore();
+        }
+
+        function updateScore() {
+            const allItems = document.querySelectorAll('.check-item-card');
+            const completedItems = document.querySelectorAll('.check-item-card.completed');
+            
+            const total = allItems.length;
+            const count = completedItems.length;
+            const percentage = Math.round((count / total) * 100);
+
+            const fill = document.getElementById('progress-fill');
+            const text = document.getElementById('progress-text');
+
+            if (fill && text) {
+                fill.style.width = percentage + '%';
+                text.textContent = `已完成 ${count} / ${total} 個探險任務 (${percentage}%)`;
+
+                if (percentage === 100) {
+                    text.textContent = `🎉 哇！太棒了！你完成了全部 ${total} 個探險任務！你是頂級小探險家！🏆`;
+                }
+            }
+        }
+
+        // Initialize score on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            updateScore();
+        });
+    </script>
+</body>
+</html>
