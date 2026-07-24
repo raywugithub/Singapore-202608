@@ -671,6 +671,200 @@
             font-weight: 600;
         }
 
+        /* --- Map Card & Lightbox Modal Styles --- */
+        .map-card-container {
+            margin: 20px 0 28px;
+        }
+
+        .map-card {
+            background: linear-gradient(135deg, #FFFFFF 0%, #F4F7FF 100%);
+            border-radius: var(--radius-lg);
+            border: 2px solid #E2E8F0;
+            box-shadow: var(--card-shadow);
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .map-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--hover-shadow);
+            border-color: var(--purple-light);
+        }
+
+        .map-card-badge {
+            align-self: flex-start;
+            background: linear-gradient(135deg, var(--purple) 0%, #8E44AD 100%);
+            color: white;
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-family: 'Fredoka', sans-serif;
+            box-shadow: 0 4px 10px rgba(108, 92, 231, 0.25);
+        }
+
+        .map-card-img-wrapper {
+            position: relative;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            max-height: 240px;
+            background: #EDF2F7;
+            border: 1px solid #CBD5E0;
+        }
+
+        .map-card-thumb {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .map-card:hover .map-card-thumb {
+            transform: scale(1.03);
+        }
+
+        .map-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(45, 52, 54, 0.45);
+            backdrop-filter: blur(2px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .map-card:hover .map-card-overlay {
+            opacity: 1;
+        }
+
+        .zoom-btn {
+            background: white;
+            color: var(--dark);
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 10px 20px;
+            border-radius: 40px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+            font-family: 'Fredoka', 'Noto Sans TC', sans-serif;
+        }
+
+        .map-card-info h4 {
+            font-family: 'Fredoka', 'Noto Sans TC', sans-serif;
+            font-size: 1.15rem;
+            color: var(--dark);
+            margin-bottom: 4px;
+        }
+
+        .map-card-info p {
+            font-size: 0.9rem;
+            color: #636E72;
+            margin: 0;
+        }
+
+        /* --- Modal Lightbox --- */
+        .map-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .map-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .map-modal-content {
+            background: white;
+            border-radius: var(--radius-lg);
+            max-width: 92vw;
+            max-height: 90vh;
+            width: 1050px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            transform: scale(0.95);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .map-modal.active .map-modal-content {
+            transform: scale(1);
+        }
+
+        .map-modal-header {
+            padding: 16px 24px;
+            background: #F8FAFC;
+            border-bottom: 1px solid #E2E8F0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .map-modal-header h3 {
+            font-family: 'Fredoka', 'Noto Sans TC', sans-serif;
+            font-size: 1.2rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .map-modal-close {
+            background: #EDF2F7;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            color: #4A5568;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            line-height: 1;
+        }
+
+        .map-modal-close:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .map-modal-body {
+            padding: 16px;
+            overflow: auto;
+            max-height: calc(90vh - 70px);
+            text-align: center;
+            background: #0F172A;
+        }
+
+        .map-modal-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--radius-sm);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: inline-block;
+        }
+
         /* --- Responsive Media Queries --- */
         @media (max-width: 768px) {
             .hero-title { font-size: 1.9rem; }
@@ -834,6 +1028,13 @@
                                 <td>SGD 32</td>
                                 <td>SGD 124</td>
                                 <td>約 NT$ 2,883</td>
+                            </tr>
+                            <tr>
+                                <td><strong>OCBC Skyway 空中走廊 (Day 2)</strong></td>
+                                <td>SGD 14×2</td>
+                                <td>SGD 10</td>
+                                <td>SGD 38</td>
+                                <td>約 NT$ 950</td>
                             </tr>
                             <tr>
                                 <td><strong>金沙 SkyPark 觀景台 (Day 2)</strong></td>
@@ -1004,10 +1205,10 @@
                     <div class="timeline-card">
                         <div class="timeline-time-row">
                             <span class="time-pill">⏰ 18:00 – 20:00</span>
-                            <span class="food-badge">🍲 晚餐：天天海南雞飯 / 松發肉骨茶</span>
+                            <span class="food-badge">🍲 晚餐：天天海南雞飯 / 168 CMY 沙爹 / 松發肉骨茶</span>
                         </div>
-                        <h3 class="timeline-title">🍚 牛車水美食冒險（麥士威熟食中心）</h3>
-                        <p>品嚐馳名中外的海南雞飯與濃郁肉骨茶，感受牛車水熱鬧風情。</p>
+                        <h3 class="timeline-title">🍚 牛車水美食冒險（麥士威熟食中心 ＆ 168 CMY 沙爹）</h3>
+                        <p>品嚐馳名中外的海南雞飯、168 CMY 炭烤沙爹串與濃郁肉骨茶，感受牛車水熱鬧風情。</p>
 
                         <div class="transport-box">
                             <span class="t-icon">🚇</span>
@@ -1015,8 +1216,9 @@
                         </div>
 
                         <div class="explorer-highlight">
-                            <div class="explorer-highlight-title">🍜 麥士威美食拍照任務</div>
-                            <p><strong>牛車水 麥士威 🍜</strong>：拍一張「大口咬下海南雞飯/喝肉骨茶」的美味滿足表情，比比看誰的表情最吸引人！</p>
+                            <div class="explorer-highlight-title">🍜 麥士威 ＆ 沙爹探險拍照任務</div>
+                            <p><strong>牛車水 麥士威 🍜</strong>：拍一張「大口咬下海南雞飯/喝肉骨茶」的美味滿足表情！<br>
+                            <strong>168 CMY 沙爹 🍢</strong>：拍一張「把沙爹串沾滿濃郁香甜鳳梨花生醬、大口享受」的幸福吃貨照片！</p>
                         </div>
 
                         <details class="detail-accordion">
@@ -1024,6 +1226,7 @@
                             <div class="accordion-content">
                                 <ul>
                                     <li>🥇 <strong>天天海南雞飯</strong>：鮮嫩多汁白斬雞（人均 SGD 6.5）。</li>
+                                    <li>🥇 <strong>168 CMY Satay 鮮烤沙爹</strong>：牛車水大廈 2 樓 #02-168（週二至週日 09:00–19:00，週一公休）。招牌炭烤豬肉、雞肉與牛肉沙爹，淋上獨家特製**鳳梨花生醬**（濃郁果香甜香完全不辣！每串 SGD 0.80，10 串起售），極受 8 歲小朋友喜愛！</li>
                                     <li>🥇 <strong>松發肉骨茶 Song Fa（唐城坊分店）</strong>：湯頭香醇不辣，備有兒童椅（人均 SGD 16）。</li>
                                 </ul>
                             </div>
@@ -1039,10 +1242,27 @@
             
             <div class="day-header-card" style="border-left-color: var(--green);">
                 <div class="day-header-info">
-                    <h2>📅 Day 2 — 8/22 (六) 濱海灣恐龍 🦕 ＋ 璀璨雙燈光秀 ✨</h2>
-                    <p>雲霧林恐龍 ➔ 迪士尼花穹 ➔ 金沙商場 ➔ 頂樓觀景台 ➔ 免費雙燈光秀壓軸</p>
+                    <h2>📅 Day 2 — 8/22 (六) 濱海灣恐龍 🦕 ＋ OCBC Skyway 🌉 ＋ 璀璨三重夜間奇幻秀 ✨</h2>
+                    <p>雲霧林恐龍 ➔ 迪士尼花穹 ➔ OCBC Skyway 高空漫步 ➔ 金沙商場 ➔ 頂樓觀景台 ➔ 水舞/超級樹/北極光三重秀壓軸</p>
                 </div>
-                <span class="day-theme-badge">探險主題：侏羅紀恐龍與夢幻夜光樹</span>
+                <span class="day-theme-badge">探險主題：侏羅紀恐龍與夢幻北極光</span>
+            </div>
+
+            <!-- Gardens by the Bay Map Card -->
+            <div class="map-card-container">
+                <div class="map-card" onclick="openMapModal()">
+                    <div class="map-card-badge">🗺️ 官方導覽地圖</div>
+                    <div class="map-card-img-wrapper">
+                        <img src="../map/Gardens%20by%20the%20Bay-Map-15-02-2026.jpg" alt="Gardens by the Bay Map" class="map-card-thumb">
+                        <div class="map-card-overlay">
+                            <span class="zoom-btn">🔍 點擊彈出放大導覽地圖</span>
+                        </div>
+                    </div>
+                    <div class="map-card-info">
+                        <h4>🗺️ 濱海灣花園 Gardens by the Bay 官方導覽地圖</h4>
+                        <p>點擊即可開啟高解析度放大地圖，輕鬆瀏覽超級樹叢、雲霧林、花穹與 OCBC Skyway 探索動線！</p>
+                    </div>
+                </div>
             </div>
 
             <div class="timeline">
@@ -1071,9 +1291,27 @@
                     </div>
                 </div>
 
-                <!-- 12:30 - 14:00 -->
+                <!-- 11:30 - 12:30 OCBC Skyway -->
                 <div class="timeline-item">
                     <div class="timeline-dot">2</div>
+                    <div class="timeline-card">
+                        <div class="timeline-time-row">
+                            <span class="time-pill">⏰ 11:30 – 12:30</span>
+                            <span class="cost-tag">Skyway 成人 SGD14 / 兒童 SGD10</span>
+                        </div>
+                        <h3 class="timeline-title">🌉 OCBC Skyway 華僑銀行空中走廊 22M 高空漫步</h3>
+                        <p>登上懸空 22 公尺高空走廊，漫步於超級樹之間，360 度俯瞰濱海灣花園全景與金沙酒店，近距離捕捉超級樹巨大鋼鐵金屬結構！</p>
+
+                        <div class="explorer-highlight">
+                            <div class="explorer-highlight-title">🌉 高空漫步勇者任務</div>
+                            <p>站在 22 公尺懸空步道上，手拉著手拍一張「勇敢的小高空探險家」鳥瞰濱海灣大合照！</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 12:30 - 14:00 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">3</div>
                     <div class="timeline-card">
                         <div class="timeline-time-row">
                             <span class="time-pill">⏰ 12:30 – 14:00</span>
@@ -1101,7 +1339,7 @@
 
                 <!-- 14:00 - 16:30 -->
                 <div class="timeline-item">
-                    <div class="timeline-dot">3</div>
+                    <div class="timeline-dot">4</div>
                     <div class="timeline-card">
                         <div class="timeline-time-row">
                             <span class="time-pill">⏰ 14:00 – 16:30</span>
@@ -1118,7 +1356,7 @@
 
                 <!-- 17:30 - 19:00 -->
                 <div class="timeline-item">
-                    <div class="timeline-dot">4</div>
+                    <div class="timeline-dot">5</div>
                     <div class="timeline-card">
                         <div class="timeline-time-row">
                             <span class="time-pill">⏰ 17:30 – 19:00</span>
@@ -1136,21 +1374,23 @@
 
                 <!-- 19:00 - 21:30 -->
                 <div class="timeline-item">
-                    <div class="timeline-dot">5</div>
+                    <div class="timeline-dot">6</div>
                     <div class="timeline-card">
                         <div class="timeline-time-row">
                             <span class="time-pill">⏰ 19:00 – 21:30</span>
-                            <span class="cost-tag">雙秀皆免費觀賞！</span>
+                            <span class="cost-tag">三重奇幻秀皆免費觀賞！</span>
                         </div>
-                        <h3 class="timeline-title">🎆 雙燈光秀壓軸大連播（Spectra ➔ 超級樹國慶版）</h3>
-                        <p>黃金順序：<br>
+                        <h3 class="timeline-title">🎆 濱海灣夜間奇幻秀超值大連播（Spectra ➔ 超級樹國慶版 ➔ Borealis 北極光秀）</h3>
+                        <p>黃金連播順序：<br>
                         1️⃣ <strong>20:00–20:15 Spectra 燈光水舞秀</strong>（金沙水岸 Event Plaza）<br>
                         2️⃣ 散步 10 分鐘至超級樹叢 🌳<br>
-                        3️⃣ <strong>20:45–21:00 Garden Rhapsody 超級樹國慶版音樂燈光秀</strong></p>
+                        3️⃣ <strong>20:45–21:00 Garden Rhapsody 超級樹國慶版音樂燈光秀</strong><br>
+                        4️⃣ <strong>21:00–21:30 Borealis 濱海灣北極光光影秀 🌌</strong>（瑞士藝術家 Dan Acher 打造，雷射光束與雲霧水霧交織出極致浪漫北極光，免費入場！）</p>
 
                         <div class="explorer-highlight">
-                            <div class="explorer-highlight-title">✨ 超級樹巨靈密技 ＆ 拍照任務</div>
-                            <p>躺在超級樹地上的草皮上往上看，拍一張「被彩虹樹包圍的小睡仙」照，跟著音樂燈光一起魔法搖擺！</p>
+                            <div class="explorer-highlight-title">✨ 超級樹巨靈 ＆ 極光魔法拍照任務</div>
+                            <p>1. <strong>超級樹燈光秀 🌳</strong>：躺在超級樹草皮上往上看，拍一張「被彩虹樹包圍的小睡仙」照片！<br>
+                            2. <strong>Borealis 北極光秀 🌌</strong>：張開雙手迎接天空中的絢麗北極光，拍一張「極光魔法師」震撼大片！</p>
                         </div>
                     </div>
                 </div>
@@ -1449,11 +1689,15 @@
                     </div>
                     <div class="check-item-card" onclick="toggleCheck(this)">
                         <div class="custom-checkbox">✓</div>
-                        <div class="check-item-text">🍜 麥士威熟食：拍大口咬下海南雞飯/喝肉骨茶滿足照</div>
+                        <div class="check-item-text">🍜 麥士威熟食 ＆ 168 沙爹：拍海南雞飯與沾鳳梨花生醬沙爹串燒幸福照</div>
                     </div>
                     <div class="check-item-card" onclick="toggleCheck(this)">
                         <div class="custom-checkbox">✓</div>
                         <div class="check-item-text">🦕 雲霧林恐龍：學恐龍「嗷嗚～」拍被恐龍追著跑合照</div>
+                    </div>
+                    <div class="check-item-card" onclick="toggleCheck(this)">
+                        <div class="custom-checkbox">✓</div>
+                        <div class="check-item-text">🌉 OCBC Skyway ＆ 🌌 Borealis 北極光秀：22M高空漫步與超級樹夢幻極光合照</div>
                     </div>
                     <div class="check-item-card" onclick="toggleCheck(this)">
                         <div class="custom-checkbox">✓</div>
@@ -1490,8 +1734,45 @@
 
     </div>
 
+    <!-- Map Modal Lightbox -->
+    <div id="mapModal" class="map-modal" onclick="closeMapModal(event)">
+        <div class="map-modal-content" onclick="event.stopPropagation()">
+            <div class="map-modal-header">
+                <h3>🗺️ 濱海灣花園 Gardens by the Bay 官方導覽地圖</h3>
+                <button class="map-modal-close" onclick="closeMapModal()">&times;</button>
+            </div>
+            <div class="map-modal-body">
+                <img src="../map/Gardens%20by%20the%20Bay-Map-15-02-2026.jpg" alt="Gardens by the Bay Map Full Resolution" class="map-modal-img">
+            </div>
+        </div>
+    </div>
+
     <!-- JavaScript Interactive Logic -->
     <script>
+        // Map Modal functions
+        function openMapModal() {
+            const modal = document.getElementById('mapModal');
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeMapModal(event) {
+            const modal = document.getElementById('mapModal');
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeMapModal();
+            }
+        });
+
         // Tab switching function
         function switchTab(tabId) {
             // Hide all tab content
