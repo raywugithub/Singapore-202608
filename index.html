@@ -763,6 +763,124 @@
             gap: 6px;
         }
 
+        /* ===================================================
+           關鍵注意事項高亮系統（三級）
+           L1 stopper：漏了會無法入境／上機／入住
+           L2 gate   ：漏了會當場買不到票／進不去，毀掉半天
+           L3 onsite ：現場執行細節，漏了會浪費時間或掃興
+           =================================================== */
+        .critical-banner {
+            background: linear-gradient(135deg, #7F1D1D 0%, #B3122A 100%);
+            color: #fff;
+            border-radius: var(--radius-md);
+            padding: 22px 24px;
+            margin: 20px 0 26px;
+            box-shadow: 0 6px 22px rgba(179, 18, 42, .28);
+        }
+        .critical-banner h3 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.35rem;
+            margin: 0 0 6px;
+            display: flex; align-items: center; gap: 9px;
+            color: #fff;
+        }
+        .critical-banner .cb-sub {
+            font-size: .92rem;
+            opacity: .92;
+            margin-bottom: 16px;
+        }
+        .cb-group { margin-top: 16px; }
+        .cb-group-title {
+            display: inline-block;
+            font-weight: 800;
+            font-size: .82rem;
+            letter-spacing: .06em;
+            background: rgba(255,255,255,.16);
+            border: 1px solid rgba(255,255,255,.34);
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin-bottom: 9px;
+        }
+        .cb-list { list-style: none; margin: 0; padding: 0; }
+        .cb-list li {
+            background: rgba(255,255,255,.10);
+            border-left: 4px solid #FFD34D;
+            border-radius: 6px;
+            padding: 10px 13px;
+            margin-bottom: 8px;
+            font-size: .93rem;
+            line-height: 1.62;
+        }
+        .cb-list li:last-child { margin-bottom: 0; }
+        .cb-list .cb-where {
+            display: inline-block;
+            font-size: .76rem;
+            font-weight: 800;
+            background: #FFD34D;
+            color: #7F1D1D;
+            padding: 1px 8px;
+            border-radius: 4px;
+            margin-right: 8px;
+            white-space: nowrap;
+        }
+        .cb-list strong { color: #FFE9A8; }
+
+        /* 卡片內的關鍵警示塊 */
+        .critical-note {
+            background: #FFF1F2;
+            border: 2px solid #B3122A;
+            border-left: 7px solid #B3122A;
+            border-radius: var(--radius-md);
+            padding: 14px 17px;
+            margin: 14px 0;
+            color: #7F1D1D;
+            font-size: .93rem;
+            line-height: 1.66;
+        }
+        .critical-note .cn-head {
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 800;
+            font-size: 1rem;
+            color: #B3122A;
+            display: flex; align-items: center; gap: 7px;
+            margin-bottom: 6px;
+        }
+        .critical-note .cn-head .cn-tag {
+            font-size: .72rem;
+            letter-spacing: .05em;
+            background: #B3122A;
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        /* 句中高亮 */
+        mark.hl {
+            background: #FFE9A8;
+            color: #7F1D1D;
+            font-weight: 700;
+            padding: 1px 5px;
+            border-radius: 3px;
+            box-decoration-break: clone;
+            -webkit-box-decoration-break: clone;
+        }
+        mark.hl-stop {
+            background: #B3122A;
+            color: #fff;
+            font-weight: 800;
+            padding: 1px 6px;
+            border-radius: 3px;
+            box-decoration-break: clone;
+            -webkit-box-decoration-break: clone;
+        }
+
+        @media print {
+            .critical-banner { background: #fff !important; color: #7F1D1D !important; border: 3px solid #B3122A; }
+            .critical-banner h3, .cb-list strong { color: #7F1D1D !important; }
+            .cb-list li { background: #FFF1F2 !important; }
+            mark.hl-stop { background: #FFE9A8 !important; color: #7F1D1D !important; }
+        }
+
         /* --- Footer --- */
         footer {
             text-align: center;
@@ -999,7 +1117,7 @@
                 <div class="meta-chip">👨‍👩‍👧 2 大人 + 1 小孩（8歲）</div>
                 <div class="meta-chip">📅 2026/08/21 (五) – 08/24 (一)</div>
                 <div class="meta-chip">🏨 M Hotel Singapore City Centre (3晚)</div>
-                <div class="meta-chip">💱 匯率參考：1 SGD ≈ NT.25</div>
+                <div class="meta-chip">💱 匯率參考：1 SGD ≈ NT$ 23.25–25</div>
             </div>
         </div>
     </header>
@@ -1025,7 +1143,57 @@
 
         <!-- ==================== TAB 0: OVERVIEW ==================== -->
         <section id="tab-overview" class="tab-content active">
-            
+
+            <!-- Card 0: 絕對不能漏看的關鍵事項 -->
+            <div class="critical-banner">
+                <h3>🚨 絕對不能漏看的 18 件事</h3>
+                <div class="cb-sub">依「漏掉的後果」分成三級。<strong>L1 出不了門／進不了國，L2 當場買不到票或進不去，L3 現場會卡住或掃興。</strong>出發前請把 L1 全部做完，L2 在購票時逐項核對。</div>
+
+                <div class="cb-group">
+                    <span class="cb-group-title">🛑 L1 · 漏了就無法入境／上機／入住（5 項）</span>
+                    <ul class="cb-list">
+                        <li><span class="cb-where">8/18–8/20</span><strong>SG Arrival Card 電子入境卡 × 3 人</strong>——入境強制要求、免費，但<strong>只能在抵達前 3 天內送出</strong>。抵達 8/21 ➔ 窗口是 8/18–8/20，太早送不了、忘了就要在關口現場填。務必走新加坡移民與關卡局 (ICA) <strong>官方網站</strong>，搜尋結果前幾名常是收費假代辦站。</li>
+                        <li><span class="cb-where">今天就查</span><strong>三本護照效期需有效至 2027/2/21 之後</strong>（入境需 6 個月以上）。<strong>兒童護照效期較短最容易被忽略</strong>，現在來不及走一般件補辦。</li>
+                        <li><span class="cb-where">今天就訂</span><strong>M Hotel 訂房確認函</strong>——專案內<strong>找不到任何訂房紀錄</strong>，而飯店研究檔標示「免費取消：否」。若還沒訂，價格可能已變且訂了不可退。</li>
+                        <li><span class="cb-where">今天就訂</span><strong>台灣機場接送去程（8/20 約 20:45 到家）＋ 回程（8/24 約 17:45）</strong>。去程沒車＝趕不上 01:35 紅眼航班。</li>
+                        <li><span class="cb-where">離家前</span><strong>旅平險＋不便險必須在離家前就生效</strong>——多數保險無法在機場或出境後投保。</li>
+                    </ul>
+                </div>
+
+                <div class="cb-group">
+                    <span class="cb-group-title">⚠️ L2 · 漏了會當場買不到票或進不去（7 項）</span>
+                    <ul class="cb-list">
+                        <li><span class="cb-where">Day 2 · SkyPark</span><strong>一定要買「高峰時段」票（17:00 入場）</strong>。非高峰<strong>最晚入場只到 16:00</strong>、且 16:30 就結束——原行程排「約 16:00」等於卡在最後一刻，吃飯慢 15 分鐘就報廢。會員價每人只多 SGD 2.80。</li>
+                        <li><span class="cb-where">Day 3 · 纜車</span><strong>線上票必須在當天 20:00 前到纜車售票櫃檯換實體券</strong>，<strong>不能直接刷 QR 上車</strong>。早上 09:00 就要搭，記得先換票。</li>
+                        <li><span class="cb-where">購票時</span><strong>纜車勿買到「LOCALS ONLY」版本</strong>——官網有一張同為 SGD 35 但限本地人的 SkyPass（附買一送一），台灣旅客不適用。下單前確認<strong>沒有 LOCALS ONLY 標籤</strong>。</li>
+                        <li><span class="cb-where">Day 3 · 時光之翼</span><strong>要選 19:40 場，不是 20:40 場</strong>。訂錯場次整個晚上動線全毀（20:40 場結束已 21:00，回飯店太晚）。</li>
+                        <li><span class="cb-where">Day 1 · Jewel</span><strong>Walking Net 官網公告維修關閉中、未列復開日期</strong>——它是 Bundle Deal 2 六項之一。<strong>下單前務必致電或查官網</strong>，若確定不開就考慮換套票。</li>
+                        <li><span class="cb-where">購票時</span><strong>濱海灣花園 Bundle 價格要再確認</strong>：官網非居民標價為 <strong>成人 73／兒童 51</strong>，與你查到的 58／41 有落差（可能是促銷或第三方平台價）。</li>
+                        <li><span class="cb-where">出發前</span><strong>所有票券與確認信要「離線」存檔並列印一份</strong>。落地第一小時 eSIM 可能還沒通、機場 Wi-Fi 要驗證——只存在 email 裡會卡住。截圖存相簿。</li>
+                    </ul>
+                </div>
+
+                <div class="cb-group">
+                    <span class="cb-group-title">📌 L3 · 現場會卡住或掃興（6 項）</span>
+                    <ul class="cb-list">
+                        <li><span class="cb-where">Day 3 · 滑車</span><strong>女兒 121cm：滑車可自己開，但空中吊椅需 135cm 才能單獨搭</strong>——<strong>兩趟上山都要爸爸或媽媽同座</strong>。購票時向櫃檯講清楚，別讓她被排到單獨的吊椅位。</li>
+                        <li><span class="cb-where">Day 1 · 10:00</span><strong>一開門先衝 Bouncing Net</strong>。它每場 <strong>45 分鐘（含 10 分安全說明）</strong>，是唯一有固定場次長度的設施，晚了會卡住後面五項全部。</li>
+                        <li><span class="cb-where">Day 1 · Jewel</span><strong>必須穿全包覆運動鞋</strong>（彈跳網與網狀步道<strong>嚴禁拖鞋、高跟鞋</strong>），建議長褲或短褲。另外<strong>行李與滾輪包一律禁止帶入</strong>——已安排先在 Jewel L1 寄放大行李。</li>
+                        <li><span class="cb-where">出發前再查</span><strong>Oceanarium 營業時間會臨時縮短</strong>。官網公布 8 月的 <strong>1、8、20、22 日縮為 10:00–16:00</strong>；8/23 目前是正常 10:00–20:00，但鄰近日期異動頻繁，<strong>出發前務必再查一次</strong>。</li>
+                        <li><span class="cb-where">Day 1 · 晚餐</span><strong>麥士威熟食中心要備 SGD 現金</strong>（小額紙鈔與硬幣）——多數傳統攤位不收卡。</li>
+                        <li><span class="cb-where">Day 1 · 15:00</span><strong>飯店 15:00 才能進房</strong>（官方時間，已不依賴提前入住）。提早到只能寄放行李在大廳。</li>
+                    </ul>
+                </div>
+
+                <div class="cb-group">
+                    <span class="cb-group-title">🌧️ 天氣風險（8 月為雷雨季，兩個戶外點會關）</span>
+                    <ul class="cb-list">
+                        <li><span class="cb-where">Day 2</span><strong>SkyPark 是露天場地</strong>，遇暴雨或閃電可能暫時關閉、<strong>現場不提供雨傘</strong>；<strong>進場未滿一小時遇關閉可要求退費</strong>。備案：直接下樓進商場，提前開始 LV 拍照。</li>
+                        <li><span class="cb-where">Day 3</span><strong>纜車雷雨會停駛</strong>。備案已寫入行程：改叫 Grab 走聖淘沙隧道直達 RWS B1 落客區，9–12 分鐘、SGD 12–18。</li>
+                    </ul>
+                </div>
+            </div>
+
             <!-- Card 1: 航班與住宿核心資訊 -->
             <div class="card">
                 <div class="card-header-title">✈️ 航班與住宿核心資訊</div>
@@ -1080,17 +1248,17 @@
                             <tr>
                                 <td><strong>Day 1｜8/21 (五)</strong></td>
                                 <td>瀑布首航 🌊 ＆ 魚尾獅初體驗</td>
-                                <td>樟宜機場清晨落地 ➔ 星耀樟宜雨漩渦 (Jewel Rain Vortex) ＆ 星空花園 (Canopy Park) ➔ 飯店 Check-in 午休 ➔ 魚尾獅公園 (Merlion Park) 散步合照 ➔ 麥士威熟食中心 (Maxwell Food Centre) 天天天南雞飯 ＆ 7/8號攤位沙爹晚餐</td>
+                                <td>樟宜機場清晨落地 ➔ 星耀樟宜雨漩渦 (Jewel Rain Vortex) ＆ <strong>星空花園 Canopy Park Bundle Deal 2 完整 3 小時（10:00–13:00）</strong> ➔ Jewel 午餐 ➔ <strong>15:00 飯店 Check-in 午休</strong> ➔ 魚尾獅公園 (Merlion Park) 散步合照 ➔ 麥士威熟食中心 (Maxwell Food Centre) 天天海南雞飯 ＆ 168 鮮烤沙爹晚餐</td>
                             </tr>
                             <tr>
                                 <td><strong>Day 2｜8/22 (六)</strong></td>
-                                <td>恐龍雙館 🦕 ＆ 金沙濱海夜秀雙饗</td>
-                                <td>濱海灣花園花穹 (Flower Dome 恐龍特展) ＆ 雲霧林 (Cloud Forest) ➔ 華僑銀行空中走廊 (OCBC Skyway) ➔ Black Tap 巨無霸漢堡與狂野奶昔晚餐 ➔ 金沙 57F 空中花園觀景台 (SkyPark) ➔ 超級樹燈光秀 (Supertree Grove) ＆ 极光秀 (Borealis Aurora Show) ➔ 同樂海鮮 (TungLok Seafood) 晚餐/宵夜</td>
+                                <td>恐龍雙館 🦕 ＆ 迪士尼花藝 🌸 ＆ LV 水上玻璃亭 👜 ＆ 水岸三連秀 ✨</td>
+                                <td>濱海灣花園雲霧林 (Cloud Forest 侏羅紀世界) ＆ 花穹 (Flower Dome) ➔ 超級樹空中走廊 (Supertree Skyway) ➔ <strong>花之幻境 (Floral Fantasy) 迪士尼花藝</strong> ➔ Black Tap 巨無霸漢堡與狂野奶昔早鳥晚餐 ➔ 金沙 56F 空中花園觀景台 (SkyPark) ➔ <strong>LV Island Maison 水上玻璃亭藍調時刻拍照</strong> ➔ <strong>Spectra 燈光水舞秀 (20:00)</strong> ➔ 超級樹燈光秀 (Garden Rhapsody 20:45) ＆ 極光秀 (Borealis 21:00)</td>
                             </tr>
                             <tr>
                                 <td><strong>Day 3｜8/23 (日)</strong></td>
                                 <td>跨海纜車 🚡 ＆ 海洋館 🐠 ＆ 斜坡滑車 🏎️ ＆ 煙火大秀 🎆</td>
-                                <td>花芭山線跨海纜車 (Mount Faber Line) 進島 ➔ Singapore Oceanarium 深度參觀 ➔ WEAVE 莆田 (Putien) / Chatterbox 海南雞飯午餐 ➔ 聖淘沙斜坡滑車 (Skyline Luge 4 tracks) ➔ 西樂索海灘 (Siloso Beach Coastes / Trapizza) 晚餐 ➔ 時光之翼煙火水舞秀 (Wings of Time Fireworks Symphony)</td>
+                                <td>花芭山線跨海纜車 (Mount Faber Line) 進島 ➔ Singapore Oceanarium 深度參觀 ➔ WEAVE 莆田 (Putien) / Chatterbox 海南雞飯午餐 ➔ <strong>聖淘沙線纜車西行 ➔ 西樂索炮台空中步道 (Fort Siloso Skywalk)</strong> ➔ 聖淘沙斜坡滑車 (Skyline Luge 4 tracks) ＋ 西樂索沙灘 ➔ 西樂索海灘 (Coastes / Trapizza) 晚餐 ➔ 時光之翼煙火水舞秀 (Wings of Time Fireworks Symphony)</td>
                             </tr>
                             <tr>
                                 <td><strong>Day 4｜8/24 (一)</strong></td>
@@ -1217,25 +1385,25 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><strong>濱海灣花園 (Gardens by the Bay) 雙館 (Day 2)</strong></td>
-                                <td>SGD 46 × 2</td>
-                                <td>SGD 32</td>
-                                <td>SGD 124</td>
-                                <td>約 NT$ 2,883–3,100</td>
+                                <td><strong>濱海灣花園 Bundle Deal (Day 2)</strong><br><span style="font-size:0.82rem; color:#276749;">含 花穹 ＋ 雲霧林(侏羅紀世界) ＋ 花之幻境 Floral Fantasy(迪士尼花藝) ＋ 園內接駁車 (SS = Shuttle Service)</span><br><span style="font-size:0.82rem; color:#c05621;">⚠️ 官網非居民標價為 成人 73／兒童 51，此處採用你查到的 58／41（可能為促銷或第三方平台價），下單時請確認</span></td>
+                                <td>SGD 58 × 2</td>
+                                <td>SGD 41</td>
+                                <td>SGD 157</td>
+                                <td>約 NT$ 3,650–3,925</td>
                             </tr>
                             <tr>
-                                <td><strong>華僑銀行空中走廊 (OCBC Skyway) (Day 2)</strong></td>
+                                <td><strong>超級樹空中走廊 (Supertree Skyway) (Day 2)</strong><br><span style="font-size:0.82rem; color:#276749;">✅ 已確認「SS」是 Shuttle Service 而非 Skyway，故空中走廊需另外購票，非重複計算</span></td>
                                 <td>SGD 14 × 2</td>
                                 <td>SGD 10</td>
                                 <td>SGD 38</td>
                                 <td>約 NT$ 884–950</td>
                             </tr>
                             <tr>
-                                <td><strong>金沙空中花園觀景台 (SkyPark 57F) (Day 2)</strong></td>
-                                <td>SGD 35 × 2</td>
-                                <td>SGD 31</td>
-                                <td>SGD 101</td>
-                                <td>約 NT$ 2,348–2,525</td>
+                                <td><strong>金沙空中花園觀景台 (SkyPark 56F) (Day 2)</strong><br><span style="font-size:0.82rem; color:#276749;">✅ 採<strong>註冊會員價</strong>、<strong>高峰時段</strong>（17:00 入場）：成人 27.30、優待票 24.50。非高峰會員價為 24.50／21.70，但非高峰最晚入場僅到 16:00，太趕故改高峰</span></td>
+                                <td>SGD 27.30 × 2</td>
+                                <td>SGD 24.50</td>
+                                <td>SGD 79.10</td>
+                                <td>約 NT$ 1,839–1,978</td>
                             </tr>
                             <tr>
                                 <td><strong>時光之翼煙火水舞秀 (Wings of Time) (Day 3)</strong></td>
@@ -1252,31 +1420,31 @@
                                 <td>約 NT$ 2,209–2,375</td>
                             </tr>
                             <tr>
-                                <td><strong>Singapore Oceanarium 一日票 (Day 3)</strong><br><span style="font-size:0.82rem; color:#c05621;">※ 原海豚浸潛 (Dolphin Immersion) 已取消，扣除 SGD 125</span></td>
-                                <td>SGD 133 × 2</td>
-                                <td>SGD 133</td>
-                                <td>SGD 399</td>
-                                <td>約 NT$ 9,277–9,975</td>
+                                <td><strong>Singapore Oceanarium 一日票 (Day 3)</strong><br><span style="font-size:0.82rem; color:#c05621;">🔴 <strong>原表列 SGD 133/人為嚴重錯誤，已更正</strong>。官網查證 (2026-08-12)：成人 <strong>S$55</strong>（含 1 張 S$5 餐飲／零售抵用券，線上再折 S$5）、兒童 <strong>S$43</strong>。原誤值使全家門票高估約 <strong>SGD 246</strong>。（原海豚浸潛已取消，不另計）</span></td>
+                                <td>SGD 55 × 2</td>
+                                <td>SGD 43</td>
+                                <td>SGD 153</td>
+                                <td>約 NT$ 3,557–3,825</td>
                             </tr>
                             <tr>
-                                <td><strong>斜坡滑車與空中吊椅 (Skyline Luge & Skyride) 3–4 次套票 (Day 3)</strong></td>
-                                <td>~SGD 36–42 × 2</td>
-                                <td>~SGD 18–24</td>
-                                <td>~SGD 90–108</td>
-                                <td>約 NT$ 2,093–2,700</td>
+                                <td><strong>斜坡滑車與空中吊椅 (Skyline Luge & Skyride) 2-Ride 套票 (Day 3)</strong><br><span style="font-size:0.82rem; color:#276749;">✅ 依你的決定改為 <strong>2-Ride S$39/人</strong>（每人同價，無兒童折扣）。媽媽與女兒以體驗為主，走相對安全好上手的賽道即可，不需買 3–4 次</span></td>
+                                <td>SGD 39 × 2</td>
+                                <td>SGD 39</td>
+                                <td>SGD 117</td>
+                                <td>約 NT$ 2,720–2,925</td>
                             </tr>
                             <tr>
-                                <td><strong>星耀樟宜星空花園 (Jewel Canopy Park Bundle Deals) (Day 1)</strong></td>
-                                <td>~SGD 10–18 × 2</td>
-                                <td>~SGD 4–9</td>
-                                <td>~SGD 24–45</td>
-                                <td>約 NT$ 558–1,125</td>
+                                <td><strong>星耀樟宜 Canopy Park Bundle Deal 2 (Day 1)</strong><br><span style="font-size:0.82rem; color:#276749;">含 Canopy Park（Discovery Slides／Foggy Bowls／Petal Garden／Topiary Walk）＋ Mastercard® Canopy Bridge ＋ Hedge Maze ＋ Mirror Maze ＋ Walking Net ＋ Bouncing Net</span><br><span style="font-size:0.82rem; color:#c05621;">🔴 Walking Net 官網公告維修關閉中、未列復開日；且 4 項設施需身高 110cm</span></td>
+                                <td>SGD 54 × 2</td>
+                                <td>SGD 39</td>
+                                <td>SGD 147</td>
+                                <td>約 NT$ 3,418–3,675</td>
                             </tr>
                             <tr style="background-color: #F0FFF4; font-weight: 700;">
                                 <td><strong>🎟️ 8 大景點門票與體驗小計 (Tickets Subtotal)</strong></td>
-                                <td colspan="2" style="text-align: center; color: #276749;">全家 2大1小 票價合算</td>
-                                <td><strong style="color: #276749;">SGD 937–976</strong></td>
-                                <td><strong style="color: #276749;">約 NT$ 21,785–24,400</strong></td>
+                                <td colspan="2" style="text-align: center; color: #276749;">全家 2大1小 票價合算（已全數改為官網／實際查得價格）</td>
+                                <td><strong style="color: #276749;">SGD 852</strong></td>
+                                <td><strong style="color: #276749;">約 NT$ 19,811–21,303</strong></td>
                             </tr>
                         </tbody>
                     </table>
@@ -1322,39 +1490,39 @@
                             </tr>
                             <tr>
                                 <td><strong>🎟️ 門票體驗 (Attractions)</strong></td>
-                                <td>8 大景點門票與體驗小計（已扣除取消的海豚浸潛 SGD 125、新增纜車 Sky Pass SGD 95）</td>
-                                <td><strong>SGD 937 – 976</strong></td>
-                                <td><strong>約 NT$ 21,785 – 24,400</strong></td>
+                                <td>8 大景點門票與體驗小計（票價已全面更正，見上表）</td>
+                                <td><strong>SGD 852</strong></td>
+                                <td><strong>約 NT$ 19,811 – 21,303</strong></td>
                             </tr>
                             <tr>
                                 <td><strong>🍽️ 餐飲美食 (Dining & Meals)</strong></td>
                                 <td>4 天全家早中晚餐、點心與特色餐廳</td>
                                 <td><strong>SGD 530 – 650</strong></td>
-                                <td><strong>約 NT$ 12,300 – 15,100</strong></td>
+                                <td><strong>約 NT$ 12,323 – 16,250</strong></td>
                             </tr>
                             <tr>
                                 <td><strong>🚕 當地交通 (Local Transportation)</strong></td>
                                 <td>新加坡機場/聖淘沙計程車 + 地鐵與公車</td>
                                 <td><strong>SGD 150 – 180</strong></td>
-                                <td><strong>約 NT$ 3,500 – 4,200</strong></td>
+                                <td><strong>約 NT$ 3,488 – 4,500</strong></td>
                             </tr>
                             <tr>
                                 <td><strong>🛍️ 伴手禮與雜項 (Souvenirs & Misc)</strong></td>
                                 <td>免稅伴手禮 (斑蘭蛋糕/TWG/CHARLES & KEITH) + eSIM 網卡 (2張) + 備用雜支</td>
                                 <td><strong>SGD 270 – 370</strong></td>
-                                <td><strong>約 NT$ 6,290 – 8,590</strong></td>
+                                <td><strong>約 NT$ 6,278 – 9,250</strong></td>
                             </tr>
                             <tr style="background: linear-gradient(135deg, #FEFCBF 0%, #FEEBC8 100%); font-weight: 700; font-size: 1.05rem;">
                                 <td><strong style="color: #C05621;">🏆 全旅程預估總花費 (Total Travel Cost)</strong></td>
                                 <td><strong style="color: #9B2C2C;">全家 4 天 3 夜總旅遊費用</strong></td>
-                                <td><strong style="color: #C05621;">SGD 4,328 – 4,748</strong></td>
-                                <td><strong style="color: #9B2C2C;">約 NT$ 102,960 – 113,136</strong></td>
+                                <td><strong style="color: #C05621;">約當 SGD 4,236 – 4,593</strong></td>
+                                <td><strong style="color: #9B2C2C;">NT$ 100,984 – 112,149</strong></td>
                             </tr>
                             <tr style="background: linear-gradient(135deg, #EBF8FF 0%, #BEE3F8 100%); font-weight: 700; font-size: 1.05rem;">
                                 <td><strong style="color: #2B6CB0;">💳 扣除媽媽負擔機票後實付 (Net Out-of-pocket)</strong></td>
                                 <td><strong style="color: #2C5282;">💡 扣除媽媽負擔機票 NT$ 30,632 後全家自付金額</strong></td>
-                                <td><strong style="color: #2B6CB0;">SGD 3,108 – 3,548</strong></td>
-                                <td><strong style="color: #2C5282;">約 NT$ 72,328 – 82,504</strong></td>
+                                <td><strong style="color: #2B6CB0;">約當 SGD 3,011 – 3,275</strong></td>
+                                <td><strong style="color: #2C5282;">NT$ 70,352 – 81,517</strong></td>
                             </tr>
                         </tbody>
                     </table>
@@ -1364,7 +1532,9 @@
                     <div class="explorer-highlight-title">💡 預算規劃與分攤貼心提示 (Budget & Cost Sharing Tips)</div>
                     <p>
                         1. <strong>機票由媽媽大方贊助</strong>：來回機票款 <strong>NT$ 30,632</strong>（2大1小）全額由媽媽負擔，極大程度減輕全家出遊壓力！<br>
-                        2. <strong>全家實付掌控良好</strong>：扣除媽媽贊助的機票後，4 天 3 夜全家實付金額僅需 <strong>SGD 3,108 – 3,548</strong>（<strong>約 NT$ 72,328 – 82,504</strong>），即可享優質飯店與豐富景點行程！（海豚浸潛取消省下 SGD 125，改搭跨海纜車增加 SGD 95，淨減 SGD 30）<br>
+                        2. <strong>全家實付掌控良好</strong>：扣除媽媽贊助的機票後，4 天 3 夜全家實付金額僅需 <strong>NT$ 70,352 – 81,517</strong>（約當 <strong>SGD 3,011 – 3,275</strong>），即可享優質飯店與豐富景點行程！<br>
+                        &nbsp;&nbsp;&nbsp;💡 <strong>本次票價全面更正後，門票小計由原（錯誤的）SGD 937–976 降為 SGD 852</strong>，主因是 Oceanarium 原表列 SGD 133/人為誤植（實為成人 55／兒童 43），單此一項即修正約 SGD 246；另加入 Floral Fantasy 套票與 Canopy Park Bundle Deal 2 的正確價格。<br>
+                        &nbsp;&nbsp;&nbsp;⚠️ <strong>對帳說明</strong>：機票、台灣接送、旅平險為<strong>台幣固定支出</strong>，其 SGD 欄僅為約當換算；其餘為 SGD 支出，TWD 欄採「低標 ×23.25、高標 ×25」。因此兩欄不會完全對帳，<strong>請以 TWD 欄為準</strong>。<br>
                         3. <strong>線上預訂門票優惠</strong>：熱門景點門票（如濱海灣雙館、Singapore Oceanarium、時光之翼與斜坡滑車）建議提前於 Klook 或 KKday 平台預訂，不僅享有套票折扣，還能節省現場排隊時間！<br>
                         4. <strong>感應支付便利搭乘</strong>：搭乘新加坡 MRT 地鐵與公車無需額外購卡，直接使用支援海外刷卡的信用卡（VISA / MasterCard）或手機 Apple Pay / Google Pay 逼卡感應即可輕鬆進出站！
                     </p>
@@ -1416,20 +1586,45 @@
                     </div>
                 </div>
 
-                <!-- 07:30 - 12:00 -->
+                <!-- 07:30 - 14:00 -->
                 <div class="timeline-item">
                     <div class="timeline-dot">2</div>
                     <div class="timeline-card">
                         <div class="timeline-time-row">
-                            <span class="time-pill">⏰ 07:30 – 12:00</span>
-                            <span class="food-badge">🍳 早餐：海南寶 (The Hainan Story) / 翠華茶餐廳 (Tsui Wah) / 亞坤 (Ya Kun Kaya Toast)</span>
+                            <span class="time-pill">⏰ 07:30 – 14:00</span>
+                            <span class="food-badge">🍳 早餐＋午餐都在 Jewel 解決</span>
                         </div>
-                        <h3 class="timeline-title">🌊 星耀樟宜 (Jewel Changi Airport) ＋ 頂樓星空花園 (Canopy Park)</h3>
-                        <p>欣賞 40 公尺高的<strong>雨漩渦 (HSBC Rain Vortex)</strong> 大瀑布，在<strong>森林谷 (Shiseido Forest Valley)</strong> 散步。10:00 準時登上頂樓<strong>星空花園 (Canopy Park)</strong> 玩滑梯與花園走廊！</p>
+                        <h3 class="timeline-title">🌊 星耀樟宜 (Jewel Changi Airport) ＋ 頂樓星空花園 (Canopy Park) — 不趕，玩完再走</h3>
+                        <p>欣賞 40 公尺高的<strong>雨漩渦 (HSBC Rain Vortex)</strong>（世界最高室內瀑布），在<strong>森林谷 (Shiseido Forest Valley)</strong> 散步。10:00 設施一開就上頂樓<strong>星空花園 (Canopy Park)</strong>，<strong>用完整 3 小時把 Bundle Deal 2 六項玩到滿</strong>，再吃個午餐才離開機場。</p>
+
+                        <div class="critical-note">
+                            <div class="cn-head"><span class="cn-tag">L2 購票關鍵</span>🔧 Walking Net 官網公告維修關閉中</div>
+                            <mark class="hl-stop">Walking Net 目前官網公告「closed for maintenance works」，且未列復開日期</mark>——它是 Bundle Deal 2 六項之一。<br>
+                            <strong>下單前務必致電 Jewel 或再查一次官網</strong>。若確定 8/21 仍不開，就考慮改買不含 Walking Net 的其他 Bundle，否則等於付了用不到。
+                        </div>
+
+                        <div class="critical-note">
+                            <div class="cn-head"><span class="cn-tag">L3 現場關鍵</span>👟 穿全包覆運動鞋＋10:00 先衝 Bouncing Net</div>
+                            <mark class="hl-stop">彈跳網與網狀步道嚴禁拖鞋、高跟鞋，必須穿全包覆運動鞋／休閒鞋</mark>，建議穿長褲或短褲。<br>
+                            <mark class="hl">行李與滾輪包一律禁止帶入</mark>（安全理由）——本行程已先在 Jewel L1 寄放大行李，動線正確。<br>
+                            <mark class="hl">10:00 一開門先衝 Bouncing Net</mark>：每場 <strong>45 分鐘（含 10 分強制安全說明）</strong>，是唯一有固定場次長度的設施，<strong>晚了會卡住後面五項全部</strong>。
+                        </div>
+
+                        <div class="explorer-highlight" style="border-left: 4px solid #1B6E3C;">
+                            <div class="explorer-highlight-title" style="color:#1B6E3C;">✅ 兩個好消息，讓 Day 1 從「趕」變成「從容」</div>
+                            <p><strong>1. 女兒身高 121cm，通過全部門檻。</strong>Canopy Park 的 Discovery Slides、Hedge Maze、Walking Net、Bouncing Net 都要求 110cm 以上——121cm <strong>全部符合，六項設施都能玩</strong>。<br>
+                            <strong>2. 不趕著離開機場。</strong>飯店官方 check-in 是 15:00，原行程排 14:00 進房其實是「不保證的提前入住」。現在改成 <strong>14:00 才離開機場、15:00 準時 check-in</strong>——既不必碰運氣，Canopy Park 也從 2 小時變成<strong>紮實的 3 小時</strong>，六項設施加上 Bouncing Net 的 45 分鐘場次全部塞得進去。</p>
+                        </div>
 
                         <div class="transport-box">
                             <span class="t-icon">🚶</span>
-                            <div>步行動線：星耀樟宜 (Jewel Changi Airport) 商場內（先賞瀑布 ➔ 08:00 後用早餐 ➔ 森林谷 (Shiseido Forest Valley) ➔ 10:00 頂樓星空花園 (Canopy Park)）。</div>
+                            <div><strong>時段安排（依官網實際開放時間排定）</strong>：<br>
+                            <strong>07:30–08:00</strong> 雨漩渦周邊拍照等候（⚠️ 瀑布 <strong>10:00</strong> 才開始放水，此時只能看建築本體）<br>
+                            <strong>08:00–09:00</strong> 早餐：海南寶 (B2-201/202)／翠華 (#03-230) 皆 08:00 開門<br>
+                            <strong>09:00–10:00</strong> 資生堂森林谷 (Shiseido Forest Valley) 散步（24 小時免費開放）＋ 10:00 看瀑布開始放水<br>
+                            <strong>10:00–13:00</strong> 頂樓星空花園 (Canopy Park, L5) ＋ Bundle Deal 2 六大設施（<strong>完整 3 小時</strong>）<br>
+                            <strong>13:00–14:00</strong> Jewel 商場內午餐（吃飽再進市區，飯店 15:00 才能進房）<br>
+                            <strong>14:00</strong> 取回寄存行李 ➔ 叫車前往飯店</div>
                         </div>
 
                         <div class="explorer-highlight">
@@ -1447,12 +1642,30 @@
                                             <li>📸 <strong>3 大黃金拍攝角度</strong>：L2 觀景台全景俯拍、L3/L4 Skytrain 輕軌穿越瀑布絕景、B2 底部玻璃水柱震撼視覺。</li>
                                         </ul>
                                     </li>
-                                    <li>🎇 <strong>雨漩渦音樂燈光水舞秀 (Light & Music Show)</strong>：每晚 20:00 ＆ 21:00 於瀑布區免費播映 5 分鐘音樂雷射秀。</li>
-                                    <li>🎟️ <strong>Canopy Park 頂樓星空花園設施</strong>：位於 Jewel L5 頂樓，開放時間為每日 10:00–22:00。內含奇幻滑梯 (Discovery Slides)、雲霧草坪 (Foggy Bowls)、花卉園與天步道，建議預購包含 Sky Nets 彈跳網與迷宮之 Bundle Deals 套票。
+                                    <li>🎇 <strong>雨漩渦音樂燈光水舞秀 (Light & Music Showcase)（✅ 官網查證，場次已更正）</strong>：<br>
+                                    • 週一–四：19:30、20:00、21:00<br>
+                                    • <strong>週五–日、假日及假日前夕：19:30、20:00、21:00、22:00</strong>（8/21 為週五，共 4 場）<br>
+                                    ⚠️ <strong>但我們 12:00 就離開機場、Day 4 是中午班機，兩天都看不到這個秀</strong>——列此僅供參考，勿列入期待。（原檔案僅寫「20:00 & 21:00 兩場」，場次不完整）</li>
+
+                                    <li>🎟️ <strong>Canopy Park Bundle Deal 2 — 六大項目逐一查證的開放時間（✅ jewelchangiairport.com 官網，2026-08-12）</strong><br>
+                                    <span style="color:#1B6E3C;"><strong>✅ 身高門檻已確認通過：</strong></span>四項設施要求 110cm 以上（Discovery Slides、Hedge Maze、Walking Net、Bouncing Net），<strong>女兒 121cm 全部符合，六項都能玩</strong>。<br>
+                                    <span style="color:#B3122A;"><strong>🔴 剩下兩個要注意：</strong></span><br>
+                                    <strong>(1) Walking Net 官網公告「closed for maintenance works」、未列復開日期</strong>——這是套票六項之一，若 8/21 仍在維修等於買了用不到，<strong>下單前務必致電或查官網確認</strong>。<br>
+                                    <strong>(2) 全部設施 10:00 才開</strong>，07:30–10:00 這段沒有付費設施可玩，已改排早餐與森林谷散步填滿。
                                         <ul>
-                                            <li>👟 <strong>穿著與安全規範</strong>：彈跳網與星空步道嚴禁穿著拖鞋/高跟鞋，必須穿著全面包覆之運動鞋/休閒鞋；彈跳網適合身高 110cm 以上孩童。</li>
+                                            <li><strong>① Canopy Park 本體</strong>（含 Discovery Slides、Foggy Bowls、Petal Garden、Topiary Walk）：週一–四 <strong>10:00–21:00</strong>；<strong>週五–日／假日 10:00–22:00</strong>（8/21 為週五）。最後入場為<strong>關閉前 30 分鐘</strong>。位置 Jewel L5。</li>
+                                            <li><strong>② Mastercard® Canopy Bridge</strong>：每日 <strong>10:00–21:00</strong>，最後入場關閉前 30 分。<br>（官網另公告 8/30 14:00–19:00 關閉，不影響 8/21 ✅）</li>
+                                            <li><strong>③ Hedge Maze 樹籬迷宮</strong>：<strong>10:00–21:00</strong>，最後入場關閉前 30 分。<strong>身高 110cm 以上</strong>。</li>
+                                            <li><strong>④ Mirror Maze 鏡子迷宮</strong>：<strong>10:00–21:00</strong>，最後入場關閉前 30 分。</li>
+                                            <li><strong>⑤ Walking Net 步行網</strong>：<strong>10:00–21:00</strong>。<strong>身高 110cm 以上</strong>。<span style="color:#B3122A;"><strong>🔴 目前維修關閉中</strong></span></li>
+                                            <li><strong>⑥ Bouncing Net 彈跳網</strong>：<strong>10:00–21:00</strong>。<strong>身高 110cm 以上</strong>。⚠️ <strong>每場 45 分鐘（含 10 分鐘強制安全說明）</strong>——光這一項就會吃掉大半時間，要玩就要先排它。</li>
                                         </ul>
                                     </li>
+                                    <li>⏱️ <strong>3 小時怎麼分配（10:00–13:00，六項全玩得完）</strong>：<br>
+                                    <strong>10:00 先衝 Bouncing Net</strong>（每場 45 分含安全說明，最耗時、開門時人最少）➔ <strong>10:45 Walking Net</strong>（若已復開）➔ <strong>11:10 Discovery Slides</strong> ➔ <strong>11:35 Hedge Maze</strong> ➔ <strong>12:00 Mirror Maze</strong> ➔ <strong>12:20 Mastercard® Canopy Bridge</strong> ➔ <strong>12:35–13:00 Petal Garden ＋ Topiary Walk</strong> 邊散步邊拍照收尾。<br>
+                                    ✅ 這樣排完剛好 3 小時，六項全中，還留了緩衝。<strong>Bouncing Net 一定要第一個玩</strong>——它是唯一有固定場次長度的設施，晚了會卡住後面全部。</li>
+                                    <li>👟 <strong>穿著與安全規範（官網）</strong>：彈跳網與網狀步道必須穿<strong>全包覆運動鞋／休閒鞋</strong>，嚴禁拖鞋、高跟鞋；建議穿<strong>長褲或短褲</strong>（裙裝不便）。<br>
+                                    ⚠️ <strong>行李與滾輪包一律禁止帶入</strong>（安全理由），現場有寄物櫃——本行程已先在 Jewel L1 寄放大行李，動線正確 ✅</li>
                                     <li>🍳 <strong>早餐推薦與營業時間說明</strong>：
                                         <ul>
                                             <li>⚠️ <strong>已查證修正</strong>：Jewel 商場雖 24 小時開放，但海南寶自身營業時間為 <strong>08:00–22:00</strong>，並非 07:30 就營業；07:30–08:00 可先在雨漩渦周邊拍照等候，08:00 一到再入座用餐。</li>
@@ -1461,23 +1674,23 @@
                                             <li>🥉 <strong>Ya Kun Kaya Toast 亞坤咖椰吐司（Jewel #01-230/#01-K207）</strong>：Google 評分 3.8★（243 則評論）；人均 SGD 1-10（約 TWD 23–233）。1944 年創立的新加坡國民早餐老字號，炭烤咖椰奶油吐司配溏心蛋、傳統咖啡/紅茶，出餐極快、價格最親民。⚠️ 已查證營業至 22:00，惟 Jewel 分店確切開店時間官網未單獨列出；亞坤其他分店（100AM、313@Somerset）皆為每日 07:30 開始營業，比照連鎖慣例預期 Jewel 分店同為 07:30 左右開店，建議行前以 Google 地圖再次確認。</li>
                                         </ul>
                                     </li>
-                                    <li>💡 <strong>彈性調整</strong>：若紅眼航班後小朋友太累，可只觀賞瀑布外觀，跳過付費星空花園 (Canopy Park) 提早前往飯店休息。</li>
+                                    <li>💡 <strong>彈性調整</strong>：若紅眼航班後女兒太累，可縮短 Canopy Park 停留（優先玩 Bouncing Net ＋ Discovery Slides 就好），提早前往飯店。⚠️ 但飯店 <strong>15:00</strong> 才能進房，提早到只能先寄放行李在大廳、在附近 100 AM 商場或 7-Eleven 休息。</li>
                                 </ul>
                             </div>
                         </details>
                     </div>
                 </div>
 
-                <!-- 12:00 - 14:00 -->
+                <!-- 14:00 - 15:00 -->
                 <div class="timeline-item">
                     <div class="timeline-dot">3</div>
                     <div class="timeline-card">
                         <div class="timeline-time-row">
-                            <span class="time-pill">⏰ 12:00 – 14:00</span>
+                            <span class="time-pill">⏰ 14:00 – 15:00</span>
                             <span class="cost-tag">計程車 SGD 25–35</span>
                         </div>
-                        <h3 class="timeline-title">🚖 取行李 ➔ 直達 M Hotel Check-in</h3>
-                        <p>領回寄存行李，搭乘計程車直達飯店（車程約 20 分鐘）。</p>
+                        <h3 class="timeline-title">🚖 取行李 ➔ 直達 M Hotel（15:00 準時 Check-in）</h3>
+                        <p>玩完 Canopy Park、吃過午餐後，14:00 領回寄存行李，搭計程車直達飯店（車程約 20–25 分鐘），<strong>15:00 剛好是官方 Check-in 時間，不必碰運氣求提前入住</strong>。</p>
 
                         <div class="transport-box">
                             <span class="t-icon">🚕</span>
@@ -1493,9 +1706,9 @@
                             <summary>📖 查看 M Hotel 飯店資訊與直達計程車走法</summary>
                             <div class="accordion-content">
                                 <ul>
-                                    <li>🏨 <strong>M Hotel 門牌地址與地標</strong>：81 Anson Road, Singapore 079908（位於丹戎巴葛 / 珊頓道商業核心，緊鄰 TE19 珊頓道站與 EW15 丹戎巴葛站）。</li>
+                                    <li>🏨 <strong>M Hotel 門牌地址與地標</strong>：81 Anson Road, Singapore 079908（位於丹戎巴葛 / 珊頓道商業核心，最近的地鐵站為 <strong>CC32 太子愛德華路站，步行約 4 分鐘</strong>）。</li>
                                     <li>🚖 <strong>機場至飯店車程與車資</strong>：樟宜機場 (Jewel / T3) 直達飯店正門車程約 20–25 分鐘，車資概估 SGD 25–35（視離峰/尖峰時段加成）。</li>
-                                    <li>⏰ <strong>Check-in 規範與禮賓寄物</strong>：官方 Check-in 時間為 15:00（通常 14:00 可安排房間提前入住）。若早到房間尚未整理完成，可至禮賓部 (Concierge) 辦理免費寄物，並前往 8 樓戶外泳池區輕鬆休憩。</li>
+                                    <li>⏰ <strong>Check-in 規範與禮賓寄物</strong>：官方 Check-in 時間為 <strong>15:00</strong>。✅ 本行程已調整為 15:00 抵達，<strong>不依賴不保證的提前入住</strong>。若早到房間尚未整理完成，可至禮賓部 (Concierge) 辦理免費寄物，並前往 8 樓戶外泳池區輕鬆休憩。</li>
                                 </ul>
                             </div>
                         </details>
@@ -1507,7 +1720,7 @@
                     <div class="timeline-dot">4</div>
                     <div class="timeline-card">
                         <div class="timeline-time-row">
-                            <span class="time-pill">⏰ 14:00 – 16:30</span>
+                            <span class="time-pill">⏰ 15:00 – 16:30</span>
                         </div>
                         <h3 class="timeline-title">🏨 飯店 Check-in ＆ 充電午休</h3>
                         <p>進房間洗澡、補眠休息，為傍晚與夜間的探險補足滿滿體力！</p>
@@ -1528,7 +1741,10 @@
                                             <li>FairPrice Finest（位於 100 AM 商場 B1，步行 5 分鐘，可買水果、新加坡養樂多、伴手禮）。</li>
                                         </ul>
                                     </li>
-                                    <li>🚇 <strong>周邊雙地鐵站指引</strong>：TE19 珊頓道站 (Shenton Way Stn 步行 5 分鐘) / EW15 丹戎巴葛站 (Tanjong Pagar Stn 步行 7 分鐘)。</li>
+                                    <li>🚇 <strong>周邊三座地鐵站實測步行距離（✅ Google 地圖查證，已更正原檔案低估值）</strong>：<br>
+                                    • <strong>CC32 太子愛德華路站 (Prince Edward Road)</strong>：約 <strong>4 分鐘 / 300 公尺 ← 最近</strong><br>
+                                    • <strong>EW15 丹戎巴葛站 (Tanjong Pagar)</strong>：約 <strong>7 分鐘</strong><br>
+                                    • <strong>TE19 珊頓道站 (Shenton Way)</strong>：約 <strong>13 分鐘 / 950 公尺</strong>（⚠️ 原檔案多處誤寫 3–5 分鐘，實測需 13 分鐘，夜間帶疲累小孩體感差異很大）</li>
                                 </ul>
                             </div>
                         </details>
@@ -1547,7 +1763,7 @@
 
                         <div class="transport-box">
                             <span class="t-icon">🚇</span>
-                            <div>MRT 路線：步行 6 分至丹戎巴葛站 (Tanjong Pagar Station, EW15) ➔ 搭 EW 線 1 站至萊佛士坊站 (Raffles Place Station, EW14) ➔ 步行 9 分抵達魚尾獅公園 (Merlion Park)。</div>
+                            <div>MRT 路線：步行 7 分至丹戎巴葛站 (Tanjong Pagar Station, EW15) ➔ 搭 EW 線 1 站至萊佛士坊站 (Raffles Place Station, EW14) ➔ 步行 9 分抵達魚尾獅公園 (Merlion Park)。</div>
                         </div>
 
                         <div class="transport-box">
@@ -1675,7 +1891,7 @@
                                 <ul>
                                     <li>🚶 <strong>直接步行走法（最推薦首選）</strong>：從麥士威熟食中心正門出發 ➔ 沿 Maxwell Road 轉 Anson Road 直行 ➔ 全程僅 <strong>850 公尺</strong>，步行約 <strong>11 分鐘</strong> 即達 M Hotel (81 Anson Road)。夜間沿途有騎樓與行人步道，晚餐後散步極為舒服！</li>
                                     <li>🚕 <strong>計程車 / Grab 叫車走法</strong>：車程僅約 <strong>4 分鐘</strong>（車資概估 SGD 6–9），於麥士威門口搭車直達飯店門口。</li>
-                                    <li>🚇 <strong>地鐵 TEL 線直達走法</strong>：麥士威站 (Maxwell Station, TE18) 搭乘 TEL 線 1 站至珊頓道站 (Shenton Way Station, TE19 Exit 1) ➔ 步行 3 分鐘即達 M Hotel。</li>
+                                    <li>🚇 <strong>地鐵 TEL 線走法（最不推薦）</strong>：麥士威站 (Maxwell Station, TE18) 搭 TEL 線 1 站至珊頓道站 (Shenton Way Station, TE19 Exit 1) ➔ ⚠️ <strong>出站還要再走 13 分鐘 / 950 公尺</strong>才到 M Hotel。搭 1 站省不到路，直接從麥士威步行 11 分鐘反而更快。</li>
                                     <li>⚠️ 以上為研究當下查詢所得的路線規劃結果，實際 20:00 後的步行照明、人潮與地鐵班距可能略有差異，建議出發前用手機 Google 地圖即時查詢確認。</li>
                                 </ul>
                             </div>
@@ -1696,10 +1912,10 @@
             
             <div class="day-header-card" style="border-left-color: var(--green);">
                 <div class="day-header-info">
-                    <h2>📅 Day 2 — 8/22 (六) 濱海灣花園 (Gardens by the Bay) 🦕 ＋ 華僑銀行空中走廊 (OCBC Skyway) 🌉 ＋ 早鳥晚餐 ＋ 超級樹雙秀 ✨</h2>
-                    <p>雲霧林 (Cloud Forest) 恐龍 ➔ 花穹 (Flower Dome) 迪士尼花藝 ➔ 華僑銀行空中走廊 (OCBC Skyway) 高空漫步 ➔ 金沙商場 (The Shoppes at Marina Bay Sands) 早鳥晚餐 ➔ 金沙空中花園觀景台 (SkyPark Observation Deck) ➔ 北極光/超級樹雙秀 ➔ 同樂海鮮晚餐（改列為跳過早鳥晚餐者的彈性宵夜備案，Spectra 水舞秀彈性加碼、非必排）</p>
+                    <h2>📅 Day 2 — 8/22 (六) 濱海灣花園 (Gardens by the Bay) 🦕 ＋ 金沙 SkyPark 🌆 ＋ LV 島嶼概念店 👜 ＋ 三場夜秀 ✨</h2>
+                    <p>雲霧林 (Cloud Forest) 恐龍 ＋ 花穹 (Flower Dome) ➔ 超級樹空中走廊 (Supertree Skyway) ➔ 濱海灣午餐 ➔ <strong>花之幻境 (Floral Fantasy) 迪士尼花藝</strong> ➔ 金沙商場 (The Shoppes) Black Tap 早鳥晚餐 ➔ 金沙空中花園觀景台 (SkyPark 56F，17:00 高峰場) ➔ <strong>LV Island Maison 藍調時刻拍照</strong> ➔ <strong>Spectra 水舞秀 (20:00)</strong> ➔ 超級樹燈光秀 (Garden Rhapsody 20:45) ＋ 北極光秀 (Borealis 21:00) ➔ Grab 回飯店</p>
                 </div>
-                <span class="day-theme-badge">探險主題：侏羅紀恐龍與夢幻北極光</span>
+                <span class="day-theme-badge">探險主題：恐龍溫室 ＆ 水岸三連秀（由西向東單向走）</span>
             </div>
 
             <!-- Gardens by the Bay Map Card -->
@@ -1726,15 +1942,22 @@
                     <div class="timeline-dot">1</div>
                     <div class="timeline-card">
                         <div class="timeline-time-row">
-                            <span class="time-pill">⏰ 09:30 – 12:30</span>
-                            <span class="cost-tag">雙館套票 成人 SGD46 / 兒童 SGD32</span>
+                            <span class="time-pill">⏰ 09:30 – 11:30</span>
+                            <span class="cost-tag">Bundle Deal 成人 SGD58 / 兒童 SGD41</span>
                         </div>
                         <h3 class="timeline-title">🦕 濱海灣花園 (Gardens by the Bay)（雲霧林 (Cloud Forest) ＋ 花穹 (Flower Dome)）</h3>
-                        <p>走進全球最大室內溫室！<strong>雲霧林 (Cloud Forest)</strong> 遇見 <strong>Jurassic World 真人比例巨型恐龍 🦕</strong>！在 <strong>花穹 (Flower Dome)</strong> 尋找迪士尼夢幻花藝 🎡！</p>
+                        <p>走進全球最大室內溫室！<strong>雲霧林 (Cloud Forest)</strong> 遇見 <strong>Jurassic World 真人比例巨型恐龍 🦕</strong>；<strong>花穹 (Flower Dome)</strong> 是全球最大玻璃溫室，收藏地中海與半乾旱地區珍稀植物。兩館官網各建議停留約 1 小時，故排 09:30–11:30。</p>
+
+                        <div class="explorer-highlight" style="border-left: 4px solid #0B5F57;">
+                            <div class="explorer-highlight-title" style="color:#0B5F57;">💡 09:30 進場的兩個好處（官網查證）</div>
+                            <p>1. <strong>雲霧林每日噴霧 6 次：10:00、12:00、14:00、16:00、18:00、20:00</strong>。09:30 入場 ➔ 剛好趕上 <strong>10:00 第一次噴霧</strong>，雲霧繚繞配恐龍最出片。<br>
+                            2. 兩館 09:00 就開門，此時人潮最少。<strong>雲霧林最後入場 20:00、花穹最後入場 20:30</strong>，時間很寬鬆。<br>
+                            🌡️ 兩館室內恆溫 <strong>23–25°C、濕度 80–90%</strong>，記得幫女兒帶薄外套。</p>
+                        </div>
 
                         <div class="transport-box">
                             <span class="t-icon">🚇</span>
-                            <div>MRT 路線：飯店步行 5 分至太子愛德華路站 (Prince Edward Road Station, CC32) ➔ 搭 CC 環線 2 站至海灣舫站 (Bayfront Station, DT16/CC34) 直達入口。</div>
+                            <div>MRT 路線：飯店步行約 4 分鐘（300 公尺）至太子愛德華路站 (Prince Edward Road Station, CC32) ➔ 搭 CC 環線 2 站至海灣舫站 (Bayfront Station, DT16/CC34) 直達入口。</div>
                         </div>
 
                         <div class="transport-box">
@@ -1743,9 +1966,10 @@
                         </div>
 
                         <div class="explorer-highlight">
-                            <div class="explorer-highlight-title">🦕 恐龍與花藝搞笑任務</div>
+                            <div class="explorer-highlight-title">🦕 恐龍與噴霧搞笑任務</div>
                             <p>1. <strong>雲霧林 (Cloud Forest) 恐龍 🦕</strong>：學恐龍「嗷嗚～」張大嘴巴拍一張「被恐龍追著跑」的探險合照！<br>
-                            2. <strong>花穹 (Flower Dome) 迪士尼花藝 🎡</strong>：擺出胡迪或巴斯光年「飛向宇宙，浩瀚無垠！」的酷炫姿勢！</p>
+                            2. <strong>10:00 雲霧噴發瞬間 ☁️</strong>：站在 35 公尺瀑布前，拍一張「被雲霧包圍的雨林探險家」！<br>
+                            ℹ️ <strong>迪士尼花藝不在花穹</strong>——它在 <strong>Floral Fantasy 花之幻境</strong>（見下午第 4 站），原檔案位置寫錯已更正。</p>
                         </div>
 
                         <details class="detail-accordion">
@@ -1756,7 +1980,7 @@
                                     <li>⏰ <strong>開放時間</strong>：每日 09:00–21:00（最後入場 20:30）</li>
                                     <li>🌿 <strong>雲霧林 (Cloud Forest) 3 大打卡亮點</strong>：
                                         <ul>
-                                            <li>35 公尺高雲霧林室內巨型瀑布 (Cloud Mountain / World's Tallest Indoor Waterfall)。</li>
+                                            <li>35 公尺高雲霧林室內瀑布 (Cloud Mountain)。⚠️ <strong>原檔案稱其為「World's Tallest Indoor Waterfall」是錯的</strong>——官網用語為「<strong>one of</strong> the world's tallest indoor waterfalls」；<strong>真正的世界最高室內瀑布是 Day 1 的星耀樟宜雨漩渦（40 公尺）</strong>，官網明確以 "the world's tallest indoor waterfall" 稱之。已更正。</li>
                                             <li>空中漫步空中步道 (Treetop Walk & Cloud Walk)，感受高空漫步於熱帶雨林植物上方。</li>
                                             <li>食蟲植物區 (Lost World & Secret Garden)，欣賞奇特豬籠草、捕蠅草與高山蘭花。</li>
                                         </ul>
@@ -1778,12 +2002,12 @@
                     </div>
                 </div>
 
-                <!-- 11:30 - 12:30 OCBC Skyway -->
+                <!-- 11:30 - 12:15 Supertree Skyway -->
                 <div class="timeline-item">
                     <div class="timeline-dot">2</div>
                     <div class="timeline-card">
                         <div class="timeline-time-row">
-                            <span class="time-pill">⏰ 11:30 – 12:30</span>
+                            <span class="time-pill">⏰ 11:30 – 12:15</span>
                             <span class="cost-tag">Skyway 成人 SGD14 / 兒童 SGD10</span>
                         </div>
                         <h3 class="timeline-title">🌉 華僑銀行空中走廊 (OCBC Skyway) 22M 高空漫步</h3>
@@ -1809,12 +2033,12 @@
                     </div>
                 </div>
 
-                <!-- 12:30 - 14:00 -->
+                <!-- 12:15 - 13:45 -->
                 <div class="timeline-item">
                     <div class="timeline-dot">3</div>
                     <div class="timeline-card">
                         <div class="timeline-time-row">
-                            <span class="time-pill">⏰ 12:30 – 14:00</span>
+                            <span class="time-pill">⏰ 12:15 – 13:45</span>
                             <span class="food-badge">🍴 午餐：華珍海鮮 (Majestic Bay) / Satay by the Bay / 金沙美食廣場</span>
                         </div>
                         <h3 class="timeline-title">🍱 濱海灣 (Marina Bay) 景觀美味午餐</h3>
@@ -1838,16 +2062,67 @@
                     </div>
                 </div>
 
-                <!-- 14:30 - 17:15 Black Tap + SkyPark 57F -->
+                <!-- 13:45 - 14:45 Floral Fantasy -->
                 <div class="timeline-item">
                     <div class="timeline-dot">4</div>
                     <div class="timeline-card">
                         <div class="timeline-time-row">
-                            <span class="time-pill">⏰ 14:30 – 17:15</span>
-                            <span class="cost-tag">SkyPark 觀景台 成人 SGD35 / 兒童 SGD31</span>
+                            <span class="time-pill">⏰ 13:45 – 14:45</span>
+                            <span class="cost-tag">🎟️ 已含在 Bundle Deal 內</span>
                         </div>
-                        <h3 class="timeline-title">🍔 Black Tap 早鳥晚餐 ➔ 🌆 金沙空中花園觀景台 (SkyPark 57F)</h3>
-                        <p>下午步行前往 The Shoppes at Marina Bay Sands 金沙商場，在 <strong>Black Tap Craft Burgers & Beer</strong> 享用招牌巨無霸漢堡與瘋狂搖滾奶昔 (Crazy Shake)！約 16:30 前往 57 樓空中花園觀景台 (SkyPark Observation Deck)，俯瞰整片濱海灣壯闊景色！</p>
+                        <h3 class="timeline-title">🌸 花之幻境 (Floral Fantasy) ＋ 迪士尼夢幻花藝 (Disney Garden of Wonder)</h3>
+                        <p><strong>這一項本來就含在你要買的 Bundle Deal 裡，不去等於白付錢。</strong>1,500 平方公尺的空間裡懸掛<strong>超過 15,000 朵</strong>鮮花、乾燥花與永生花，分成 Dance／Float／Waltz／Drift 四個主題造景，另有箭毒蛙生態缸。<strong>迪士尼與皮克斯花藝展 (Disney Garden of Wonder) 就在這裡</strong>——《玩具總動員 5》與《冰雪奇緣》角色花藝，活動期間 2026/6/8–2027/3/14，8/22 正在展期內。</p>
+
+                        <div class="transport-box">
+                            <span class="t-icon">🚶</span>
+                            <div><strong>為什麼排在這個時間</strong>：Floral Fantasy 官網描述「<strong>a stone's throw from Bayfront MRT station</strong>」——就在海灣舫站旁，而我們午餐後本來就要往西走去金沙商場，<strong>它剛好在路上，不繞路</strong>。官網建議停留 1 小時。</div>
+                        </div>
+
+                        <div class="explorer-highlight">
+                            <div class="explorer-highlight-title">🎡 迪士尼花藝搞笑任務</div>
+                            <p>擺出胡迪或巴斯光年「飛向宇宙，浩瀚無垠！」的酷炫姿勢，跟花藝角色合照！再找找箭毒蛙生態缸裡的小青蛙躲在哪。</p>
+                        </div>
+
+                        <details class="detail-accordion">
+                            <summary>📖 查看開放時間、票價與注意事項（官網查證）</summary>
+                            <div class="accordion-content">
+                                <ul>
+                                    <li>⏰ <strong>開放時間</strong>：每日 <strong>10:00–21:00</strong>，最後入場 20:30。建議停留 1 小時。</li>
+                                    <li>📍 <strong>位置</strong>：緊鄰海灣舫站 (Bayfront MRT)，最近停車場為 Bayfront Plaza Carpark。</li>
+                                    <li>🎟️ <strong>單買票價（非居民）</strong>：成人 SGD 24、兒童 (3–12 歲) SGD 16。<strong>本次已含在 Bundle Deal 內，不需另購。</strong></li>
+                                    <li>🌸 <strong>展區內容</strong>：四大主題造景 Dance／Float／Waltz／Drift，逾 15,000 朵花材懸掛於頭頂；另設箭毒蛙 (Poison Dart Frog) 生態缸。</li>
+                                    <li>⚠️ <strong>維修休館日</strong>：官網公告下次休館為 <strong>2026/9/1</strong>，不影響 8/22。（另：雲霧林下次休館 <strong>8/24</strong>、花穹已於 <strong>8/17</strong> 休館，皆不影響 8/22，但<strong>出發前建議再確認一次</strong>。）</li>
+                                    <li>🚌 <strong>Bundle 內的「SS」是 Shuttle Service</strong>（園內接駁車），可省去在偌大園區內步行，帶小孩很實用——記得問清楚上車點與班距。</li>
+                                    <li>💡 <strong>若當天體力不濟</strong>：這是唯一可以捨棄的一站（門票已付、但不影響動線）。Day 2 全程 09:30–21:20 偏長，可視女兒狀況彈性放棄。</li>
+                                </ul>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
+                <!-- 14:45 - 18:00 Black Tap + SkyPark 56F -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">5</div>
+                    <div class="timeline-card">
+                        <div class="timeline-time-row">
+                            <span class="time-pill">⏰ 14:45 – 18:00</span>
+                            <span class="cost-tag">SkyPark 會員價 成人 27.30 / 優待 24.50</span>
+                        </div>
+                        <h3 class="timeline-title">🍔 Black Tap 早鳥晚餐 ➔ 🌆 金沙空中花園觀景台 (SkyPark 56F)</h3>
+                        <p><strong>14:45–16:30</strong> 在 The Shoppes at Marina Bay Sands 的 <strong>Black Tap Craft Burgers & Beer</strong> 享用招牌巨無霸漢堡與瘋狂搖滾奶昔 (Crazy Shake)。<strong>17:00–18:00</strong> 上觀景台俯瞰整片濱海灣。下樓後直接接上 Event Plaza 的 LV 拍照與夜秀，一路往東不回頭。</p>
+
+                        <div class="critical-note">
+                            <div class="cn-head"><span class="cn-tag">L2 購票關鍵</span>🎟️ 一定要買「高峰時段」票，不要買非高峰</div>
+                            官網開放時間：每日 09:30–22:00。<mark class="hl-stop">非高峰 09:30–16:30，最晚入場只到 16:00</mark>；<mark class="hl">高峰 17:00–22:00，最晚入場 21:30</mark>。<br>
+                            原行程排「約 16:00 上觀景台」<strong>正好卡在非高峰最後入場的那一刻</strong>——Black Tap 只要吃慢 15 分鐘就會錯過，而且入場後 16:30 非高峰時段就結束。<br>
+                            改買<mark class="hl">高峰時段票、17:00 進場</mark>後：最晚入場 21:30 完全不趕、光線更接近黃金時刻，<strong>會員價每人只多 SGD 2.80</strong>（成人 24.50 → 27.30），非常值得。
+                        </div>
+
+                        <div class="critical-note">
+                            <div class="cn-head"><span class="cn-tag">天氣風險</span>🌧️ 露天場地，雷雨可能關閉</div>
+                            SkyPark 是<mark class="hl">露天</mark>場地，遇暴雨或閃電可能暫時關閉，<mark class="hl">現場不提供雨傘</mark>；<mark class="hl">進場未滿一小時遇關閉可要求退費</mark>。8 月為雷雨季。<br>
+                            <strong>備案</strong>：若當下關閉，直接下樓進金沙商場，提前開始 Event Plaza 的 LV 拍照（藍調時刻 18:45–19:45 才是重點），不影響後面 Spectra 與超級樹雙秀。
+                        </div>
 
                         <div class="transport-box">
                             <span class="t-icon">🚶</span>
@@ -1857,7 +2132,7 @@
                         <div class="explorer-highlight">
                             <div class="explorer-highlight-title">🍔 狂野美食探險任務</div>
                             <p>1. <strong>Black Tap 巨型漢堡 🍔</strong>：抱著比臉還大的漢堡，拍一張「爸媽都不相信我吃得下去」的誇張挑戰表情！<br>
-                            2. <strong>金沙 SkyPark 57F 觀景台 🌆</strong>：站在高空捏住遠方的新加坡摩天觀景輪 (Singapore Flyer)，拍出傳說中的「捏捏照」大神之作！</p>
+                            2. <strong>金沙 SkyPark 56F 觀景台 🌆</strong>：站在高空捏住遠方的新加坡摩天觀景輪 (Singapore Flyer)，拍出傳說中的「捏捏照」大神之作！</p>
                         </div>
 
                         <details class="detail-accordion">
@@ -1866,27 +2141,99 @@
                                 <ul>
                                     <li>📍 <strong>Black Tap Craft Burgers & Beer 門牌位置</strong>：金沙購物商城 1 樓 (The Shoppes at Marina Bay Sands, #L1-80, Bay Level)。人均約 SGD 30–50。</li>
                                     <li>🍔 <strong>招牌狂放美食</strong>：<strong>The All-American Burger</strong> (美國經典起司漢堡)、<strong>The Greg Norman</strong> (和牛漢堡)，以及紅遍全球的夢幻 <strong>CrazyShake</strong> (Cotton Candy 棉花糖 / Sweet & Salty 鹹甜狂想瘋狂奶昔)。</li>
-                                    <li>⏰ <strong>早鳥晚餐避排隊時間</strong>：建議 16:30–17:00 入座享用早鳥晚餐，避開 18:30 晚餐尖峰人潮，餐後順暢直上 57F 觀景台欣賞濱海灣夕陽。</li>
+                                    <li>⏰ <strong>早鳥晚餐時間</strong>：<strong>14:45 入座</strong>，避開 18:30 晚餐尖峰人潮；16:30 結束後從容步行至 Tower 3 票務中心，趕上 17:00 高峰時段第一批入場。</li>
                                     <li>📍 實體門牌地址：TWG Tea on the Bay at Event Plaza (#B1-02, The Shoppes at Marina Bay Sands, 2 Bayfront Ave, Singapore 018972，金沙水岸旗艦店)。</li>
                                     <li>🫖 TWG Tea 經典下午茶：新加坡代表性精品茶館，提供 800+ 種全球頂級名茶、馬卡龍禮盒與兒童無咖啡因水果茶。</li>
-                                    <li>🏙️ <strong>金沙空中花園觀景台 (SkyPark Observation Deck, 57F) 實體入口與指南</strong>：觀景台專屬入口位在 <strong>Marina Bay Sands Hotel Tower 3 (酒店 3 號塔樓 B1 樓層票務中心)</strong>（門牌：<code>10 Bayfront Ave, Hotel Tower 3, Singapore 018956</code>）。搭乘直達高速電梯僅需 56 秒即可抵達 57 樓！</li>
-                                    <li>🎟️ <strong>門票與開放時間</strong>：每日 11:00–21:00。成人 SGD 35、兒童 (3–12歲) SGD 31。全場採預約指定時段入場，門票含免費數位高清攝影照片下載服務；建議提早預購門票。站立於 57 樓可同時擁抱正面金沙灣天際線與背面濱海灣花園巨型超級樹全景。</li>
+                                    <li>🏙️ <strong>實體入口（✅ 官網查證，樓層已更正）</strong>：觀景台專屬入口位在 <strong>Marina Bay Sands Hotel Tower 3（酒店 3 號塔樓 B1 樓票務中心）</strong>（門牌：<code>10 Bayfront Ave, Hotel Tower 3, Singapore 018956</code>），高速電梯 56 秒直達。<br>
+                                    ⚠️ <strong>觀景台在 56 樓，不是 57 樓</strong>——官網明載「空中花園觀景台是位於 <strong>56 層</strong>的公共觀景台，帶有一個夾層連接 57 層的一部分」。<strong>57 樓是無邊際泳池、LAVO、Spago、CÉ LA VI 所在，泳池僅限住客</strong>，且持觀景台票無法進入 CÉ LA VI。原檔案多處誤寫 57F，已更正。</li>
+                                    <li>⏰ <strong>開放時間（✅ 官網查證，已更正）</strong>：<strong>每日 09:30–22:00</strong>。非高峰 09:30–16:30（<strong>最晚入場 16:00</strong>）；高峰 17:00–22:00（<strong>最晚入場 21:30</strong>）。原檔案誤寫 11:00–21:00。</li>
+                                    <li>🎟️ <strong>票價（✅ 官網查證）</strong>：<strong>註冊會員後有折扣</strong>——非高峰 成人 <strong>SGD 24.50</strong>／優待票 <strong>SGD 21.70</strong>；高峰 成人 <strong>SGD 27.30</strong>／優待票 <strong>SGD 24.50</strong>。（非會員牌價為非高峰 35／31、高峰 39／35。）<strong>本次採高峰會員價，全家 SGD 79.10。</strong><br>
+                                    ⚠️ 官網未見家庭套票；另官網註明<strong>只有 2 歲以下免票</strong>，2 歲以上皆須持票——請於購票時確認 8 歲女兒適用「優待票」。</li>
+                                    <li>🌧️ <strong>天氣風險（官網警語，原檔案未提）</strong>：觀景台為<strong>露天場地</strong>，遇暴雨或閃電可能暫時關閉，<strong>現場不提供雨傘</strong>；若進場不足一小時即遇關閉，<strong>可要求退費</strong>。8 月為雷雨季，建議把它排在有替代方案的時段（本行程 17:00 後若關閉，可直接下樓進商場並提前開始 LV 拍照）。</li>
+                                    <li>📸 <strong>門票福利</strong>：含免費數位高清攝影照片下載。站在 56 樓可同時擁抱正面金沙灣天際線與背面濱海灣花園超級樹全景。因入場採<strong>預約指定時段</strong>，官網強烈建議提前購票。</li>
                                 </ul>
                             </div>
                         </details>
                     </div>
                 </div>
 
-                <!-- 19:45 Garden Rhapsody + Borealis -->
+                <!-- 18:00 - 19:45 Event Plaza + LV Island Maison -->
                 <div class="timeline-item">
-                    <div class="timeline-dot">5</div>
+                    <div class="timeline-dot">6</div>
                     <div class="timeline-card">
                         <div class="timeline-time-row">
-                            <span class="time-pill">⏰ 19:45 – 21:00</span>
+                            <span class="time-pill">⏰ 18:00 – 19:45</span>
+                            <span class="cost-tag">🆓 免門票 ｜ 👑 媽媽指定</span>
+                        </div>
+                        <h3 class="timeline-title">👜 金沙水岸廣場 (Event Plaza) ＋ 路易威登島嶼概念店 (Louis Vuitton Island Maison) 拍照</h3>
+                        <p><strong>媽媽指定拍照點。</strong>18:00 從 SkyPark 下樓，步行 5–8 分鐘即到金沙水岸廣場 (Event Plaza)，<strong>LV Island Maison 就是那座漂在濱海灣水面上的玻璃帆船建築</strong>——而 Spectra 水舞秀的表演場地就在它正前方。也就是說，<strong>拍完照原地不動就能接著看秀</strong>，完全不用移動。</p>
+
+                        <div class="transport-box">
+                            <span class="t-icon">🚶</span>
+                            <div><strong>SkyPark ➔ Event Plaza</strong>：金沙酒店 Tower 3 下樓 ➔ 穿過金沙購物商城 (The Shoppes) ➔ 出水岸側即達 Event Plaza，步行約 5–8 分鐘、全程室內冷氣。<br>
+                            💡 LV Island Maison 另有 <strong>B1 水底通道</strong>從商場直接連通到水上玻璃亭，本身就是一個小景點。</div>
+                        </div>
+
+                        <div class="explorer-highlight">
+                            <div class="explorer-highlight-title">📸 媽媽的黃金拍照時刻：18:45 – 19:45</div>
+                            <p>8 月新加坡日落約在 <strong>19:10 前後</strong>，日落後的「藍調時刻 (Blue Hour)」約 <strong>19:15–19:45</strong> 是拍這座玻璃亭最美的時段——建築內部燈光亮起、天空仍是深藍而非全黑，水面倒影最清晰。<br>
+                            建議站位：Event Plaza 階梯往水面方向，可同時把<strong>玻璃亭 ＋ 水面倒影 ＋ 背後金沙酒店三塔</strong>收進同一個畫面。</p>
+                        </div>
+
+                        <details class="detail-accordion">
+                            <summary>📖 查看時間分配、歇腳點與拍攝注意事項</summary>
+                            <div class="accordion-content">
+                                <ul>
+                                    <li>⏰ <strong>這 1 小時 45 分怎麼分配</strong>：<strong>18:00–18:45</strong> 從 SkyPark 下樓、穿過金沙商場歇腳吹冷氣（走了一整天，這段休息很必要）；<strong>18:45–19:45</strong> 出到水岸拍照，剛好卡住日落 19:10 前後的藍調時刻。</li>
+                                    <li>🫖 <strong>就近歇腳點</strong>：<strong>TWG Tea on the Bay</strong> 就在 Event Plaza 內（<code>#B1-02, The Shoppes at Marina Bay Sands, 2 Bayfront Ave</code>），800+ 種名茶、馬卡龍禮盒與兒童無咖啡因水果茶，出店門就是拍照點。</li>
+                                    <li>📍 <strong>LV Island Maison 門牌</strong>：<code>2 Bayfront Avenue, B1-36 The Shoppes at Marina Bay Sands</code>。水上玻璃亭內除精品外設有藝術書店空間。</li>
+                                    <li>⚠️ <strong>出發前請確認兩件事</strong>：(1) 當日<strong>營業時間</strong>；(2) <strong>店內是否允許攝影</strong>——多數精品店限制室內拍攝。<strong>經典的那張照片是從外面拍玻璃亭外觀</strong>，這在公共水岸步道上拍不受限制，所以就算不能進去拍也不影響媽媽的目標。</li>
+                                    <li>👨‍👩‍👧 <strong>週六人潮提醒</strong>：8/22 是週六，Event Plaza 傍晚人多。若要卡 Spectra 的前排位置，建議 <strong>19:45 拍完照就先佔位</strong>。</li>
+                                </ul>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
+                <!-- 20:00 - 20:15 Spectra -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">7</div>
+                    <div class="timeline-card">
+                        <div class="timeline-time-row">
+                            <span class="time-pill">⏰ 20:00 – 20:15</span>
+                            <span class="cost-tag">免費入場</span>
+                        </div>
+                        <h3 class="timeline-title">💦 Spectra 燈光水舞秀 (A Light &amp; Water Show)</h3>
+                        <p>拍完 LV 玻璃亭<strong>原地不動</strong>，20:00 場 Spectra 就在眼前的濱海灣水面上演。融合 12 米玻璃金字塔噴泉、噴火裝置與雷射光影，約 15 分鐘，免費。</p>
+
+                        <details class="detail-accordion">
+                            <summary>📖 查看 Spectra 場次與觀賞位置</summary>
+                            <div class="accordion-content">
+                                <ul>
+                                    <li>📍 <strong>演出地點</strong>：金沙水岸廣場 (Event Plaza at Marina Bay Sands, <code>10 Bayfront Ave, Singapore 018956</code>)，即 LV Island Maison 正前方的戶外階梯廣場。</li>
+                                    <li>⏰ <strong>8/22 (六) 場次</strong>：每晚 20:00 ＆ 21:00，<strong>週五、週六加開 22:00 第三場</strong>。我們看 <strong>20:00 場</strong>，看完剛好有充裕時間走去超級樹叢接 20:45 場燈光秀。</li>
+                                    <li>💺 <strong>觀賞位置</strong>：Event Plaza 面水階梯席地而坐即可，無需門票、不劃位。想拍水舞與噴火全景建議站中段偏後，太靠前反而拍不到全貌。</li>
+                                </ul>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
+                <!-- 20:45 - 21:15 Garden Rhapsody + Borealis -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">8</div>
+                    <div class="timeline-card">
+                        <div class="timeline-time-row">
+                            <span class="time-pill">⏰ 20:45 – 21:15</span>
                             <span class="cost-tag">免費入場</span>
                         </div>
                         <h3 class="timeline-title">🎶 超級樹燈光秀 (Supertree Garden Rhapsody) ➔ 🌌 北極光極光秀 (Borealis)</h3>
-                        <p>回到超級樹叢 (Supertree Grove) 廣場，欣賞每晚 19:45 與 20:45 兩場的 <strong>Garden Rhapsody</strong> 超級樹燈光音樂秀！看完 19:45 場後，步行前往 Cloud Forest 旁觀賞 20:00 / 21:00 場的 <strong>Borealis 北極光極光秀</strong>！兩場秀合計約 20–25 分鐘，全部免費，是 Day 2 最壓軸的夢幻雙秀！</p>
+                        <p>Spectra 散場後往東散步過橋到超級樹叢 (Supertree Grove)，接 <strong>20:45 場 Garden Rhapsody</strong> 超級樹燈光音樂秀，再原地轉向西側草坪接 <strong>21:00 場 Borealis 北極光秀</strong>。這是<strong>全天唯一一次東西向移動</strong>，之後就直接從旁邊的地鐵站回飯店。</p>
+
+                        <div class="transport-box">
+                            <span class="t-icon">🚶</span>
+                            <div><strong>Event Plaza ➔ 超級樹叢</strong>：20:20 出發，經蜻蜓橋 (Dragonfly Bridge) 往東步行約 700–900 公尺、<strong>12–15 分鐘</strong>，20:35 前抵達可從容選位。夜間橋上有燈、路線單純好走。</div>
+                        </div>
 
                         <div class="explorer-highlight">
                             <div class="explorer-highlight-title">🎇 雙秀震撼拍照任務</div>
@@ -1898,57 +2245,37 @@
                             <summary>📖 查看雙秀場次與注意事項</summary>
                             <div class="accordion-content">
                                 <ul>
-                                    <li>🎶 <strong>19:45 Garden Rhapsody 燈光秀觀賞攻略</strong>：每晚 19:45 ＆ 20:45 兩場（每場約 10 分鐘，免費）。最佳觀賞姿勢是於 Supertree Grove 草坪區抬頭看或坐在 Supertree 樹根花台周邊（建議隨身攜帶輕便野餐墊/坐墊，讓小朋友躺著仰望巨型超級樹隨配樂變幻燈光，體驗震撼感極佳）。</li>
-                                    <li>🌌 <strong>20:00 Borealis 極光秀展區與體驗</strong>：位於 Supertree Grove 西側展區（每晚 20:00 ＆ 21:00 兩場，每場約 10–15 分鐘，免費），由瑞士藝術家 Dan Acher 打造，透過高科技雲霧與雷射光在夜空中重現北極極光的流動。</li>
-                                    <li>🚶 <strong>零散步無縫雙秀連播</strong>：兩場燈光秀同在超級樹園區，19:45 觀賞完 Garden Rhapsody 後無需長途散步，直接於原地或轉向西側草坪佇立即可輕鬆銜接 20:00 的 Borealis 極光秀。</li>
+                                    <li>🎶 <strong>Garden Rhapsody 燈光秀觀賞攻略</strong>：每晚 19:45 ＆ 20:45 兩場（每場約 10 分鐘，免費），<strong>本行程看 20:45 第二場</strong>。8 月為國慶特別版「Songs of Singapore」。最佳觀賞姿勢是於 Supertree Grove 草坪區抬頭看或坐在樹根花台周邊（建議隨身帶輕便坐墊，讓小朋友躺著仰望）。</li>
+                                    <li>🌌 <strong>Borealis 極光秀</strong>：位於 Supertree Grove 西側展區（每晚 20:00 ＆ 21:00 兩場，每場約 10–15 分鐘，免費），<strong>本行程看 21:00 第二場</strong>。由瑞士藝術家 Dan Acher 打造，以高科技雲霧與雷射重現北極光的流動。</li>
+                                    <li>🚶 <strong>兩秀零散步銜接</strong>：Garden Rhapsody 20:55 結束後，原地或轉向西側草坪佇立即可接 21:00 的 Borealis，中間不需長途移動。</li>
+                                    <li>💡 <strong>為什麼改看第二場</strong>：原行程排 19:45 第一場，代表傍晚要先從金沙往東走到超級樹、看完再往西折回金沙看 Spectra、最後又往東回地鐵站——來回穿越濱海灣兩次。改看 20:45 場後變成<strong>由西向東單向前進</strong>，少走一趟來回、還多看到一場 Spectra。</li>
                                 </ul>
                             </div>
                         </details>
                     </div>
                 </div>
 
-                <!-- 21:00 TungLok Seafood -->
+                <!-- 21:20 onward - Return to hotel -->
                 <div class="timeline-item">
-                    <div class="timeline-dot">6</div>
+                    <div class="timeline-dot">9</div>
                     <div class="timeline-card">
                         <div class="timeline-time-row">
-                            <span class="time-pill">⏰ 21:00 起（彈性備案）</span>
-                            <span class="food-badge">🍴 同樂海鮮 (TungLok Seafood)（跳過早鳥晚餐者適用）</span>
+                            <span class="time-pill">⏰ 21:20 起</span>
+                            <span class="cost-tag">🚕 車程約 7–8 分（首選）｜ 🚇 TEL 線約 20–22 分</span>
                         </div>
-                        <h3 class="timeline-title">🍽️ 彈性宵夜／晚餐備案：同樂海鮮 (TungLok Seafood) ＋ Spectra 彈性加碼（非必排）</h3>
-                        <p>若全家已在 16:30–17:15 用過早鳥晚餐，本段<strong>非必排</strong>，看完 20:45 Garden Rhapsody 後可直接考慮返回飯店休息。若當天彈性調整、<strong>改為跳過早鳥晚餐、留到看完秀後再吃</strong>，同樂海鮮就在濱海灣花園園區內、僅幾分鐘步行可達，21:00 從容入座，22:00 前都在最後點餐時間內，適合想吃較晚、更悠閒一頓晚餐的家庭。晚餐後（或不吃宵夜也一樣）若全家仍有體力，可散步到金沙 Event Plaza 加碼觀賞 22:00 場 Spectra 水舞秀；小朋友已累的話<strong>直接跳過亦無妨</strong>，22:00 場對 8 歲小孩來說偏晚，不看也不影響行程完整度。</p>
+                        <h3 class="timeline-title">🚕 賞秀後返回 M Hotel：21:20 帶疲累小孩，計程車／Grab 是首選</h3>
+                        <p>調整順序後，全晚的<strong>結束地點固定在超級樹叢 (Supertree Grove)</strong>，旁邊就是濱海灣花園站 (Gardens by the Bay, TE22)。<br>
+                        ⚠️ <strong>已更正先前的建議</strong>：原本寫「TEL 線 3 站直達＋步行 3 分鐘＝11 分鐘」是基於錯誤的步行值。<strong>珊頓道站 (TE19) 到 M Hotel 實測要走 13 分鐘 / 950 公尺</strong>，所以 TEL 走法實際約 <strong>20–22 分鐘</strong>，且最後一段要在夜間走近 1 公里。<strong>21:20 帶著玩了 12 小時的 8 歲小孩，直接叫車最實在。</strong></p>
 
-                        <div class="explorer-highlight">
-                            <div class="explorer-highlight-title">🍤 南洋美食探險任務</div>
-                            <p>挑戰吃一口從沒吃過的南洋料理（叻沙、沙嗲、辣椒螃蟹任選一種），拍一張「勇敢美食家」的浮誇表情照！</p>
+                        <div class="transport-box">
+                            <span class="t-icon">🚕</span>
+                            <div><strong>首選：計程車／Grab 直達</strong>——超級樹叢／金沙一帶至 M Hotel 車程約 <strong>7–8 分鐘、4.3 公里</strong>（經 MCE 濱海中央高速公路），車資約 SGD 12–18。門到門、不用走路，是這個時間點的最佳解。</div>
                         </div>
 
-                        <details class="detail-accordion">
-                            <summary>📖 查看餐廳推薦</summary>
-                            <div class="accordion-content">
-                                <ul>
-                                    <li>🦀 <strong>同樂海鮮 (TungLok Seafood) 門牌與定位</strong>：位於濱海灣花園花穹下方 (Gardens by the Bay, 18 Marina Gardens Dr, #01-10, Below Flower Dome)。新加坡知名經典海鮮品牌，人均約 SGD 60–100。</li>
-                                    <li>🍲 <strong>招牌星洲海鮮巨獻</strong>：<strong>TungLok Signatures Chili Crab (星洲辣椒蟹)</strong> 隨附金黃炸饅頭沾醬吃、<strong>Black Pepper Crab (黑胡椒蟹)</strong> ＆ 椒鹽脆皮豆腐。</li>
-                                    <li>⏰ <strong>宵夜時段與最晚點餐</strong>：晚間營業至 22:00（最晚點餐點酒約 21:15–21:30），適合看完 20:00/20:45 燈光秀後直奔享用高質感海鮮宵夜。</li>
-                                    <li>📍 <strong>實體觀賞地點與門牌</strong>：Event Plaza at Marina Bay Sands (10 Bayfront Ave, Singapore 018956，金沙購物商城戶外水岸廣場)。</li>
-                                    <li>⏰ <strong>Spectra 水幕水舞秀演出時間</strong>：每晚 20:00 ＆ 21:00 免費入場演出（週五、週六加開 22:00 第三場），每場約 15 分鐘，融合 12 米玻璃金字塔噴泉、噴火與雷射光影技術。</li>
-                                </ul>
-                                <p style="font-size:0.85rem; color:#777; margin-top:6px;">⚠️ 曾考慮鄰近花園的知名沙嗲小販中心 Satay by the Bay（4.0★／6,640 則評論），但實測步行動線與 Event Plaza 方向相反、需繞遠路（來回多花 30-40 分鐘），故未排入此段晚餐。</p>
-                            </div>
-                        </details>
-                    </div>
-                </div>
-
-                <!-- 21:00 or 22:00-22:20 onward - Return to hotel (covers both branch A and branch B endings) -->
-                <div class="timeline-item">
-                    <div class="timeline-dot">7</div>
-                    <div class="timeline-card">
-                        <div class="timeline-time-row">
-                            <span class="time-pill">⏰ 21:00 或 22:00–22:20 起（視收尾行程而定）</span>
-                            <span class="cost-tag">🚕 車程約 7–8 分 / 🚇 捷運約 11 分 / 🚌 公車約 14–17 分</span>
+                        <div class="transport-box">
+                            <span class="t-icon">🚇</span>
+                            <div><strong>次選：TEL 線（零轉乘但要走遠路）</strong>——濱海灣花園站 (TE22) 搭 TEL 線 <strong>3 站</strong>至珊頓道站 (TE19 Exit 1)，車程約 6–7 分鐘 ➔ <strong>⚠️ 出站步行 13 分鐘 / 950 公尺</strong>，總計約 <strong>20–22 分鐘</strong>。省錢但夜間步行段偏長。</div>
                         </div>
-                        <h3 class="timeline-title">🚕 濱海灣賞秀後返回 M Hotel：計程車／大眾運輸（捷運、公車）多元走法</h3>
-                        <p>無論是全家提前用過早鳥晚餐、看完雙秀後約 <strong>21:00</strong> 直接收工，或是改吃同樂海鮮 (TungLok Seafood)、加碼看完 Spectra 水舞秀約 <strong>22:00–22:20</strong> 才收工，兩種情境的結束地點都在超級樹叢 (Supertree Grove)／金沙 (Marina Bay Sands) 一帶，彼此步行可達，回飯店的走法完全相同，故合併整理成一張卡片，不重複查兩次。✅ 大眾運輸走法已重新查證：提供 CC 環線捷運與直達公車兩種大眾運輸選項，捷運走法（11 分鐘）轉乘少又快速，公車走法（14–17 分鐘）免進捷運站走地下道，適合依體力彈性選擇。</p>
 
                         <div class="transport-box">
                             <span class="t-icon">🚕</span>
@@ -1971,7 +2298,8 @@
                                 <ul>
                                     <li>🚕 <strong>計程車 / Grab 叫車走法（最快速首選）</strong>：從超級樹或金沙塔 3 叫車處搭車直達 M Hotel，夜間車程僅約 <strong>7–8 分鐘</strong>（車資概估 SGD 9–14）。</li>
                                     <li>🚌 <strong>夜間直達公車走法（大眾運輸最推薦）</strong>：於金沙 Bayfront Stn Exit B 站牌 (03509) 搭乘 <strong>Bus 97、106 或 133 號公車</strong> ➔ 直達 <strong>Opp Hub Synergy Pt 站 (03222)</strong> 下車，乘車時間僅 8–11 分鐘，下車步行 2 分鐘即達飯店正門，總長僅 <strong>14–17 分鐘</strong>！</li>
-                                    <li>🚇 <strong>地鐵 TEL 線直達走法</strong>：由濱海灣花園站 (Gardens by the Bay, TE22) 搭乘 TEL 線 3 站直達珊頓道站 (Shenton Way, TE19 Exit 1) ➔ 步行 3 分鐘即達 M Hotel，總行程約 11 分鐘。</li>
+                                    <li>🚇 <strong>地鐵 TEL 線走法</strong>：濱海灣花園站 (TE22) 搭 TEL 線 3 站至珊頓道站 (TE19 Exit 1) ➔ ⚠️ <strong>出站步行 13 分鐘 / 950 公尺</strong>，總行程約 20–22 分鐘（原檔案誤寫「步行 3 分鐘、全程 11 分鐘」，已更正）。</li>
+                                    <li>💡 <strong>最近的地鐵站其實是 CC32 太子愛德華路站</strong>（距飯店僅 300 公尺 / 4 分鐘）。若要走大眾運輸，「步行至海灣舫站 (Bayfront) ➔ CC 環線 2 站 ➔ CC32 出站走 4 分鐘」比走 TE19 的步行段短得多，惟前段要先走 10–11 分鐘到海灣舫站，總時間相當。</li>
                                     <li>⚠️ 以上為研究當下查詢所得的路線規劃結果，實際班距與車程可能因時段略有差異，建議出發前用手機 Google 地圖即時查詢確認車班。</li>
                                 </ul>
                             </div>
@@ -1993,9 +2321,9 @@
             <div class="day-header-card" style="border-left-color: var(--purple);">
                 <div class="day-header-info">
                     <h2>📅 Day 3 — 8/23 (日) 聖淘沙島 (Sentosa Island) 跨海纜車 (Cable Car) 🚡 ＋ Singapore Oceanarium 🐠 ＋ 斜坡滑車與空中吊椅 (Skyline Luge & Skyride) 🛼 ＋ 時光之翼煙火秀 (Wings of Time Fireworks Symphony) 🎇</h2>
-                    <p>花芭山線跨海纜車 (Mount Faber Line) ➔ Singapore Oceanarium ➔ WEAVE 商場午餐（莆田 PUTIEN／話匣子 Chatterbox Café）➔ 斜坡滑車與空中吊椅 (Skyline Luge & Skyride) ➔ 西樂索沙灘 (Siloso Beach) 探索 ➔ Coastes／Trapizza 沙灘餐廳晚餐 ➔ 時光之翼煙火秀 (Wings of Time Fireworks Symphony)</p>
+                    <p>花芭山線跨海纜車 (Mount Faber Line) ➔ Singapore Oceanarium ➔ WEAVE 商場午餐（莆田 PUTIEN／話匣子 Chatterbox Café）➔ <strong>聖淘沙線纜車西行至最西端</strong> ➔ <strong>西樂索炮台空中步道 (Fort Siloso Skywalk)</strong> ➔ 斜坡滑車與空中吊椅 (Skyline Luge & Skyride) ＋ 西樂索沙灘 ➔ Coastes／Trapizza 沙灘餐廳晚餐 ➔ 時光之翼煙火秀 (Wings of Time Fireworks Symphony)</p>
                 </div>
-                <span class="day-theme-badge">探險主題：跨海纜車 ＆ 海洋館 ＆ 飛馳滑車</span>
+                <span class="day-theme-badge">探險主題：跨海纜車 ＆ 海洋館 ＆ 飛馳滑車（島內由西向東單向走）</span>
             </div>
 
             <div class="warning-box">
@@ -2054,15 +2382,18 @@
                             <span class="cost-tag">一日票</span>
                         </div>
                         <h3 class="timeline-title">🐠 抵達 RWS / Singapore Oceanarium 深度參觀</h3>
-                        <p>使用 Singapore Oceanarium 一日票入園，全家悠閒參觀水族館，欣賞豐富的海洋生物。海豚體驗取消後空出的時段，正好可以放慢腳步把 10 大主題展區逐一走完。</p>
+                        <p>使用 Singapore Oceanarium 一日票入園，全家悠閒參觀水族館。這裡是舊 S.E.A. 海洋館擴建 <strong>3 倍</strong>後的新館，共 <strong>22 大展區、超過 100,000 隻海洋生物</strong>，官網建議<strong>預留 2–3 小時</strong>——我們排 3 小時剛好。8/23 適逢 POP MART「Cry Me An Ocean」限定展（6/24–8/30）。</p>
 
                         <details class="detail-accordion">
                             <summary>📖 查看 Singapore Oceanarium 參觀重點與門票</summary>
                             <div class="accordion-content">
                                 <ul>
-                                    <li>📍 <strong>館址與門牌</strong>：位於聖淘沙名勝世界 (8 Sentosa Gateway, Resorts World Sentosa)。包含 10 大主題展區、逾 1,000 種海洋物種。</li>
+                                    <li>📍 <strong>館址與規模（✅ 官網查證，已更正）</strong>：位於聖淘沙名勝世界 (8 Sentosa Gateway, Resorts World Sentosa)。<strong>22 大展區、超過 100,000 隻海洋生物</strong>，為舊 S.E.A. 海洋館的 3 倍規模。（原檔案誤寫「10 大展區、逾 1,000 種」）</li>
+                                    <li>🎟️ <strong>票價（✅ 官網查證 2026-08-12）</strong>：成人 <strong>S$55</strong>、兒童 <strong>S$43</strong>。成人票含 1 張 <strong>S$5 餐飲／零售抵用券</strong>，官網線上購票再折 S$5。4 歲以下免費。</li>
                                     <li>🦈 <strong>深海奧秘巨型水族窗 (Open Ocean Habitat)</strong>：寬 36 公尺、高 8.3 公尺之世界級全景觀景窗，可仰望雙吻前口蝠魟 (Manta Rays)、巨型石斑與鯊魚群。</li>
-                                    <li>⏰ <strong>開放時間與潛水員餵食秀 (Dive Feeding)</strong>：每日開放時間 10:00–17:00。潛水員餵食秀時間（資料來源官網）：<br>• <strong>Shark Seas</strong>：週二、週四 14:30 (2:30 PM)<br>• <strong>Open Ocean</strong>：除週一、週五外每日 16:00 (4:00 PM)</li>
+                                    <li>⏰ <strong>開放時間（✅ 官網查證 2026-08-12，已更正）</strong>：<strong>每日 10:00–20:00</strong>（原檔案誤寫 10:00–17:00）。<br>
+                                    ⚠️ 官網另列縮短營業（10:00–16:00）之特定日期，8 月為 <strong>1、8、20、22 日</strong>——<strong>8/23 不在名單內，當天為正常 10:00–20:00</strong>，但因鄰近日期異動頻繁，<strong>出發前務必再查一次官網公告</strong>。</li>
+                                    <li>💡 <strong>開到 20:00 帶來的彈性</strong>：既然不是 17:00 關門，若當天午後遇雷雨，可把海洋館挪到下午當避雨備案；官網另有 <strong>Twilight 票（16:00–20:00 入場）</strong>附 S$5 零售＋S$5 餐飲抵用券，若行程改動可考慮。</li>
                                 </ul>
                             </div>
                         </details>
@@ -2101,41 +2432,93 @@
                     <div class="timeline-dot">4</div>
                     <div class="timeline-card">
                         <div class="timeline-time-row">
-                            <span class="time-pill">⏰ 14:30 – 15:00</span>
+                            <span class="time-pill">⏰ 14:30 – 15:10</span>
+                            <span class="cost-tag">🚡 已含在 SkyPass 內</span>
                         </div>
-                        <h3 class="timeline-title">🚝 搭乘聖淘沙捷運 (Sentosa Express)</h3>
-                        <p>從 RWS (Resorts World Station) 搭乘聖淘沙捷運 (Sentosa Express) 一站到伊姆亞站 (Imbiah Station)，步行約 5 分鐘至斜坡滑車與空中吊椅 (Skyline Luge & Skyride) 山頂入口。</p>
+                        <h3 class="timeline-title">🚝 聖淘沙捷運 ➔ 🚡 聖淘沙線纜車西行至西樂索沙灘站 (Siloso Point)</h3>
+                        <p>從名勝世界站 (Resorts World Station) 搭聖淘沙捷運一站到伊姆比亞站 (Imbiah Station)，步行約 5 分鐘到<strong>纜車 Imbiah Lookout 站</strong>，改搭<strong>聖淘沙線 (Sentosa Line) 纜車一路西行到島的最西端 Siloso Point</strong>。</p>
+
+                        <div class="critical-note">
+                            <div class="cn-head"><span class="cn-tag">L2 現場關鍵</span>🎫 線上票不能直接刷 QR 上車</div>
+                            <mark class="hl-stop">纜車票必須先到 Singapore Cable Car 售票櫃檯換成實體入場券，且須在當天 20:00 前完成</mark>（官網條款）。所有票券都需事先兌換，並依現場供應先到先服務。<br>
+                            我們 <strong>09:00 就要搭纜車</strong>，所以請<strong>抵達港灣大廈 2 座後第一件事就是換票</strong>，別直接走去閘門。若需改日期，須於<strong>前一日</strong>完成變更。
+                        </div>
+
+                        <div class="explorer-highlight" style="border-left: 4px solid #0B5F57;">
+                            <div class="explorer-highlight-title" style="color:#0B5F57;">💡 這段纜車不用再花錢，而且是為了「不走回頭路」</div>
+                            <p>早上買的 <strong>Cable Car SkyPass 已經包含聖淘沙線</strong>（官網條款：一趟來回含 Mount Faber Line ＋ Sentosa Line），不搭反而浪費。<br>
+                            更重要的是<strong>順序</strong>：先搭纜車到<strong>最西邊</strong>的炮台，之後就一路往東（沙灘滑車 ➔ 晚餐 ➔ 煙火秀 ➔ 出島），<strong>全程單向不回頭</strong>。若照原本先玩滑車再去炮台，滑車終點在沙灘，等於要往西跑一趟再折回東邊，多花 30–40 分鐘與一次來回接駁。</p>
+                        </div>
                     </div>
                 </div>
 
-                <!-- 15:00 - 17:00 Luge -->
+                <!-- 15:10 - 16:10 Fort Siloso Skywalk -->
                 <div class="timeline-item">
                     <div class="timeline-dot">5</div>
                     <div class="timeline-card">
                         <div class="timeline-time-row">
-                            <span class="time-pill">⏰ 15:00 – 16:30</span>
+                            <span class="time-pill">⏰ 15:10 – 16:10</span>
+                            <span class="cost-tag">🆓 免門票</span>
                         </div>
-                        <h3 class="timeline-title">🛼 斜坡滑車與空中吊椅 (Skyline Luge & Skyride)（山頂入口）</h3>
-                        <p>從山頂入口直接滑車飆速下山，再搭空中吊椅回山頂！戴上帥氣安全帽，選擇不同賽道反覆體驗下山遠飆的刺激快感！多次後自然落在 Siloso Beach 山腳，剛好接著晚餐與煙火秀！</p>
+                        <h3 class="timeline-title">🏰 西樂索炮台空中步道 (Fort Siloso Skywalk)（島嶼最西端）</h3>
+                        <p>纜車 Siloso Point 站下車即達。搭電梯直上 <strong>181 公尺穿越樹冠層的高架步道</strong>，居高臨下俯瞰整座二戰炮台園區與外海，是聖淘沙少有的安靜角落。逛完只需 <strong>20–30 分鐘</strong>，剩下時間可在炮台園區外圍走走。</p>
+
+                        <details class="detail-accordion">
+                            <summary>📖 查看炮台開放時間、免費導覽與為什麼只走空中步道（官網查證）</summary>
+                            <div class="accordion-content">
+                                <ul>
+                                    <li>⏰ <strong>空中步道電梯營運 09:00–22:00</strong>（✅ sentosa.com.sg 官網查證），時間非常寬鬆，不會卡到後面的行程。</li>
+                                    <li>⚠️ <strong>為什麼不進炮台主園區</strong>：官網明訂<strong>西樂索炮台與投降廳 09:00–18:00、展館 10:00 開放、最後入場 17:30</strong>，且官網建議<strong>需預留 1.5–2 小時</strong>。若完整參觀就吃掉整個滑車時段，因此本次<strong>只走空中步道</strong>——這也是官網形容「值得留到參觀最後」的一段。</li>
+                                    <li>🎖️ <strong>8/23 是週日，有免費導覽</strong>：官網提供 <strong>Free Fort Siloso Day Tours</strong> 週末專人導覽，涵蓋軍事建築與新整修的投降廳。⚠️ 場次時間官網未列出，需另行查詢；若剛好對得上非常值得。</li>
+                                    <li>🏰 <strong>炮台背景</strong>：新加坡<strong>唯一保存下來的海防炮台</strong>，1880 年代英軍所建、二戰期間實際作戰，館內火炮是<strong>原件而非複製品</strong>。投降廳以蠟像重現 1942 年 2 月新加坡淪陷的場景。</li>
+                                    <li>📸 <strong>拍照重點</strong>：樹冠層步道往南可拍到外海與貨輪，往東可俯瞰整片西樂索沙灘，是全島視角最特別的免費觀景點。</li>
+                                </ul>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
+                <!-- 16:30 - 18:15 Luge + Siloso Beach -->
+                <div class="timeline-item">
+                    <div class="timeline-dot">6</div>
+                    <div class="timeline-card">
+                        <div class="timeline-time-row">
+                            <span class="time-pill">⏰ 16:30 – 18:15</span>
+                        </div>
+                        <h3 class="timeline-title">🛼 斜坡滑車與空中吊椅 (Skyline Luge & Skyride)（山腳站出發）＋ 西樂索沙灘</h3>
+                        <p>從 Siloso Point 搭<strong>免費 Beach Shuttle 或 Sentosa Bus A 東行</strong>約 15 分鐘到西樂索沙灘。<strong>在山腳站先搭空中吊椅 (Skyride) 上山，再滑車飆速下山</strong>——套票本來就含吊椅，從山腳出發完全不影響玩法，而且<strong>每一趟都自然回到沙灘</strong>，玩完直接接晚餐。2-Ride 兩趟建議走 <strong>Jungle Trail（叢林道，坡緩景美）</strong>與 <strong>Kupu Kupu Trail（蝴蝶道，最新最順）</strong>，中間可在沙灘踏浪、拍 SILOSO 巨型地標。</p>
+                        <div class="critical-note">
+                            <div class="cn-head"><span class="cn-tag">L3 現場關鍵</span>🪂 女兒 121cm：吊椅必須大人同座</div>
+                            <mark class="hl">滑車 (Luge) 門檻 110cm ➔ 121cm 可以自己開</mark>，不必買 SGD 12 兒童合騎票。<br>
+                            但<mark class="hl-stop">空中吊椅 (Skyride) 需 135cm 才能單獨搭乘，121cm 落在 85–135cm 區間 ➔ 兩趟上山都必須有爸爸或媽媽同座</mark>。<br>
+                            因為本行程從山腳站出發、玩法是「搭吊椅上山 ➔ 滑車下山」，<strong>2-Ride 的兩趟上山都要安排陪同</strong>。<strong>購票時請向櫃檯講清楚，別讓她被排到單獨的吊椅位。</strong>
+                        </div>
+
+                        <div class="transport-box">
+                            <span class="t-icon">🚌</span>
+                            <div><strong>Siloso Point ➔ 西樂索沙灘</strong>：搭<strong>免費 Sentosa Beach Shuttle 或 Sentosa Bus A</strong>（✅ sentosa.com.sg 官網指定路線），每 10–15 分鐘一班，免費循環連接 Siloso Point ⇆ 西樂索沙灘 (Siloso Beach) ⇆ 海灘站 (Beach Station) ⇆ 巴拉灣沙灘 (Palawan Beach)。</div>
+                        </div>
 
                         <details class="detail-accordion">
                             <summary>📖 查看 Skyline Luge 票種、兒童騎乘限制與體驗攻略</summary>
                             <div class="accordion-content">
                                 <ul>
                                     <li>📍 <strong>實體門牌地址</strong>：45 Siloso Beach Walk, Singapore 099003（山腳海灘入口）；山頂入口位於 1 Imbiah Rd, Singapore 099692。</li>
-                                    <li>⏰ <strong>營業時間</strong>：週一至週四 10:00–19:30（最後入場 18:30）；週五至週日 10:00–21:00（19:00 後開啟 Night Luge 七彩炫光賽道）。</li>
+                                    <li>⏰ <strong>營業時間</strong>：週一至週四 10:00–19:30（最後入場 18:30）；週五至週日 10:00–21:00。我們 16:30–18:15 玩，時間充裕。<br>
+                                    ℹ️ 19:00 後雖有夜間炫光賽道 (Night Luge)，但<strong>依你的決定不排入行程</strong>（對 8 歲小孩太晚，且隔天要早起去聖淘沙）。⚠️ 此營業時間來自專案既有筆記，官網查詢時遇重導向迴圈未能覆核，<strong>購票時順便確認</strong>。</li>
                                     <li>🎟️ <strong>門票與套票</strong>：
                                         <ul>
-                                            <li>3-Ride 套票（含 3 次滑車 ＋ 3 次吊椅）：約 SGD 33/人</li>
-                                            <li>4-Ride 套票（含 4 次滑車 ＋ 4 次吊椅）：約 SGD 36/人</li>
+                                            <li>✅ <strong>本次採用：2-Ride 套票（含 2 次滑車 ＋ 2 次吊椅）SGD 39/人</strong>，全家 3 人共 SGD 117</li>
+                                            <li>⚠️ <strong>沒有兒童折扣</strong>：滑車套票每人同價，女兒也是 SGD 39</li>
                                             <li>兒童雙人合騎票 (Child Doubling Ticket)：SGD 12（適用於 85cm–110cm 需由成人陪同合騎之兒童）</li>
                                         </ul>
                                     </li>
-                                    <li>🧒 <strong>騎乘與身高規定</strong>：
+                                    <li>🧒 <strong>騎乘與身高規定 — 對照女兒 121cm 的結論</strong>：
                                         <ul>
-                                            <li><strong>斜坡滑車 (Luge)</strong>：身高 110cm 以上可單獨駕駛；85cm–110cm 需由成人陪同雙人合騎 (Child Doubling)；85cm 以下禁止騎乘。</li>
-                                            <li><strong>空中吊椅 (Skyride)</strong>：身高 135cm 以上可單獨搭乘；85cm–135cm 需由成人陪同搭乘；85cm 以下禁止搭乘。</li>
+                                            <li><strong>斜坡滑車 (Luge)</strong>：110cm 以上可單獨駕駛。<span style="color:#1B6E3C;"><strong>✅ 121cm 可以自己開，不必買 SGD 12 兒童合騎票</strong></span>，三人各騎一台。</li>
+                                            <li><strong>空中吊椅 (Skyride)</strong>：135cm 以上才可單獨搭乘；85–135cm 須成人陪同。<span style="color:#B3122A;"><strong>⚠️ 121cm 不到 135cm ➔ 每次搭吊椅上山都必須有爸爸或媽媽同座</strong></span>。</li>
                                         </ul>
+                                        <p style="font-size:0.9rem; margin:8px 0 0; color:#B3122A;">🔴 <strong>這一點會影響 Day 3 的玩法</strong>：本行程從山腳站出發，玩法是「搭吊椅上山 ➔ 滑車下山」，代表<strong>每一趟上山女兒都要跟大人共坐吊椅</strong>。2-Ride 套票含 2 次吊椅，兩次都要安排陪同（爸爸媽媽輪流或固定一人陪）。<strong>購票時請向櫃檯確認同座安排，別讓她單獨排到吊椅。</strong></p>
                                     </li>
                                     <li>🛣️ <strong>4 大主題滑道</strong>：
                                         <ul>
@@ -2145,6 +2528,9 @@
                                             <li>🦋 <strong>Kupu Kupu Trail (蝴蝶道)</strong>：最新設計滑道，體驗順暢優雅。</li>
                                         </ul>
                                     </li>
+                                    <li>📸 <strong>沙灘打卡：SILOSO 巨型彩色立體地標</strong>：位於西樂索沙灘入口處，是聖淘沙最受歡迎的親子打卡彩色字母裝置，滑車空檔就能順手拍。</li>
+                                    <li>🌅 <strong>馬六甲海峽黃金落日</strong>：傍晚 18:30–19:15 是西樂索沙灘看夕陽的最佳時間；本行程 18:15 進 Coastes 用餐，剛好在沙灘座位邊吃邊看夕陽，不必特地安排看日落時段。</li>
+                                    <li>💡 <strong>沙灘上還有這些（本次未排入，供日後加碼參考）</strong>：Mega Adventure 高空滑索、iFly Singapore 室內風洞跳傘、AJ Hackett 高空彈跳與 Skybridge 吊橋、Ola Beach Club 水上活動。⚠️ <strong>票價與兒童年齡／體重限制均尚未查證</strong>（官網查詢時被阻擋），要加入前務必先確認 8 歲女兒是否符合資格。</li>
                                 </ul>
                             </div>
                         </details>
@@ -2153,8 +2539,8 @@
                             <div class="explorer-highlight-title" style="color:#e67e22;">💡 Skyline Luge 達人小撇步（TripCabinet 2026）</div>
                             <p style="font-size:0.9rem; margin-bottom:8px;"><strong>🛤️ 4 條賽道可自選（每次下山換不同賽道）：</strong><br>
                             🐉 Dragon（龍軌）彎最多最快 ／ 🌿 Jungle（叢林軌）景觀最美 ／ 🏔️ Expedition（探險軌）有隧道急彎 ／ 🦋 Kupu Kupu（蝴蝶軌）最新賽道<br>
-                            建議購買 <strong>3–4 次套餐</strong>以體驗全部賽道（幾乎每個人都後悔買太少！）</p>
-                            <p style="font-size:0.9rem; margin-bottom:8px;"><strong>👶 身高限制：</strong>85cm 以上可與大人共乘 ／ 110cm 以上可自己獨駕 ／ 85cm 以下不可乘坐</p>
+                            ✅ <strong>本次選 2-Ride（SGD 39/人）</strong>：媽媽與女兒以體驗為主，挑<strong>相對安全好上手</strong>的賽道即可——建議走 <strong>🌿 Jungle Trail（叢林道，坡度緩、景觀最美）</strong> 與 <strong>🦋 Kupu Kupu Trail（蝴蝶道，最新設計、體驗順暢）</strong>；<strong>🐉 Dragon Trail 彎道最多最快，想追求刺激的爸爸再單獨挑戰</strong>。</p>
+                            <p style="font-size:0.9rem; margin-bottom:8px;"><strong>👶 身高對照（女兒 121cm）：</strong>滑車 110cm+ ➔ <strong style="color:#1B6E3C;">✅ 可獨駕</strong>；吊椅需 135cm+ 才能單獨搭 ➔ <strong style="color:#B3122A;">⚠️ 需大人陪同同座</strong></p>
                             <ul style="font-size:0.88rem; margin:0; padding-left:1.2em; color:#555;">
                                 <li>⏰ <strong>早上或下午 5 點後</strong>去，避開擁擠與正午酷熱</li>
                                 <li>📸 空中吊椅 (Skyride) 景色超美——手機用掛繩固定，不要放大腿上</li>
@@ -2168,42 +2554,7 @@
                     </div>
                 </div>
                 
-                <!-- 17:30 - 18:30 Relax -->
-                <div class="timeline-item">
-                    <div class="timeline-dot">6</div>
-                    <div class="timeline-card">
-                        <div class="timeline-time-row">
-                            <span class="time-pill">⏰ 16:30 – 18:15</span>
-                            <span class="cost-tag">🆓 免門票</span>
-                        </div>
-                        <h3 class="timeline-title">🏖️ 西樂索沙灘 (Siloso Beach) 探索 ＋ 西樂索炮台空中步道 (Fort Siloso Skywalk)</h3>
-                        <p>海豚浸潛取消、滑車提前到 16:30 結束後，沙灘時段從 1 小時<strong>拉長到 1 小時 45 分</strong>。除了踏浪與 SILOSO 地標打卡，加碼一段<strong>免門票</strong>的 181 公尺樹冠層空中步道，居高臨下看夕陽與海峽。</p>
-
-                        <div class="transport-box">
-                            <span class="t-icon">🚌</span>
-                            <div><strong>到西樂索炮台 (Siloso Point) 的官方走法</strong>：滑車在沙灘山腳結束後，於 <strong>海灘站 (Beach Station)</strong> 搭 <strong>免費 Beach Shuttle 或 Sentosa Bus A</strong> 直達 Siloso Point（✅ sentosa.com.sg 官網指定路線）。<br>
-                            💡 也可用纜車：SkyPass 已含 Sentosa Line，可從 Imbiah Lookout 搭到 <strong>Siloso Point 站</strong>；但滑車終點在山腳，走接駁車比再搭吊椅上山更順。</div>
-                        </div>
-
-                        <details class="detail-accordion">
-                            <summary>📖 查看西樂索炮台空中步道、免費導覽與沙灘打卡指南（官網查證）</summary>
-                            <div class="accordion-content">
-                                <ul>
-                                    <li>🌉 <strong>西樂索炮台空中步道 (Fort Siloso Skywalk)｜本時段主打</strong>：<strong>181 公尺</strong>穿越樹冠層的高架步道，可俯瞰整座炮台園區與外海。✅ 官網查證 <strong>電梯營運 09:00–22:00</strong>，逛完只需 <strong>20–30 分鐘</strong>，完美塞進這個時段，且傍晚光線最美、遊客比主園區少。</li>
-                                    <li>⚠️ <strong>炮台主園區這次來不及（重要）</strong>：官網明訂 <strong>西樂索炮台與投降廳 (Surrender Chambers) 09:00–18:00、展館 10:00 開放、最後入場 17:30</strong>，且官網建議<strong>需預留 1.5–2 小時</strong>才逛得完。我們 16:30 才抵達，<strong>時間不足且園區 18:00 關閉</strong>，因此本次<strong>只走空中步道</strong>。若你想完整參觀炮台，需要把滑車再往前挪、或另外安排半天。</li>
-                                    <li>🎖️ <strong>免費假日導覽（8/23 是週日 ✅）</strong>：官網提供 <strong>Free Fort Siloso Day Tours</strong> 週末專人導覽，涵蓋軍事建築與新整修的投降廳。⚠️ 場次時間官網未列出，需另行查詢；若時間對得上非常值得。</li>
-                                    <li>🏰 <strong>炮台背景（官網說法）</strong>：新加坡<strong>唯一保存下來的海防炮台</strong>，1880 年代英軍所建、二戰期間實際作戰。館內火炮是<strong>原件而非複製品</strong>，地下彈藥庫坑道可步行穿越。投降廳以蠟像重現 1942 年 2 月新加坡淪陷的場景。</li>
-                                    <li>🚌 <strong>聖淘沙免費海灘接駁車 (Sentosa Beach Shuttle)</strong>：每 10–15 分鐘一班，免費循環連接海灘站 (Beach Station) ⇆ 西樂索沙灘 (Siloso Beach) ⇆ 巴拉灣沙灘 (Palawan Beach)。</li>
-                                    <li>📸 <strong>SILOSO 巨型彩色立體地標</strong>：位於 Siloso Beach 入口處，是聖淘沙最受歡迎的親子打卡彩色字母裝置。</li>
-                                    <li>🌅 <strong>馬六甲海峽黃金落日時刻</strong>：傍晚 18:30–19:15 是西樂索沙灘面對海峽欣賞夕陽餘暉的最佳時間；本行程 18:15 進 Coastes 用餐，剛好可在沙灘座位邊吃邊看夕陽。</li>
-                                    <li>💡 <strong>沙灘上還有這些（本次未排入，供你日後加碼參考）</strong>：Mega Adventure 高空滑索、iFly Singapore 室內風洞跳傘、AJ Hackett 高空彈跳與 Skybridge 吊橋、Ola Beach Club 水上活動。⚠️ <strong>以上票價與兒童年齡／體重限制均尚未查證</strong>（官網查詢時被阻擋），要加入前務必先確認 8 歲女兒是否符合資格。</li>
-                                </ul>
-                            </div>
-                        </details>
-                    </div>
-                </div>
-
-                <!-- 18:30 - 19:30 Coastes Dinner -->
+                <!-- 18:15 - 19:20 Coastes Dinner -->
                 <div class="timeline-item">
                     <div class="timeline-dot">7</div>
                     <div class="timeline-card">
@@ -2241,6 +2592,12 @@
                         <h3 class="timeline-title">🎇 時光之翼煙火秀 (Wings of Time Fireworks Symphony)</h3>
                         <p>坐在海灘觀眾席，欣賞結合水舞、雷射光影與璀璨煙火的國際級壓軸大秀！看完後搭計程車回飯店休息。</p>
 
+                        <div class="critical-note">
+                            <div class="cn-head"><span class="cn-tag">L2 購票關鍵</span>🎫 一定要訂 19:40 場，不是 20:40 場</div>
+                            每晚兩場：<mark class="hl">19:40</mark> ＆ 20:40，每場約 20 分鐘。<mark class="hl-stop">訂錯成 20:40 場，結束就 21:00，整個晚上動線與回飯店時間全毀</mark>（女兒隔天還要早起，Day 4 是中午班機）。<br>
+                            訂票時<strong>再三確認場次與座位區</strong>；建議提前於 Mount Faber Leisure 官網或第三方平台<strong>預購劃位</strong>。
+                        </div>
+
                         <details class="detail-accordion">
                             <summary>📖 查看時光之翼演出特色與場次指南</summary>
                             <div class="accordion-content">
@@ -2257,11 +2614,6 @@
                             </div>
                         </details>
 
-                        <div class="explorer-highlight" style="margin-top:14px; border-left: 4px solid #e67e22; background: linear-gradient(135deg, #fef9e7 0%, #fef3cd 100%);">
-                            <div class="explorer-highlight-title" style="color:#e67e22;">🌈 可選加碼：20:15–21:00 夜間炫光滑車 (Night Luge)</div>
-                            <p style="font-size:0.9rem; margin-bottom:6px;">看完煙火秀若小探險家還有電，<strong>用白天同一張滑車套票</strong>回頭滑一趟七彩炫光夜間賽道，<strong>不必額外付費</strong>。滑車山腳站就在西樂索沙灘 (45 Siloso Beach Walk)，離秀場很近。</p>
-                            <p style="font-size:0.88rem; margin:0; color:#a05a1a;">⚠️ <strong>此項尚未官網查證</strong>：Night Luge「週五至週日 19:00 後開放、21:00 收」的資訊來自本專案既有研究筆記 (TripCabinet 2026)，查詢官網時被系統阻擋未能覆核。<strong>出發前請確認 8/23（日）當晚是否營運與末場時間</strong>，再決定要不要留這段。</p>
-                        </div>
                     </div>
                 </div>
 
@@ -2446,7 +2798,7 @@
             <div class="progress-banner-card">
                 <div class="progress-banner-header">
                     <h3>🏆 小探險家星島大冒險打卡進度</h3>
-                    <span id="progress-percent-badge" class="progress-badge">0 / 37 (0%)</span>
+                    <span id="progress-percent-badge" class="progress-badge">0 / 47 (0%)</span>
                 </div>
                 <div class="progress-bar-bg">
                     <div id="checklist-progress-fill" class="progress-bar-fill" style="width: 0%;"></div>
@@ -2462,13 +2814,52 @@
                 <div class="progress-bar-container">
                     <div class="progress-bar-fill" id="progress-fill"></div>
                 </div>
-                <div id="progress-text" style="font-weight: 700; font-size:1.1rem;">已完成 0 / 37 個探險任務 (0%)</div>
+                <div id="progress-text" style="font-weight: 700; font-size:1.1rem;">已完成 0 / 47 個探險任務 (0%)</div>
+            </div>
+
+            <!-- Card 0: 出發前必辦文件（原本完全缺漏） -->
+            <div class="card">
+                <div class="card-header-title">🛑 出發前必辦文件（漏了無法入境／上機）</div>
+                <div class="critical-note" style="margin:0 0 14px;">
+                    <div class="cn-head"><span class="cn-tag">L1 最高優先</span>📋 這兩項原本整份行程都沒記錄</div>
+                    我在 review 時搜遍整個專案資料夾，<mark class="hl-stop">「SG Arrival Card」「入境卡」「護照」都是零筆記錄</mark>——這是強制要求，漏了會直接卡在關口。已補入下方清單。
+                </div>
+                <div class="checklist-grid">
+                    <div class="check-item-card" onclick="toggleCheck(this)">
+                        <div class="custom-checkbox">✓</div>
+                        <div class="check-item-text">🛑 <strong>SG Arrival Card 電子入境卡 × 3 人已送出</strong>（<mark class="hl">只能 8/18–8/20 送出</mark>，抵達前 3 天內；免費，走 ICA 官網，慎防收費假網站；確認信截圖離線存好）</div>
+                    </div>
+                    <div class="check-item-card" onclick="toggleCheck(this)">
+                        <div class="custom-checkbox">✓</div>
+                        <div class="check-item-text">🛑 <strong>三本護照效期確認</strong>（需有效至 <mark class="hl">2027/2/21</mark> 之後；<strong>兒童護照效期較短最易忽略</strong>）</div>
+                    </div>
+                    <div class="check-item-card" onclick="toggleCheck(this)">
+                        <div class="custom-checkbox">✓</div>
+                        <div class="check-item-text">🛡️ <strong>旅平險＋不便險已生效</strong>（<mark class="hl">必須離家前投保</mark>，機場補不了）</div>
+                    </div>
+                    <div class="check-item-card" onclick="toggleCheck(this)">
+                        <div class="custom-checkbox">✓</div>
+                        <div class="check-item-text">🚘 <strong>台灣機場接送去程＋回程已預訂</strong>（去程 8/20 約 20:45 到家；回程 8/24 約 17:45；客服電話存進手機）</div>
+                    </div>
+                    <div class="check-item-card" onclick="toggleCheck(this)">
+                        <div class="custom-checkbox">✓</div>
+                        <div class="check-item-text">🏨 <strong>M Hotel 訂房確認函</strong>（⚠️ 專案內找不到訂房紀錄，且飯店標示「免費取消：否」）</div>
+                    </div>
+                </div>
             </div>
 
             <!-- Card 1 -->
             <div class="card">
                 <div class="card-header-title">🎒 行前準備與必備物品檢查清單</div>
                 <div class="checklist-grid">
+                    <div class="check-item-card" onclick="toggleCheck(this)">
+                        <div class="custom-checkbox">✓</div>
+                        <div class="check-item-text">👟 <strong>全包覆運動鞋 ×3</strong>（<mark class="hl">Day 1 Jewel 彈跳網與網狀步道嚴禁拖鞋／高跟鞋</mark>）</div>
+                    </div>
+                    <div class="check-item-card" onclick="toggleCheck(this)">
+                        <div class="custom-checkbox">✓</div>
+                        <div class="check-item-text">💵 <strong>SGD 小額現金</strong>（<mark class="hl">Day 1 麥士威熟食中心攤位多不收卡</mark>；備 $2/$5/$10 紙鈔與硬幣）</div>
+                    </div>
                     <div class="check-item-card" onclick="toggleCheck(this)">
                         <div class="custom-checkbox">✓</div>
                         <div class="check-item-text">🏊 泳衣、泳鏡 (Day 3 西樂索沙灘戲水／飯店泳池用)</div>
@@ -2561,19 +2952,27 @@
                     </div>
                     <div class="check-item-card" onclick="toggleCheck(this)">
                         <div class="custom-checkbox">✓</div>
-                        <div class="check-item-text">🌆 金沙空中花園 (SkyPark 57F)：捏住新加坡摩天觀景輪 (Singapore Flyer) 高空捏捏照</div>
+                        <div class="check-item-text">🌆 金沙空中花園 (SkyPark 56F)：17:00 高峰場，捏住新加坡摩天觀景輪 (Singapore Flyer) 高空捏捏照</div>
                     </div>
                     <div class="check-item-card" onclick="toggleCheck(this)">
                         <div class="custom-checkbox">✓</div>
-                        <div class="check-item-text">🎶 超級樹燈光秀 (Supertree Garden Rhapsody)：19:45 震撼燈光音樂秀體驗</div>
+                        <div class="check-item-text">👜 LV Island Maison 水上玻璃亭：18:45–19:45 藍調時刻媽媽指定合照（玻璃亭＋水面倒影＋金沙三塔）</div>
                     </div>
                     <div class="check-item-card" onclick="toggleCheck(this)">
                         <div class="custom-checkbox">✓</div>
-                        <div class="check-item-text">🌌 北極光光影秀 (Borealis)：20:00 / 21:00 夢幻極光打卡拍照</div>
+                        <div class="check-item-text">💦 Spectra 燈光水舞秀：20:00 場，Event Plaza 階梯席地而坐看噴泉噴火雷射</div>
                     </div>
                     <div class="check-item-card" onclick="toggleCheck(this)">
                         <div class="custom-checkbox">✓</div>
-                        <div class="check-item-text">🦀 東樂海鮮 (TungLok Seafood) 辣椒蟹 ＆ 忠食館 (Rasapura Masters) 宵夜打卡</div>
+                        <div class="check-item-text">🎶 超級樹燈光秀 (Supertree Garden Rhapsody)：20:45 第二場，躺草地仰望震撼燈光音樂秀</div>
+                    </div>
+                    <div class="check-item-card" onclick="toggleCheck(this)">
+                        <div class="custom-checkbox">✓</div>
+                        <div class="check-item-text">🌌 北極光光影秀 (Borealis)：21:00 第二場，夢幻極光打卡拍照</div>
+                    </div>
+                    <div class="check-item-card" onclick="toggleCheck(this)">
+                        <div class="custom-checkbox">✓</div>
+                        <div class="check-item-text">🌸 花之幻境 (Floral Fantasy)：迪士尼／皮克斯花藝合照（玩具總動員 5 ＆ 冰雪奇緣）＋ 找到箭毒蛙</div>
                     </div>
                     <div class="check-item-card" onclick="toggleCheck(this)">
                         <div class="custom-checkbox">✓</div>
@@ -2593,6 +2992,10 @@
                     <div class="check-item-card" onclick="toggleCheck(this)">
                         <div class="custom-checkbox">✓</div>
                         <div class="check-item-text">🍽️ WEAVE 購物中心：莆田 (Putien) / Chatterbox / Moutarde 澎湃午餐</div>
+                    </div>
+                    <div class="check-item-card" onclick="toggleCheck(this)">
+                        <div class="custom-checkbox">✓</div>
+                        <div class="check-item-text">🏰 西樂索炮台空中步道 (Fort Siloso Skywalk)：181 公尺樹冠層步道俯瞰炮台與外海</div>
                     </div>
                     <div class="check-item-card" onclick="toggleCheck(this)">
                         <div class="custom-checkbox">✓</div>
