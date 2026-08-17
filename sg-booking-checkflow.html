@@ -1,0 +1,1034 @@
+<title>新加坡行前預訂檢驗流程 — 8/20 出發</title>
+<style>
+  :root{
+    --bg:#F6F7F8; --surface:#FFFFFF; --surface-2:#EFF1F3; --surface-3:#E7EAED;
+    --rule:#DCE0E4; --rule-strong:#C3CAD1;
+    --text:#14181D; --text-2:#545C66; --text-3:#7C858F;
+    --accent:#0B5F57; --accent-soft:#E3F0EE; --accent-line:#8FBFB8;
+    --crit:#B3122A; --crit-soft:#FBE9EC; --crit-line:#E8A3AF; --on-crit:#FFFFFF;
+    --warn:#8A5A00; --warn-soft:#FBF1DF; --warn-line:#DCC084;
+    --ok:#1B6E3C; --ok-soft:#E6F2EA; --ok-line:#9AC7AC;
+    --shadow:0 1px 2px rgba(20,24,29,.05),0 4px 14px rgba(20,24,29,.05);
+    --mono:ui-monospace,"SFMono-Regular","Cascadia Mono","Consolas","Liberation Mono",monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","Microsoft JhengHei","PingFang TC",sans-serif;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#0E1216; --surface:#161C22; --surface-2:#1D242B; --surface-3:#232B33;
+      --rule:#2A333B; --rule-strong:#3B464F;
+      --text:#E8ECEF; --text-2:#A3AEB8; --text-3:#78838D;
+      --accent:#5FC7B8; --accent-soft:#123832; --accent-line:#2C6259;
+      --crit:#FF8A9B; --crit-soft:#3A1620; --crit-line:#7A2E3C; --on-crit:#3A0C14;
+      --warn:#E0B053; --warn-soft:#35280F; --warn-line:#6B5320;
+      --ok:#6FCE95; --ok-soft:#10301D; --ok-line:#2E6141;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.25);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0E1216; --surface:#161C22; --surface-2:#1D242B; --surface-3:#232B33;
+    --rule:#2A333B; --rule-strong:#3B464F;
+    --text:#E8ECEF; --text-2:#A3AEB8; --text-3:#78838D;
+    --accent:#5FC7B8; --accent-soft:#123832; --accent-line:#2C6259;
+    --crit:#FF8A9B; --crit-soft:#3A1620; --crit-line:#7A2E3C;
+    --warn:#E0B053; --warn-soft:#35280F; --warn-line:#6B5320;
+    --ok:#6FCE95; --ok-soft:#10301D; --ok-line:#2E6141;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.25);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:var(--sans); font-size:16px; line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1060px; margin:0 auto; padding:0 20px 96px}
+  h1,h2,h3,h4{text-wrap:balance; margin:0}
+
+  /* ---------- masthead ---------- */
+  .masthead{padding:56px 0 28px; border-bottom:2px solid var(--text)}
+  .eyebrow{
+    font-family:var(--mono); font-size:11.5px; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--text-3);
+    display:flex; flex-wrap:wrap; gap:14px; align-items:center;
+  }
+  .eyebrow b{color:var(--crit); font-weight:600}
+  h1{font-size:clamp(28px,4.6vw,42px); line-height:1.14; letter-spacing:-.02em; margin:14px 0 10px; font-weight:700}
+  .standfirst{color:var(--text-2); max-width:64ch; font-size:16.5px}
+
+  .countdown{
+    display:flex; flex-wrap:wrap; gap:0; margin-top:26px;
+    border:1px solid var(--rule); border-radius:3px; overflow:hidden; background:var(--surface);
+  }
+  .cd{flex:1 1 150px; padding:13px 16px; border-right:1px solid var(--rule)}
+  .cd:last-child{border-right:0}
+  .cd dt{font-family:var(--mono); font-size:10.5px; letter-spacing:.13em; text-transform:uppercase; color:var(--text-3)}
+  .cd dd{margin:3px 0 0; font-family:var(--mono); font-size:19px; font-weight:600; font-variant-numeric:tabular-nums}
+  .cd dd small{font-size:12px; font-weight:400; color:var(--text-2); letter-spacing:0}
+
+  /* ---------- sticky progress ---------- */
+  .progress-bar{
+    position:sticky; top:0; z-index:20; background:var(--bg);
+    border-bottom:1px solid var(--rule); padding:11px 0 10px; margin-bottom:8px;
+  }
+  .progress-inner{display:flex; align-items:center; gap:14px; flex-wrap:wrap}
+  .track{flex:1 1 200px; height:6px; background:var(--surface-3); border-radius:99px; overflow:hidden; min-width:140px}
+  .fill{height:100%; width:0%; background:var(--accent); border-radius:99px; transition:width .28s ease}
+  .ptext{font-family:var(--mono); font-size:12.5px; font-variant-numeric:tabular-nums; color:var(--text-2); white-space:nowrap}
+  .ptext b{color:var(--text); font-size:15px}
+  .reset{
+    font-family:var(--mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase;
+    background:none; border:1px solid var(--rule-strong); color:var(--text-3);
+    padding:5px 10px; border-radius:3px; cursor:pointer;
+  }
+  .reset:hover{color:var(--text); border-color:var(--text-3)}
+  .reset:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+
+  /* ---------- sections ---------- */
+  section{margin-top:52px}
+  .sec-head{display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; padding-bottom:10px; border-bottom:1px solid var(--rule-strong)}
+  .sec-num{font-family:var(--mono); font-size:12px; letter-spacing:.14em; color:var(--accent); text-transform:uppercase}
+  h2{font-size:clamp(21px,2.7vw,27px); letter-spacing:-.015em; font-weight:700}
+  .sec-note{color:var(--text-2); font-size:14.5px; margin-top:12px; max-width:70ch}
+
+  /* ---------- alert ---------- */
+  .alert{
+    margin-top:22px; background:var(--crit-soft); border:1px solid var(--crit-line);
+    border-left:3px solid var(--crit); border-radius:3px; padding:16px 18px;
+  }
+  .alert h3{font-size:16px; color:var(--crit); display:flex; align-items:center; gap:9px}
+  .alert h3 span{font-family:var(--mono); font-size:11px; letter-spacing:.1em; border:1px solid var(--crit-line); padding:2px 6px; border-radius:2px}
+  .alert p{margin:9px 0 0; font-size:14.5px; color:var(--text); max-width:74ch}
+  .alert p+p{margin-top:7px}
+
+  /* ---------- purchase blocks ---------- */
+  .block{margin-top:30px}
+  .block-head{display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:2px}
+  .when{
+    font-family:var(--mono); font-size:12px; font-weight:600; letter-spacing:.06em;
+    background:var(--text); color:var(--bg); padding:4px 9px; border-radius:2px; white-space:nowrap;
+  }
+  .when.urgent{background:var(--crit); color:var(--on-crit)}
+  .block-head h3{font-size:16.5px; font-weight:650}
+  .block-head .hint{font-size:13.5px; color:var(--text-3); font-family:var(--mono)}
+
+  .rows{list-style:none; margin:12px 0 0; padding:0; display:flex; flex-direction:column; gap:1px; background:var(--rule); border:1px solid var(--rule); border-radius:4px; overflow:hidden}
+  .row{background:var(--surface); display:grid; grid-template-columns:auto 40px 1fr auto; gap:0 14px; align-items:start; padding:14px 16px; transition:background .15s}
+  .row:hover{background:var(--surface-2)}
+  .row.done{background:var(--surface-2)}
+  .row.done .rtitle{text-decoration:line-through; text-decoration-thickness:1px; color:var(--text-3)}
+  .row.done .rmeta{color:var(--text-3)}
+
+  .row input[type=checkbox]{
+    appearance:none; width:19px; height:19px; margin:3px 0 0; flex:none;
+    border:1.5px solid var(--rule-strong); border-radius:3px; background:var(--surface);
+    cursor:pointer; position:relative;
+  }
+  .row input[type=checkbox]:hover{border-color:var(--accent)}
+  .row input[type=checkbox]:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+  .row input[type=checkbox]:checked{background:var(--accent); border-color:var(--accent)}
+  .row input[type=checkbox]:checked::after{
+    content:""; position:absolute; left:5px; top:2px; width:5px; height:10px;
+    border:solid var(--surface); border-width:0 2px 2px 0; transform:rotate(42deg);
+  }
+  .rid{font-family:var(--mono); font-size:12.5px; font-weight:600; color:var(--text-3); padding-top:4px; font-variant-numeric:tabular-nums}
+  .rbody{min-width:0}
+  .rtitle{font-size:15.5px; font-weight:600; line-height:1.45}
+  .rmeta{font-size:13.5px; color:var(--text-2); margin-top:4px; line-height:1.55}
+  .rmeta code{font-family:var(--mono); font-size:12.5px; background:var(--surface-3); padding:1px 5px; border-radius:2px}
+  .rwarn{font-size:13px; color:var(--crit); margin-top:5px; font-weight:500}
+  .rside{display:flex; flex-direction:column; align-items:flex-end; gap:6px; padding-top:2px; flex:none}
+  .cost{font-family:var(--mono); font-size:13.5px; font-weight:600; font-variant-numeric:tabular-nums; white-space:nowrap}
+  .chip{
+    font-family:var(--mono); font-size:10.5px; letter-spacing:.09em; text-transform:uppercase;
+    padding:3px 7px; border-radius:2px; white-space:nowrap; font-weight:600; border:1px solid;
+  }
+  .chip.must{background:var(--crit-soft); color:var(--crit); border-color:var(--crit-line)}
+  .chip.conf{background:var(--accent-soft); color:var(--accent); border-color:var(--accent-line)}
+  .chip.opt{background:var(--warn-soft); color:var(--warn); border-color:var(--warn-line)}
+  .chip.win{background:var(--surface); color:var(--crit); border-color:var(--crit)}
+
+  /* ---------- timeline ---------- */
+  .day{margin-top:34px}
+  .day-head{display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; padding:9px 14px; background:var(--text); color:var(--bg); border-radius:3px}
+  .day-head .dl{font-family:var(--mono); font-size:12px; letter-spacing:.13em; text-transform:uppercase; opacity:.72}
+  .day-head h3{font-size:16px; font-weight:650}
+  .nodes{list-style:none; margin:0; padding:0 0 0 0}
+  .node{display:grid; grid-template-columns:76px 1fr; gap:0 18px; position:relative; padding:15px 0 15px 0; border-bottom:1px solid var(--rule)}
+  .node:last-child{border-bottom:0}
+  .ntime{font-family:var(--mono); font-size:13px; font-weight:600; font-variant-numeric:tabular-nums; color:var(--text-2); padding-top:1px; text-align:right}
+  .nbody{min-width:0}
+  .ntitle{font-size:15.5px; font-weight:600; line-height:1.45}
+  .ndesc{font-size:13.5px; color:var(--text-2); margin-top:4px; max-width:72ch}
+  .needs{display:flex; flex-wrap:wrap; gap:6px; margin-top:9px; align-items:center}
+  .needs-label{font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--text-3)}
+  .ref{
+    font-family:var(--mono); font-size:11.5px; font-weight:600; padding:3px 8px; border-radius:2px;
+    background:var(--crit-soft); color:var(--crit); border:1px solid var(--crit-line); white-space:nowrap;
+  }
+  .ref.conf{background:var(--accent-soft); color:var(--accent); border-color:var(--accent-line)}
+  .ref.opt{background:var(--warn-soft); color:var(--warn); border-color:var(--warn-line)}
+  .ref.free{background:var(--ok-soft); color:var(--ok); border-color:var(--ok-line)}
+  .nflag{font-size:13px; color:var(--crit); margin-top:8px; font-weight:500; max-width:72ch}
+
+  /* ---------- money table ---------- */
+  .tscroll{overflow-x:auto; margin-top:20px; border:1px solid var(--rule); border-radius:4px}
+  table{border-collapse:collapse; width:100%; min-width:520px; background:var(--surface); font-size:14.5px}
+  th,td{text-align:left; padding:11px 15px; border-bottom:1px solid var(--rule)}
+  th{font-family:var(--mono); font-size:11px; letter-spacing:.11em; text-transform:uppercase; color:var(--text-3); background:var(--surface-2); font-weight:600}
+  td.n{font-family:var(--mono); text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap}
+  tr:last-child td{border-bottom:0}
+  tr.total td{font-weight:700; background:var(--surface-2)}
+
+  /* ---------- footnote ---------- */
+  .foot{margin-top:52px; padding-top:22px; border-top:1px solid var(--rule); font-size:13.5px; color:var(--text-2)}
+  .foot h4{font-family:var(--mono); font-size:11.5px; letter-spacing:.13em; text-transform:uppercase; color:var(--text-3); margin-bottom:10px}
+  .foot ul{margin:0; padding-left:1.2em; display:flex; flex-direction:column; gap:6px}
+  .legend{display:flex; flex-wrap:wrap; gap:16px; margin-top:14px; padding:13px 15px; background:var(--surface); border:1px solid var(--rule); border-radius:3px}
+  .legend div{display:flex; align-items:center; gap:7px; font-size:13px; color:var(--text-2)}
+
+  @media (max-width:640px){
+    .row{grid-template-columns:auto 34px 1fr; gap:0 10px}
+    .rside{grid-column:2 / -1; flex-direction:row; align-items:center; justify-content:flex-start; margin-top:8px}
+    .node{grid-template-columns:1fr; gap:0}
+    .ntime{text-align:left; margin-bottom:3px}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important; animation:none!important}}
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="eyebrow">
+      <span>行前預訂檢驗流程</span>
+      <span>2 大 1 小 · 8 歲</span>
+      <span><b>出發 8/20 (四) 夜</b></span>
+    </div>
+    <h1>新加坡 4 天 3 夜 —<br>預訂與購買檢驗流程</h1>
+    <p class="standfirst">
+      以「從家裡出發到回到家」的完整行程模擬反推，逐一標出每個<strong>必須事先預訂好才能通關的節點</strong>。
+      上半部是依日期排好的採購順序，下半部是行程模擬——每個節點回指採購編號，用來驗證沒有任何預訂被漏掉。
+    </p>
+
+    <dl class="countdown">
+      <div class="cd"><dt>今天</dt><dd>8/12 <small>(三)</small></dd></div>
+      <div class="cd"><dt>離出發</dt><dd>8 <small>天</small></dd></div>
+      <div class="cd"><dt>去程航班</dt><dd>01:35 <small>8/21 TPE→SIN</small></dd></div>
+      <div class="cd"><dt>需預訂項目</dt><dd>27 <small>項</small></dd></div>
+    </dl>
+  </header>
+
+  <div class="progress-bar">
+    <div class="progress-inner">
+      <span class="ptext"><b id="pdone">0</b> / 27 已完成</span>
+      <div class="track"><div class="fill" id="pfill"></div></div>
+      <span class="ptext" id="ppct">0%</span>
+      <button class="reset" id="preset" type="button">清除全部</button>
+    </div>
+  </div>
+
+  <!-- ============ GAP ALERT ============ -->
+  <section id="alert" style="margin-top:34px">
+    <div class="alert">
+      <h3><span>缺漏</span> 原行程完全沒有記錄的兩項強制要求</h3>
+      <p><strong>1. SG Arrival Card（新加坡電子入境卡）</strong>——我搜遍整個專案資料夾（行程 HTML、景點研究、餐廳、飯店、活動日曆），
+      「SG Arrival」「入境卡」「SGAC」<strong>零筆記錄</strong>。這是入境強制要求、免費，且<strong>只能在抵達前 3 天內送出</strong>：
+      抵達日 8/21，送出窗口為 <code>8/18 – 8/20</code>，現在還太早，但絕不能忘。務必走官方 ICA 網站，網路上有大量收費的假代辦站。</p>
+      <p><strong>2. 護照效期</strong>——專案同樣沒有任何記錄。入境新加坡一般要求護照效期至少 6 個月，
+      以 8/21 入境計算需有效至 <strong>2027/2/21 之後</strong>。三本護照今天就該翻開確認，若需換發已經來不及走一般件。</p>
+      <p style="color:var(--text-2)">上述兩項規則請以新加坡移民與關卡局官方頁面為最終依據；此處僅作為提醒節點。</p>
+    </div>
+  </section>
+
+  <!-- ============ PART 1: PURCHASE SCHEDULE ============ -->
+  <section id="schedule">
+    <div class="sec-head">
+      <span class="sec-num">上半部</span>
+      <h2>採購排程：從今天開始依序執行</h2>
+    </div>
+    <p class="sec-note">
+      排序邏輯是「不可壓縮的前置」→「有庫存與時段限制」→「隨時可買但趁早」→「有時間窗、太早做不了」。
+      勾選狀態會存在這個頁面裡，可以分幾天慢慢做完。
+    </p>
+
+    <!-- Block A -->
+    <div class="block">
+      <div class="block-head">
+        <span class="when urgent">今天 8/12</span>
+        <h3>先確認已付款項目的實際狀態</h3>
+        <span class="hint">— 專案裡找不到憑證的項目</span>
+      </div>
+      <ul class="rows">
+        <li class="row">
+          <input type="checkbox" id="c01" aria-labelledby="t01">
+          <span class="rid">01</span>
+          <div class="rbody">
+            <div class="rtitle" id="t01">來回機票 TPE ⇄ SIN 電子票券核對</div>
+            <div class="rmeta">去程 <code>8/21 01:35–06:00</code>、回程 <code>8/24 12:25–17:10</code>。媽媽已付 TWD 30,632。
+            請核對：三人英文姓名拼音與護照<strong>完全一致</strong>、8 歲兒童的票別、託運行李額度、以及是否已選位（紅眼航班坐一起很重要）。</div>
+          </div>
+          <div class="rside"><span class="cost">已付 30,632</span><span class="chip conf">確認</span></div>
+        </li>
+        <li class="row">
+          <input type="checkbox" id="c02" aria-labelledby="t02">
+          <span class="rid">02</span>
+          <div class="rbody">
+            <div class="rtitle" id="t02">M Hotel Singapore City Centre 3 晚訂房</div>
+            <div class="rmeta">81 Anson Road, S079908。預算表列 SGD 1,006.80（含稅）。</div>
+            <div class="rwarn">⚠️ 專案內沒有任何訂房確認紀錄，且飯店研究檔明確標示「免費取消：否」。若尚未訂，價格可能已變動且訂了不可退——這是今天最該先確認的一項。</div>
+          </div>
+          <div class="rside"><span class="cost">SGD 1,006.80</span><span class="chip must">必訂</span></div>
+        </li>
+        <li class="row">
+          <input type="checkbox" id="c03" aria-labelledby="t03">
+          <span class="rid">03</span>
+          <div class="rbody">
+            <div class="rtitle" id="t03">三本護照效期確認（需有效至 2027/2/21 後）</div>
+            <div class="rmeta">爸爸、媽媽、女兒各一本。同時確認女兒的護照是否即將到期——兒童護照效期較短最容易被忽略。</div>
+          </div>
+          <div class="rside"><span class="cost">—</span><span class="chip conf">確認</span></div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Block B -->
+    <div class="block">
+      <div class="block-head">
+        <span class="when urgent">今天 8/12</span>
+        <h3>不可壓縮的前置預訂</h3>
+        <span class="hint">— 車輛需排班、保險須出發前生效</span>
+      </div>
+      <ul class="rows">
+        <li class="row">
+          <input type="checkbox" id="c04" aria-labelledby="t04">
+          <span class="rid">04</span>
+          <div class="rbody">
+            <div class="rtitle" id="t04">台灣機場接送｜去程 8/20 (四) 夜　家 → 桃園機場</div>
+            <div class="rmeta">01:35 起飛，建議 22:30 前完成報到 → 約 <code>20:45</code> 從家裡出發。訂車時直接指定這個時間。</div>
+          </div>
+          <div class="rside"><span class="cost">TWD 1,360</span><span class="chip must">必訂</span></div>
+        </li>
+        <li class="row">
+          <input type="checkbox" id="c05" aria-labelledby="t05">
+          <span class="rid">05</span>
+          <div class="rbody">
+            <div class="rtitle" id="t05">台灣機場接送｜回程 8/24 (一) 夜　桃園機場 → 家</div>
+            <div class="rmeta">17:10 落地，提領行李與通關約 30 分 → 約 <code>17:45</code> 上車。建議與去程一起訂，通常有來回優惠。</div>
+          </div>
+          <div class="rside"><span class="cost">TWD 1,360</span><span class="chip must">必訂</span></div>
+        </li>
+        <li class="row">
+          <input type="checkbox" id="c06" aria-labelledby="t06">
+          <span class="rid">06</span>
+          <div class="rbody">
+            <div class="rtitle" id="t06">旅遊平安險 ＋ 不便險（2 大 1 小全程）</div>
+            <div class="rmeta">預算表列 TWD 2,324。紅眼航班＋轉機零容錯，不便險（延誤／行李延誤）值得保。</div>
+            <div class="rwarn">⚠️ 保單必須在<strong>離家出發前</strong>就生效，多數保險無法在機場或出境後投保。</div>
+          </div>
+          <div class="rside"><span class="cost">TWD 2,324</span><span class="chip must">必訂</span></div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Block C -->
+    <div class="block">
+      <div class="block-head">
+        <span class="when">8/13 – 8/14</span>
+        <h3>需指定時段或劃位的票券</h3>
+        <span class="hint">— 熱門時段會先被訂走</span>
+      </div>
+      <ul class="rows">
+        <li class="row">
+          <input type="checkbox" id="c07" aria-labelledby="t07">
+          <span class="rid">07</span>
+          <div class="rbody">
+            <div class="rtitle" id="t07">金沙空中花園觀景台 SkyPark <strong>56F</strong>（Day 2）— 買<strong>會員價・高峰場</strong></div>
+            <div class="rmeta"><strong>先註冊會員</strong>再買：高峰場 成人 SGD 27.30 × 2 ＋ 優待票 SGD 24.50。行程已改為 <code>8/22 17:00 入場</code>。
+            官網開放 09:30–22:00；<strong>非高峰 09:30–16:30（最晚入場 16:00）、高峰 17:00–22:00（最晚入場 21:30）</strong>。
+            觀景台在 <strong>56 樓</strong>（57 樓是泳池／餐廳，僅限住客）。官網未見家庭套票。</div>
+            <div class="rwarn">⚠️ 原排「約 16:00」正好卡非高峰最後入場，吃飯稍慢就錯過，故改高峰場（每人僅多 SGD 2.80）。露天場地遇雷雨可能關閉，進場未滿 1 小時可退費。</div>
+          </div>
+          <div class="rside"><span class="cost">SGD 79.10</span><span class="chip must">必訂</span></div>
+        </li>
+        <li class="row">
+          <input type="checkbox" id="c08" aria-labelledby="t08">
+          <span class="rid">08</span>
+          <div class="rbody">
+            <div class="rtitle" id="t08">時光之翼煙火秀 Wings of Time（Day 3）</div>
+            <div class="rmeta">SGD 22 × 3。<strong>選 8/23 的 19:40 場</strong>（另有 20:40 場，別訂錯）。
+            建議於 Mount Faber Leisure 官網或第三方平台<strong>預購劃位</strong>；Premium 區中央高台視野無遮擋。</div>
+          </div>
+          <div class="rside"><span class="cost">SGD 66</span><span class="chip must">必訂</span></div>
+        </li>
+        <li class="row">
+          <input type="checkbox" id="c09" aria-labelledby="t09">
+          <span class="rid">09</span>
+          <div class="rbody">
+            <div class="rtitle" id="t09">濱海灣花園 <strong>Bundle Deal</strong>（雙館 ＋ Floral Fantasy ＋ 接駁車）（Day 2）</div>
+            <div class="rmeta">成人 SGD 58 × 2 ＋ 兒童 SGD 41。含 <strong>花穹 ＋ 雲霧林(侏羅紀世界) ＋ 花之幻境 Floral Fantasy(迪士尼花藝) ＋ 園內接駁車</strong>（SS = Shuttle Service）。
+            行程 <code>8/22 09:30–11:30 雙館</code>、<code>13:45–14:45 Floral Fantasy</code>。
+            ℹ️ <strong>迪士尼花藝在 Floral Fantasy，不在花穹</strong>（原清單寫錯已更正）。</div>
+            <div class="rwarn">⚠️ 官網非居民標價為 成人 73／兒童 51，你查到的 58／41 可能是促銷或第三方平台價，下單時確認。另：雲霧林 8/24 休館、花穹 8/17 已休館，皆不影響 8/22，但出發前再確認一次。</div>
+          </div>
+          <div class="rside"><span class="cost">SGD 157</span><span class="chip must">必訂</span></div>
+        </li>
+        <li class="row">
+          <input type="checkbox" id="c10" aria-labelledby="t10">
+          <span class="rid">10</span>
+          <div class="rbody">
+            <div class="rtitle" id="t10">超級樹空中走廊 Supertree Skyway（Day 2）</div>
+            <div class="rmeta">成人 SGD 14 × 2 ＋ 兒童 SGD 10。行程 <code>8/22 11:30–12:15</code>，緊接雙館之後，可與 09 一起結帳。
+            ✅ 已確認 Bundle 裡的「SS」是 Shuttle Service <strong>不是</strong> Skyway，所以空中走廊要另外買，<strong>沒有重複付費</strong>。</div>
+          </div>
+          <div class="rside"><span class="cost">SGD 38</span><span class="chip must">必訂</span></div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Block D -->
+    <div class="block">
+      <div class="block-head">
+        <span class="when">8/15 – 8/16</span>
+        <h3>Day 3 聖淘沙全套票券</h3>
+        <span class="hint">— 線上購票均比現場便宜</span>
+      </div>
+      <ul class="rows">
+        <li class="row">
+          <input type="checkbox" id="c11" aria-labelledby="t11">
+          <span class="rid">11</span>
+          <div class="rbody">
+            <div class="rtitle" id="t11">聖淘沙纜車 Cable Car SkyPass（1 Round Trip）</div>
+            <div class="rmeta">成人 SGD 35 × 2 ＋ 兒童 SGD 25。已查證此票<strong>已含 Mount Faber Line ＋ Sentosa Line 兩條線</strong>，不必買更貴的版本。
+            兒童定義 4–12 歲，女兒 8 歲適用。線上購票成人每張再折 SGD 2.10。</div>
+            <div class="rwarn">⚠️ 官網另有同為 SGD 35 但標示「LOCALS ONLY」的版本，台灣旅客不適用——下單前確認沒有這個標籤。
+            另：票券<strong>必須在當天 20:00 前到纜車售票櫃檯換實體券</strong>。</div>
+          </div>
+          <div class="rside"><span class="cost">SGD 95</span><span class="chip must">必訂</span></div>
+        </li>
+        <li class="row">
+          <input type="checkbox" id="c12" aria-labelledby="t12">
+          <span class="rid">12</span>
+          <div class="rbody">
+            <div class="rtitle" id="t12">Singapore Oceanarium 一日票</div>
+            <div class="rmeta"><strong>成人 SGD 55 × 2 ＋ 兒童 SGD 43</strong>。行程 <code>8/23 10:00–13:00</code>，共 <strong>22 大展區、逾 100,000 隻海洋生物</strong>，官網建議預留 2–3 小時。
+            成人票含 1 張 <strong>S$5 餐飲／零售抵用券</strong>，官網線上購票再折 S$5。期間限定 POP MART「Cry Me An Ocean」展（6/24–8/30）含在門票內。</div>
+            <div class="rwarn">🔴 <strong>原清單寫 SGD 133 × 3 = 399 是嚴重錯誤，已更正為 153</strong>（高估約 SGD 246）。另：官網營業時間為 <strong>10:00–20:00</strong>（非原寫的 17:00 關門）；8 月的 1、8、20、22 日縮短為 10:00–16:00，<strong>8/23 不在名單內但出發前務必再查</strong>。</div>
+          </div>
+          <div class="rside"><span class="cost">SGD 153</span><span class="chip must">必訂</span></div>
+        </li>
+        <li class="row">
+          <input type="checkbox" id="c13" aria-labelledby="t13">
+          <span class="rid">13</span>
+          <div class="rbody">
+            <div class="rtitle" id="t13">斜坡滑車與空中吊椅 Skyline Luge &amp; Skyride</div>
+            <div class="rmeta">✅ 依你的決定買 <strong>2-Ride 套票 SGD 39/人 × 3</strong>（媽媽與女兒以體驗為主，走 Jungle／Kupu Kupu 這兩條較緩、好上手的賽道）。
+            ⚠️ <strong>每人同價，沒有兒童折扣</strong>。</div>
+            <div class="rwarn">✅ <strong>女兒 121cm：滑車可自己開，不必買 SGD 12 合騎票</strong>（門檻 110cm）。<br>
+            ⚠️ <strong>但空中吊椅 (Skyride) 需 135cm 才能單獨搭乘</strong>——121cm 落在 85–135cm 區間，<strong>兩趟上山都必須有爸爸或媽媽同座</strong>。購票時向櫃檯確認同座安排。</div>
+          </div>
+          <div class="rside"><span class="cost">SGD 117</span><span class="chip must">必訂</span></div>
+        </li>
+        <li class="row">
+          <input type="checkbox" id="c14" aria-labelledby="t14">
+          <span class="rid">14</span>
+          <div class="rbody">
+            <div class="rtitle" id="t14">星耀樟宜 Canopy Park <strong>Bundle Deal 2</strong>（Day 1）</div>
+            <div class="rmeta">成人 SGD 54 × 2 ＋ 兒童 SGD 39。含 Canopy Park（Discovery Slides／Foggy Bowls／Petal Garden／Topiary Walk）＋ Mastercard® Canopy Bridge ＋ Hedge Maze ＋ Mirror Maze ＋ Walking Net ＋ Bouncing Net。
+            官網查證：Canopy Park 本體與 Discovery Slides 週五 <strong>10:00–22:00</strong>，其餘五項 <strong>10:00–21:00</strong>，最後入場皆為關閉前 30 分鐘。</div>
+            <div class="rwarn">🔴 <strong>Walking Net 官網公告維修關閉中、未列復開日期</strong>——這是套票第 5 項，下單前務必致電或查官網確認。<br>
+            ✅ <strong>身高門檻已通過</strong>：四項設施需 110cm（Discovery Slides／Hedge Maze／Walking Net／Bouncing Net），<strong>女兒 121cm 全部符合</strong>。<br>
+            ✅ <strong>時間已調整為 10:00–13:00 完整 3 小時</strong>（行程改為 14:00 才離開機場、15:00 準時 check-in），六項全玩得完。<strong>10:00 一開門先衝 Bouncing Net</strong>（每場 45 分含安全說明，是唯一有固定場次長度的設施，晚了會卡住後面全部）。</div>
+          </div>
+          <div class="rside"><span class="cost">SGD 147</span><span class="chip must">必訂</span></div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Block E -->
+    <div class="block">
+      <div class="block-head">
+        <span class="when">8/17 – 8/18</span>
+        <h3>餐廳訂位</h3>
+        <span class="hint">— 8/22、8/23 是週六日，尖峰時段會候位</span>
+      </div>
+      <ul class="rows">
+        <li class="row">
+          <input type="checkbox" id="c15" aria-labelledby="t15">
+          <span class="rid">15</span>
+          <div class="rbody">
+            <div class="rtitle" id="t15">莆田 PUTIEN（Day 3 午餐 13:00）</div>
+            <div class="rmeta">RWS WEAVE 商場 #01-209。Google 4.8★，資料明確記載<strong>可預約座位</strong>。
+            剛出海洋館就有位子坐，對帶小孩差很多。</div>
+          </div>
+          <div class="rside"><span class="cost">人均 20–70</span><span class="chip must">建議訂</span></div>
+        </li>
+        <li class="row">
+          <input type="checkbox" id="c16" aria-labelledby="t16">
+          <span class="rid">16</span>
+          <div class="rbody">
+            <div class="rtitle" id="t16">Coastes 或 Trapizza（Day 3 沙灘晚餐 18:15）</div>
+            <div class="rmeta">Coastes：50 Siloso Beach Walk，桌椅直接在沙灘上，有兒童椅與尿布台。
+            Trapizza：10 Siloso Beach Walk，柴燒 Pizza ＋ 第一排海景。<strong>18:15 入座剛好邊吃邊看夕陽</strong>（落日 18:30–19:15），週日海景第一排很搶手。</div>
+          </div>
+          <div class="rside"><span class="cost">人均 20–70</span><span class="chip must">建議訂</span></div>
+        </li>
+        <li class="row">
+          <input type="checkbox" id="c17" aria-labelledby="t17">
+          <span class="rid">17</span>
+          <div class="rbody">
+            <div class="rtitle" id="t17">Black Tap（Day 2 早鳥晚餐 14:30）</div>
+            <div class="rmeta">巨無霸漢堡與狂野奶昔，金沙商場內。14:30 是離峰，但週六仍建議先訂。</div>
+          </div>
+          <div class="rside"><span class="cost">—</span><span class="chip opt">可選</span></div>
+        </li>
+        <li class="row">
+          <input type="checkbox" id="c18" aria-labelledby="t18">
+          <span class="rid">18</span>
+          <div class="rbody">
+            <div class="rtitle" id="t18">華珍海鮮 Majestic Bay（Day 2 午餐 12:30）</div>
+            <div class="rmeta">濱海灣花園內，緊接雙館行程。備案：Satay by the Bay、金沙美食廣場（皆無需訂位）。</div>
+          </div>
+          <div class="rside"><span class="cost">—</span><span class="chip opt">可選</span></div>
+        </li>
+        <li class="row">
+          <input type="checkbox" id="c19" aria-labelledby="t19">
+          <span class="rid">19</span>
+          <div class="rbody">
+            <div class="rtitle" id="t19">同樂海鮮 TungLok Seafood（Day 2 宵夜備案 21:00）</div>
+            <div class="rmeta">只有在跳過 Black Tap 早鳥晚餐時才會用到，屬彈性備案。可到現場再決定。</div>
+          </div>
+          <div class="rside"><span class="cost">—</span><span class="chip opt">可選</span></div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Block F -->
+    <div class="block">
+      <div class="block-head">
+        <span class="when urgent">8/18 – 8/20</span>
+        <h3>有時間窗限制，太早做不了</h3>
+        <span class="hint">— 這格是最容易漏掉的一格</span>
+      </div>
+      <ul class="rows">
+        <li class="row">
+          <input type="checkbox" id="c20" aria-labelledby="t20">
+          <span class="rid">20</span>
+          <div class="rbody">
+            <div class="rtitle" id="t20">SG Arrival Card 電子入境卡 × 3 人</div>
+            <div class="rmeta">入境強制要求、<strong>完全免費</strong>。抵達日 8/21 → 送出窗口 <code>8/18 – 8/20</code>，8/17 之前系統不會受理。
+            務必走新加坡移民與關卡局 (ICA) 官方網站；搜尋結果前幾名常是收費的代辦假站。送出後把確認信截圖離線存好。</div>
+          </div>
+          <div class="rside"><span class="cost">免費</span><span class="chip win">限時窗口</span></div>
+        </li>
+        <li class="row">
+          <input type="checkbox" id="c21" aria-labelledby="t21">
+          <span class="rid">21</span>
+          <div class="rbody">
+            <div class="rtitle" id="t21">eSIM 網卡 × 2 張</div>
+            <div class="rmeta">含在雜項預算內。建議<strong>出發前先在台灣安裝好設定檔</strong>（安裝需網路），落地再啟用即可，
+            避免在樟宜機場摸黑弄。爸爸媽媽各一張，開熱點給女兒的裝置用。</div>
+          </div>
+          <div class="rside"><span class="cost">雜項內</span><span class="chip must">必訂</span></div>
+        </li>
+        <li class="row">
+          <input type="checkbox" id="c22" aria-labelledby="t22">
+          <span class="rid">22</span>
+          <div class="rbody">
+            <div class="rtitle" id="t22">Grab App 綁定信用卡 ＋ 通知銀行開通海外交易</div>
+            <div class="rmeta">整趟行程機場往返、聖淘沙來回都靠 Grab／計程車。同時確認信用卡可在新加坡 MRT／公車直接感應搭乘（VISA／Mastercard 或 Apple Pay／Google Pay）。</div>
+          </div>
+          <div class="rside"><span class="cost">—</span><span class="chip must">必做</span></div>
+        </li>
+        <li class="row">
+          <input type="checkbox" id="c23" aria-labelledby="t23">
+          <span class="rid">23</span>
+          <div class="rbody">
+            <div class="rtitle" id="t23">換少量 SGD 現金</div>
+            <div class="rmeta">麥士威熟食中心（Day 1 晚餐）、牛車水攤販、部分小攤仍偏好現金。
+            機場行李寄存 SGD 24–30 也建議備零錢，雖然支援感應支付。</div>
+          </div>
+          <div class="rside"><span class="cost">—</span><span class="chip must">必做</span></div>
+        </li>
+        <li class="row">
+          <input type="checkbox" id="c24" aria-labelledby="t24">
+          <span class="rid">24</span>
+          <div class="rbody">
+            <div class="rtitle" id="t24">線上辦理登機（去程 8/20 夜）</div>
+            <div class="rmeta">多數航空可於起飛前 3–12 小時開放線上報到。紅眼航班先劃好座位，確保三人坐一起。</div>
+          </div>
+          <div class="rside"><span class="cost">—</span><span class="chip opt">可選</span></div>
+        </li>
+        <li class="row">
+          <input type="checkbox" id="c25" aria-labelledby="t25">
+          <span class="rid">25</span>
+          <div class="rbody">
+            <div class="rtitle" id="t25">iShopChangi 免稅品線上預訂（回程提貨）</div>
+            <div class="rmeta">Bengawan Solo 斑蘭蛋糕、TWG 茶葉等可線上先訂、回程在樟宜機場提貨，通常比現場便宜且不必花時間逛。
+            ⚠️ 多數平台有「起飛前 N 小時截止」規定，要訂就早點訂。</div>
+          </div>
+          <div class="rside"><span class="cost">伴手禮預算內</span><span class="chip opt">可選</span></div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Block G -->
+    <div class="block">
+      <div class="block-head">
+        <span class="when urgent">8/20 出發當天</span>
+        <h3>離家前最後核對</h3>
+      </div>
+      <ul class="rows">
+        <li class="row">
+          <input type="checkbox" id="c26" aria-labelledby="t26">
+          <span class="rid">26</span>
+          <div class="rbody">
+            <div class="rtitle" id="t26">行李與隨身物品核對</div>
+            <div class="rmeta">泳衣泳鏡（Day 3 西樂索沙灘／飯店泳池）· 兒童防曬乳 ＆ 太陽眼鏡 · 換洗衣物與薄外套 · 舒適涼鞋／拖鞋 ·
+            女兒的常備藥 · 行動電源（不可託運）· 轉接頭（新加坡為英規三孔 Type G）</div>
+          </div>
+          <div class="rside"><span class="cost">—</span><span class="chip must">必做</span></div>
+        </li>
+        <li class="row">
+          <input type="checkbox" id="c27" aria-labelledby="t27">
+          <span class="rid">27</span>
+          <div class="rbody">
+            <div class="rtitle" id="t27">所有票券與確認信「離線」存檔並列印一份</div>
+            <div class="rmeta">機票 · 飯店訂房確認 · SG Arrival Card 確認 · 保單 · 接送派車單 ·
+            雙館／Skyway／SkyPark／纜車／Oceanarium／Luge／Wings of Time／Canopy Park 全部門票 · 餐廳訂位確認。</div>
+            <div class="rwarn">⚠️ 落地時 eSIM 還沒啟用、機場 Wi-Fi 需驗證——第一小時很可能沒網路。截圖存相簿，別只存在 email 裡。</div>
+          </div>
+          <div class="rside"><span class="cost">—</span><span class="chip must">必做</span></div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="legend">
+      <div><span class="chip must">必訂</span> 沒有它行程會斷</div>
+      <div><span class="chip conf">確認</span> 應該已完成，需核對</div>
+      <div><span class="chip opt">可選</span> 沒訂也走得通</div>
+      <div><span class="chip win">限時窗口</span> 只能在特定日期區間辦</div>
+    </div>
+  </section>
+
+  <!-- ============ PART 2: SIMULATION ============ -->
+  <section id="sim">
+    <div class="sec-head">
+      <span class="sec-num">下半部</span>
+      <h2>行程模擬：逐節點驗證</h2>
+    </div>
+    <p class="sec-note">
+      從 8/20 晚上離家走到 8/24 晚上回到家。每個節點標出<strong>那一刻會用到哪一項預訂</strong>，
+      回指上半部的編號。全部走完沒有出現「找不到對應編號」的節點，就代表採購清單是完整的。
+    </p>
+
+    <!-- 8/20 -->
+    <div class="day">
+      <div class="day-head"><span class="dl">出發日</span><h3>8/20 (四) — 離家 · 桃園機場 · 紅眼航班</h3></div>
+      <ul class="nodes">
+        <li class="node">
+          <span class="ntime">20:00</span>
+          <div class="nbody">
+            <div class="ntitle">家中最後打包</div>
+            <div class="needs"><span class="needs-label">需要</span><span class="ref">26 行李核對</span><span class="ref">27 票券離線存檔</span></div>
+          </div>
+        </li>
+        <li class="node">
+          <span class="ntime">20:45</span>
+          <div class="nbody">
+            <div class="ntitle">接送專車抵家，出發前往桃園機場</div>
+            <div class="ndesc">車程依住家位置估算，抓 1 小時緩衝。</div>
+            <div class="needs"><span class="needs-label">需要</span><span class="ref">04 去程接送</span></div>
+          </div>
+        </li>
+        <li class="node">
+          <span class="ntime">21:45</span>
+          <div class="nbody">
+            <div class="ntitle">抵達桃園機場</div>
+            <div class="nflag">🔴 此刻起保險必須已生效——保單無法在機場補買。</div>
+            <div class="needs"><span class="needs-label">需要</span><span class="ref">06 平安險已生效</span><span class="ref">03 護照</span></div>
+          </div>
+        </li>
+        <li class="node">
+          <span class="ntime">22:00</span>
+          <div class="nbody">
+            <div class="ntitle">櫃檯報到 · 託運行李</div>
+            <div class="ndesc">核對姓名拼音、行李額度與座位。若已線上報到可走快速通道。</div>
+            <div class="needs"><span class="needs-label">需要</span><span class="ref conf">01 機票</span><span class="ref opt">24 線上登機</span></div>
+          </div>
+        </li>
+        <li class="node">
+          <span class="ntime">22:45</span>
+          <div class="nbody">
+            <div class="ntitle">出境查驗 · 安檢 · 候機</div>
+            <div class="nflag">🔴 最後檢查點：SG Arrival Card 三人是否都已送出？落地才發現就得在關口現場填。</div>
+            <div class="needs"><span class="needs-label">需要</span><span class="ref">20 SG Arrival Card</span><span class="ref">21 eSIM 已安裝</span></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 8/21 -->
+    <div class="day">
+      <div class="day-head"><span class="dl">Day 1</span><h3>8/21 (五) — 星耀樟宜 · 魚尾獅 · 牛車水</h3></div>
+      <ul class="nodes">
+        <li class="node">
+          <span class="ntime">01:35</span>
+          <div class="nbody"><div class="ntitle">TPE → SIN 起飛（紅眼航班）</div></div>
+        </li>
+        <li class="node">
+          <span class="ntime">06:00</span>
+          <div class="nbody">
+            <div class="ntitle">落地樟宜機場 · 入境查驗</div>
+            <div class="ndesc">出示護照，入境卡以電子方式查核。</div>
+            <div class="needs"><span class="needs-label">需要</span><span class="ref">20 SG Arrival Card</span><span class="ref">03 護照</span></div>
+          </div>
+        </li>
+        <li class="node">
+          <span class="ntime">06:00–07:30</span>
+          <div class="nbody">
+            <div class="ntitle">提領行李 → T1 L1 Smarte Carte 行李寄存</div>
+            <div class="ndesc">大件約 SGD 10–15/件/24hr，24 小時營業，支援感應支付。</div>
+            <div class="needs"><span class="needs-label">需要</span><span class="ref free">現場付費 · 免預訂</span><span class="ref">23 現金／感應卡</span></div>
+          </div>
+        </li>
+        <li class="node">
+          <span class="ntime">07:30–12:00</span>
+          <div class="nbody">
+            <div class="ntitle">星耀樟宜 雨漩渦 ＋ 頂樓星空花園 Canopy Park</div>
+            <div class="ndesc">雨漩渦 11:00 開始噴水。早餐在 Jewel 內解決（海南寶／翠華／亞坤，皆免訂位）。</div>
+            <div class="needs"><span class="needs-label">需要</span><span class="ref">14 Canopy Park Bundle</span></div>
+          </div>
+        </li>
+        <li class="node">
+          <span class="ntime">12:00–14:00</span>
+          <div class="nbody">
+            <div class="ntitle">取回行李 → Grab 直達 M Hotel</div>
+            <div class="ndesc">車資約 SGD 25–35。此刻 eSIM 必須已能上網才叫得到車。</div>
+            <div class="needs"><span class="needs-label">需要</span><span class="ref">22 Grab 綁卡</span><span class="ref">21 eSIM 已啟用</span></div>
+          </div>
+        </li>
+        <li class="node">
+          <span class="ntime">14:00</span>
+          <div class="nbody">
+            <div class="ntitle">M Hotel Check-in ＆ 充電午休</div>
+            <div class="ndesc">紅眼航班後的補眠時段，別排行程。</div>
+            <div class="needs"><span class="needs-label">需要</span><span class="ref">02 訂房確認函</span></div>
+          </div>
+        </li>
+        <li class="node">
+          <span class="ntime">16:30–18:00</span>
+          <div class="nbody">
+            <div class="ntitle">魚尾獅公園拍照打卡</div>
+            <div class="needs"><span class="needs-label">需要</span><span class="ref free">免費 · 免預訂</span></div>
+          </div>
+        </li>
+        <li class="node">
+          <span class="ntime">18:00–20:00</span>
+          <div class="nbody">
+            <div class="ntitle">牛車水美食冒險：麥士威熟食中心 ＋ 168 沙爹</div>
+            <div class="ndesc">天天海南雞飯（麥士威 #01-10/11）、168 鮮烤沙爹（牛車水大廈 2 樓 #02-168）、松發肉骨茶。熟食中心攤販為主，備現金最保險。</div>
+            <div class="needs"><span class="needs-label">需要</span><span class="ref">23 SGD 現金</span><span class="ref free">免訂位</span></div>
+          </div>
+        </li>
+        <li class="node">
+          <span class="ntime">20:00</span>
+          <div class="nbody"><div class="ntitle">步行約 11 分回 M Hotel</div></div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 8/22 -->
+    <div class="day">
+      <div class="day-head"><span class="dl">Day 2</span><h3>8/22 (六) — 濱海灣花園 · 金沙 · 雙夜秀</h3></div>
+      <ul class="nodes">
+        <li class="node">
+          <span class="ntime">09:30–12:30</span>
+          <div class="nbody">
+            <div class="ntitle">濱海灣花園：雲霧林 ＋ 花穹</div>
+            <div class="ndesc">花穹 Disney Garden of Wonder、雲霧林 Jurassic World 恐龍裝置皆含在雙館票。</div>
+            <div class="needs"><span class="needs-label">需要</span><span class="ref">09 雙館套票</span></div>
+          </div>
+        </li>
+        <li class="node">
+          <span class="ntime">11:30–12:30</span>
+          <div class="nbody">
+            <div class="ntitle">華僑銀行空中走廊 OCBC Skyway 22M 高空漫步</div>
+            <div class="needs"><span class="needs-label">需要</span><span class="ref">10 OCBC Skyway</span></div>
+          </div>
+        </li>
+        <li class="node">
+          <span class="ntime">12:30–14:00</span>
+          <div class="nbody">
+            <div class="ntitle">濱海灣景觀午餐</div>
+            <div class="ndesc">華珍海鮮 Majestic Bay／Satay by the Bay／金沙美食廣場。後兩者免訂位。</div>
+            <div class="needs"><span class="needs-label">需要</span><span class="ref opt">18 Majestic Bay 訂位</span></div>
+          </div>
+        </li>
+        <li class="node">
+          <span class="ntime">14:30–17:15</span>
+          <div class="nbody">
+            <div class="ntitle">Black Tap 早鳥晚餐 → 金沙空中花園 SkyPark 57F</div>
+            <div class="nflag">🔴 SkyPark 是預約指定時段制——訂票時選的時段必須落在這個區間內，否則整段行程要重排。</div>
+            <div class="needs"><span class="needs-label">需要</span><span class="ref">07 SkyPark 指定時段</span><span class="ref opt">17 Black Tap 訂位</span></div>
+          </div>
+        </li>
+        <li class="node">
+          <span class="ntime">19:45–21:00</span>
+          <div class="nbody">
+            <div class="ntitle">超級樹燈光秀 Garden Rhapsody ＋ 北極光極光秀 Borealis</div>
+            <div class="ndesc">8 月為國慶特別版，每晚 19:45 ＆ 20:45 兩場。</div>
+            <div class="needs"><span class="needs-label">需要</span><span class="ref free">免費入場</span></div>
+          </div>
+        </li>
+        <li class="node">
+          <span class="ntime">21:00 起</span>
+          <div class="nbody">
+            <div class="ntitle">彈性宵夜備案：同樂海鮮 TungLok Seafood</div>
+            <div class="ndesc">只在跳過 Black Tap 早鳥晚餐時才用到。</div>
+            <div class="needs"><span class="needs-label">需要</span><span class="ref opt">19 TungLok 訂位</span></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 8/23 -->
+    <div class="day">
+      <div class="day-head"><span class="dl">Day 3</span><h3>8/23 (日) — 跨海纜車 · 海洋館 · 滑車 · 煙火</h3></div>
+      <ul class="nodes">
+        <li class="node">
+          <span class="ntime">08:45</span>
+          <div class="nbody">
+            <div class="ntitle">Grab 至港灣大廈 2 座（HarbourFront Tower 2）</div>
+            <div class="ndesc">3 HarbourFront Place，車程約 5 分、車資約 SGD 6–10。</div>
+            <div class="needs"><span class="needs-label">需要</span><span class="ref">22 Grab</span></div>
+          </div>
+        </li>
+        <li class="node">
+          <span class="ntime">09:00</span>
+          <div class="nbody">
+            <div class="ntitle">Mount Faber Line 跨海纜車 → 聖淘沙站（Imbiah Lookout）</div>
+            <div class="ndesc">纜車每日 08:45 首班。8/23 有 Pokémon 主題車廂。接著步行 5 分至 Imbiah Station，搭 Sentosa Express 一站到名勝世界站。</div>
+            <div class="nflag">🔴 線上票券必須先到纜車售票櫃檯換實體券（當日 20:00 前），無法直接刷 QR 上車。</div>
+            <div class="needs"><span class="needs-label">需要</span><span class="ref">11 Cable Car SkyPass</span></div>
+          </div>
+        </li>
+        <li class="node">
+          <span class="ntime">10:00–13:00</span>
+          <div class="nbody">
+            <div class="ntitle">Singapore Oceanarium 深度參觀</div>
+            <div class="ndesc">10 大主題展區、36 公尺巨型觀景窗、鯊魚海底隧道、水母沉浸展區。10:00 一開館入場人最少。</div>
+            <div class="needs"><span class="needs-label">需要</span><span class="ref">12 Oceanarium 一日票</span></div>
+          </div>
+        </li>
+        <li class="node">
+          <span class="ntime">13:00–14:30</span>
+          <div class="nbody">
+            <div class="ntitle">WEAVE 商場午餐</div>
+            <div class="ndesc">莆田 PUTIEN #01-209／話匣子 Chatterbox #02-207／Moutarde B1-219。</div>
+            <div class="needs"><span class="needs-label">需要</span><span class="ref">15 PUTIEN 訂位</span></div>
+          </div>
+        </li>
+        <li class="node">
+          <span class="ntime">14:30–15:00</span>
+          <div class="nbody">
+            <div class="ntitle">Sentosa Express 至伊姆比亞站（Imbiah）</div>
+            <div class="ndesc">島內輕軌免費，步行 5 分至滑車山頂入口。</div>
+            <div class="needs"><span class="needs-label">需要</span><span class="ref free">島內免費</span></div>
+          </div>
+        </li>
+        <li class="node">
+          <span class="ntime">15:00–16:30</span>
+          <div class="nbody">
+            <div class="ntitle">斜坡滑車與空中吊椅 Skyline Luge &amp; Skyride</div>
+            <div class="ndesc">4 條賽道：Dragon／Jungle／Expedition／Kupu Kupu。建議寄物再玩。</div>
+            <div class="needs"><span class="needs-label">需要</span><span class="ref">13 Luge 套票</span></div>
+          </div>
+        </li>
+        <li class="node">
+          <span class="ntime">16:30–18:15</span>
+          <div class="nbody">
+            <div class="ntitle">西樂索沙灘 ＋ 西樂索炮台空中步道 Fort Siloso Skywalk</div>
+            <div class="ndesc">海灘站搭免費 Beach Shuttle 或 Sentosa Bus A 至 Siloso Point。181 公尺樹冠層步道，電梯營運至 22:00，逛完 20–30 分。</div>
+            <div class="needs"><span class="needs-label">需要</span><span class="ref free">免門票 · 免預訂</span></div>
+          </div>
+        </li>
+        <li class="node">
+          <span class="ntime">18:15–19:20</span>
+          <div class="nbody">
+            <div class="ntitle">Coastes／Trapizza 沙灘晚餐</div>
+            <div class="ndesc">落日 18:30–19:15，海景第一排最搶手。</div>
+            <div class="needs"><span class="needs-label">需要</span><span class="ref">16 沙灘餐廳訂位</span></div>
+          </div>
+        </li>
+        <li class="node">
+          <span class="ntime">19:40–20:00</span>
+          <div class="nbody">
+            <div class="ntitle">時光之翼煙火秀 Wings of Time</div>
+            <div class="ndesc">秀場位於 50 Beach View，海灘站正對面步行 2 分。</div>
+            <div class="nflag">🔴 確認手上票是 19:40 場而非 20:40 場，且座位區與劃位相符。</div>
+            <div class="needs"><span class="needs-label">需要</span><span class="ref">08 Wings of Time 劃位</span></div>
+          </div>
+        </li>
+        <li class="node">
+          <span class="ntime">20:15–21:00</span>
+          <div class="nbody">
+            <div class="ntitle">夜間炫光滑車 Night Luge（可選加碼）</div>
+            <div class="ndesc">用白天同一張滑車套票，不必額外付費。</div>
+            <div class="nflag">⚠️ 週日是否營運與末場時間尚未向官網查證，出發前請確認再決定要不要留這段。</div>
+            <div class="needs"><span class="needs-label">需要</span><span class="ref">13 Luge 套票（同一張）</span></div>
+          </div>
+        </li>
+        <li class="node">
+          <span class="ntime">20:05／21:00</span>
+          <div class="nbody">
+            <div class="ntitle">Grab 回 M Hotel</div>
+            <div class="ndesc">車程約 9 分、5.4 公里，車資約 SGD 15–22。散場人多建議提前開 App 候車。</div>
+            <div class="needs"><span class="needs-label">需要</span><span class="ref">22 Grab</span></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 8/24 -->
+    <div class="day">
+      <div class="day-head"><span class="dl">Day 4 · 返程</span><h3>8/24 (一) — 退房 · 樟宜機場 · 回到家</h3></div>
+      <ul class="nodes">
+        <li class="node">
+          <span class="ntime">07:00–09:00</span>
+          <div class="nbody">
+            <div class="ntitle">飯店早餐 ＆ 退房</div>
+            <div class="ndesc">順便確認早餐是否已含在房價內，以及有無 minibar／雜支待結。</div>
+            <div class="needs"><span class="needs-label">需要</span><span class="ref conf">02 訂房方案（早餐是否含）</span></div>
+          </div>
+        </li>
+        <li class="node">
+          <span class="ntime">09:05–09:25</span>
+          <div class="nbody">
+            <div class="ntitle">Grab 直達樟宜機場</div>
+            <div class="ndesc">車資約 SGD 20–30，起飛前 3 小時抵達。</div>
+            <div class="needs"><span class="needs-label">需要</span><span class="ref">22 Grab</span></div>
+          </div>
+        </li>
+        <li class="node">
+          <span class="ntime">09:25–12:00</span>
+          <div class="nbody">
+            <div class="ntitle">辦理登機 · 託運 · 管制區免稅店</div>
+            <div class="ndesc">Bengawan Solo 斑蘭蛋糕、TWG 茶葉、CHARLES &amp; KEITH。若已線上預訂則直接前往提貨點。</div>
+            <div class="needs"><span class="needs-label">需要</span><span class="ref conf">01 機票</span><span class="ref opt">25 iShopChangi 提貨</span></div>
+          </div>
+        </li>
+        <li class="node">
+          <span class="ntime">12:25</span>
+          <div class="nbody"><div class="ntitle">SIN → TPE 起飛</div></div>
+        </li>
+        <li class="node">
+          <span class="ntime">17:10</span>
+          <div class="nbody">
+            <div class="ntitle">抵達桃園機場 · 入境提領行李</div>
+          </div>
+        </li>
+        <li class="node">
+          <span class="ntime">17:45</span>
+          <div class="nbody">
+            <div class="ntitle">接送專車接回家</div>
+            <div class="nflag">⚠️ 若班機延誤，多數接送業者需主動通知改派時間——把客服電話存進手機。</div>
+            <div class="needs"><span class="needs-label">需要</span><span class="ref">05 回程接送</span></div>
+          </div>
+        </li>
+        <li class="node">
+          <span class="ntime">約 19:00</span>
+          <div class="nbody"><div class="ntitle">回到家 — 行程結束 🎉</div></div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ MONEY ============ -->
+  <section id="money">
+    <div class="sec-head">
+      <span class="sec-num">對帳</span>
+      <h2>出發前需付款金額彙總</h2>
+    </div>
+    <p class="sec-note">只列「出發前必須先付掉」的項目。現地餐飲、交通、伴手禮不在此表。</p>
+    <div class="tscroll">
+      <table>
+        <thead>
+          <tr><th>編號</th><th>項目</th><th>幣別</th><th class="n">金額</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>01</td><td>來回機票（媽媽已付）</td><td>TWD</td><td class="n">30,632</td></tr>
+          <tr><td>04 · 05</td><td>台灣機場接送 來回</td><td>TWD</td><td class="n">2,720</td></tr>
+          <tr><td>06</td><td>旅遊平安險 ＋ 不便險</td><td>TWD</td><td class="n">2,324</td></tr>
+          <tr><td>02</td><td>M Hotel 3 晚含稅</td><td>SGD</td><td class="n">1,006.80</td></tr>
+          <tr><td>07</td><td>金沙 SkyPark 56F（會員價・高峰場）</td><td>SGD</td><td class="n">79.10</td></tr>
+          <tr><td>08</td><td>時光之翼 Wings of Time</td><td>SGD</td><td class="n">66</td></tr>
+          <tr><td>09</td><td>濱海灣花園 Bundle（雙館＋Floral Fantasy＋接驛）</td><td>SGD</td><td class="n">157</td></tr>
+          <tr><td>10</td><td>超級樹空中走廊 Supertree Skyway</td><td>SGD</td><td class="n">38</td></tr>
+          <tr><td>11</td><td>聖淘沙纜車 SkyPass</td><td>SGD</td><td class="n">95</td></tr>
+          <tr><td>12</td><td>Singapore Oceanarium</td><td>SGD</td><td class="n">153</td></tr>
+          <tr><td>13</td><td>Skyline Luge 2-Ride 套票</td><td>SGD</td><td class="n">117</td></tr>
+          <tr><td>14</td><td>星耀樟宜 Canopy Park Bundle Deal 2</td><td>SGD</td><td class="n">147</td></tr>
+          <tr class="total"><td>—</td><td>門票小計（07–14）</td><td>SGD</td><td class="n">852</td></tr>
+          <tr class="total"><td>—</td><td>台幣部分小計（01 · 04–06）</td><td>TWD</td><td class="n">35,676</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="sec-note">門票小計 <strong>SGD 852</strong> 與行程表的「8 大景點門票與體驗小計」完全吻合。<br>
+    🔴 <strong>本次全面更正票價後，門票小計由原（錯誤的）SGD 937–976 降為 SGD 852</strong>，主因是 Oceanarium 原誤植為 SGD 133/人（實為成人 55／兒童 43），單此一項即修正約 SGD 246；同時 SkyPark 改用會員價、Luge 改 2-Ride、GBTB 與 Canopy Park 改為實際 Bundle 價。<br>
+    ⚠️ 台幣部分小計 <strong>TWD 35,676</strong>（機票 30,632 ＋ 接送 2,720 ＋ 保險 2,324）為台幣固定支出，與 SGD 欄不互相換算。</p>
+  </section>
+
+  <div class="foot">
+    <h4>使用前請注意</h4>
+    <ul>
+      <li><strong>票價基準</strong>：纜車票價與條款為 2026-08-11 於 sentosa.com.sg 官網查證。其餘門票價格來自 2026-07-14 的專案研究檔，已過近一個月，<strong>下單時請以當下官網／平台顯示金額為準</strong>。</li>
+      <li><strong>尚未查證的項目</strong>：Skyline Luge 週日 Night Luge 營運時間、Fort Siloso 一般入場是否免費、纜車票是否已含聖淘沙入島費、Free Fort Siloso Day Tours 場次時間。查詢時 sentosa.com.sg 開始阻擋請求，未繞過。</li>
+      <li><strong>SG Arrival Card 與護照效期</strong>的具體規則請以新加坡移民與關卡局官方頁面為最終依據，本頁僅作提醒節點之用。</li>
+      <li><strong>餐廳營業時間</strong>：8/23 為週日，Coastes、Trapizza、PUTIEN 的週日營業時間未逐一查證，訂位時一併確認。</li>
+    </ul>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  var TOTAL = 27, KEY = 'sg-booking-checkflow-v1';
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('.row input[type=checkbox]'));
+  var fill = document.getElementById('pfill');
+  var done = document.getElementById('pdone');
+  var pct  = document.getElementById('ppct');
+
+  function store(obj){
+    try { localStorage.setItem(KEY, JSON.stringify(obj)); } catch(e){}
+  }
+  function load(){
+    try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e){ return {}; }
+  }
+
+  function render(){
+    var n = 0, state = {};
+    boxes.forEach(function(b){
+      var row = b.closest('.row');
+      if (b.checked){ n++; row.classList.add('done'); } else { row.classList.remove('done'); }
+      state[b.id] = b.checked;
+    });
+    var p = Math.round(n / TOTAL * 100);
+    fill.style.width = p + '%';
+    done.textContent = n;
+    pct.textContent = p + '%';
+    store(state);
+  }
+
+  var saved = load();
+  boxes.forEach(function(b){
+    if (saved[b.id]) b.checked = true;
+    b.addEventListener('change', render);
+  });
+
+  document.getElementById('preset').addEventListener('click', function(){
+    boxes.forEach(function(b){ b.checked = false; });
+    render();
+  });
+
+  render();
+})();
+</script>

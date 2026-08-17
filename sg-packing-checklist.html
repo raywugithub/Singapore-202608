@@ -1,0 +1,730 @@
+<title>探險家打包清單</title>
+<style>
+  :root{
+    --bg:#F3F5F3; --surface:#FFFFFF; --surface-2:#EAEEEA; --surface-3:#E1E7E2;
+    --rule:#D7DEDA; --rule-strong:#BFC9C2;
+    --text:#12201C; --text-2:#4B5D55; --text-3:#7C8D84;
+    --accent:#0B6B5D; --accent-soft:#E1F0EC; --accent-line:#8FC2B6;
+    --crit:#B3122A; --crit-soft:#FBE9EC; --crit-line:#E8A3AF; --on-crit:#FFFFFF;
+    --warn:#8A5A00; --warn-soft:#FBF1DF; --warn-line:#DCC084;
+    --ok:#1B6E3C; --ok-soft:#E6F2EA; --ok-line:#9AC7AC;
+    --carry:#1D5FA6; --carry-soft:#E8F1FB; --carry-line:#A9C7E6;
+    --shadow:0 1px 2px rgba(18,32,28,.05),0 4px 14px rgba(18,32,28,.05);
+    --mono:ui-monospace,"SFMono-Regular","Cascadia Mono","Consolas","Liberation Mono",monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","Microsoft JhengHei","PingFang TC",sans-serif;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#101513; --surface:#171E1B; --surface-2:#1E2622; --surface-3:#252F29;
+      --rule:#2B3630; --rule-strong:#3C4B43;
+      --text:#E7EDE9; --text-2:#A6B6AE; --text-3:#76897F;
+      --accent:#5FC7B0; --accent-soft:#123832; --accent-line:#2C6259;
+      --crit:#FF8A9B; --crit-soft:#3A1620; --crit-line:#7A2E3C; --on-crit:#3A0C14;
+      --warn:#E0B053; --warn-soft:#35280F; --warn-line:#6B5320;
+      --ok:#6FCE95; --ok-soft:#10301D; --ok-line:#2E6141;
+      --carry:#7FB1E3; --carry-soft:#132537; --carry-line:#2C4A66;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.25);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#101513; --surface:#171E1B; --surface-2:#1E2622; --surface-3:#252F29;
+    --rule:#2B3630; --rule-strong:#3C4B43;
+    --text:#E7EDE9; --text-2:#A6B6AE; --text-3:#76897F;
+    --accent:#5FC7B0; --accent-soft:#123832; --accent-line:#2C6259;
+    --crit:#FF8A9B; --crit-soft:#3A1620; --crit-line:#7A2E3C; --on-crit:#3A0C14;
+    --warn:#E0B053; --warn-soft:#35280F; --warn-line:#6B5320;
+    --ok:#6FCE95; --ok-soft:#10301D; --ok-line:#2E6141;
+    --carry:#7FB1E3; --carry-soft:#132537; --carry-line:#2C4A66;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.25);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:var(--sans); font-size:16px; line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:980px; margin:0 auto; padding:0 20px 96px}
+  h1,h2,h3{text-wrap:balance; margin:0}
+
+  /* ---------- masthead ---------- */
+  .masthead{padding:52px 0 26px; border-bottom:2px solid var(--text)}
+  .eyebrow{
+    font-family:var(--mono); font-size:11.5px; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--text-3);
+    display:flex; flex-wrap:wrap; gap:14px; align-items:center;
+  }
+  .eyebrow b{color:var(--crit); font-weight:600}
+  h1{font-size:clamp(27px,4.4vw,40px); line-height:1.16; letter-spacing:-.02em; margin:14px 0 10px; font-weight:700}
+  .standfirst{color:var(--text-2); max-width:62ch; font-size:16.5px}
+
+  .meta-row{
+    display:flex; flex-wrap:wrap; gap:0; margin-top:24px;
+    border:1px solid var(--rule); border-radius:3px; overflow:hidden; background:var(--surface);
+  }
+  .mc{flex:1 1 140px; padding:12px 15px; border-right:1px solid var(--rule)}
+  .mc:last-child{border-right:0}
+  .mc dt{font-family:var(--mono); font-size:10.5px; letter-spacing:.13em; text-transform:uppercase; color:var(--text-3)}
+  .mc dd{margin:3px 0 0; font-family:var(--mono); font-size:17px; font-weight:600; font-variant-numeric:tabular-nums}
+  .mc dd small{font-size:12px; font-weight:400; color:var(--text-2); letter-spacing:0}
+
+  /* ---------- sticky progress ---------- */
+  .progress-bar{
+    position:sticky; top:0; z-index:20; background:var(--bg);
+    border-bottom:1px solid var(--rule); padding:11px 0 10px; margin-bottom:6px;
+  }
+  .progress-inner{display:flex; align-items:center; gap:14px; flex-wrap:wrap}
+  .track{flex:1 1 200px; height:6px; background:var(--surface-3); border-radius:99px; overflow:hidden; min-width:140px}
+  .fill{height:100%; width:0%; background:var(--accent); border-radius:99px; transition:width .28s ease}
+  .ptext{font-family:var(--mono); font-size:12.5px; font-variant-numeric:tabular-nums; color:var(--text-2); white-space:nowrap}
+  .ptext b{color:var(--text); font-size:15px}
+  .reset{
+    font-family:var(--mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase;
+    background:none; border:1px solid var(--rule-strong); color:var(--text-3);
+    padding:5px 10px; border-radius:3px; cursor:pointer;
+  }
+  .reset:hover{color:var(--text); border-color:var(--text-3)}
+  .reset:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+
+  /* ---------- jump nav ---------- */
+  .jumpnav{display:flex; flex-wrap:wrap; gap:7px; margin-top:14px}
+  .jumpnav a{
+    font-family:var(--mono); font-size:11.5px; color:var(--text-2);
+    text-decoration:none; padding:4px 10px; border:1px solid var(--rule); border-radius:20px;
+    background:var(--surface); white-space:nowrap;
+  }
+  .jumpnav a:hover{border-color:var(--accent-line); color:var(--accent)}
+
+  /* ---------- pouch sections ---------- */
+  .pouch{margin-top:34px}
+  .pouch-head{
+    display:flex; align-items:center; gap:11px; padding:12px 16px;
+    background:var(--surface); border:1px solid var(--rule-strong);
+    border-bottom:none; border-radius:8px 8px 0 0;
+    position:relative;
+  }
+  .pouch-head::after{
+    content:""; position:absolute; left:16px; right:16px; bottom:-1px; height:0;
+    border-bottom:2px dashed var(--rule-strong);
+  }
+  .tag-hole{
+    width:16px; height:16px; border-radius:50%; flex:none;
+    border:2px solid var(--text-3); background:var(--bg);
+  }
+  .pouch-head h2{font-size:17px; font-weight:700}
+  .pouch-head .count{
+    margin-left:auto; font-family:var(--mono); font-size:12px; color:var(--text-3);
+    font-variant-numeric:tabular-nums; white-space:nowrap;
+  }
+  .pouch-note{
+    font-size:13.5px; color:var(--text-2); background:var(--surface);
+    border-left:1px solid var(--rule-strong); border-right:1px solid var(--rule-strong);
+    padding:0 16px 12px; max-width:70ch;
+  }
+
+  .rows{list-style:none; margin:0; padding:0;
+    border:1px solid var(--rule-strong); border-top:none; border-radius:0 0 8px 8px; overflow:hidden;}
+  .row{
+    background:var(--surface); display:flex; align-items:flex-start; gap:12px;
+    padding:12px 16px; border-top:1px solid var(--rule); transition:background .15s;
+  }
+  .row:hover{background:var(--surface-2)}
+  .row.done{background:var(--surface-2)}
+  .row.done .rtitle{text-decoration:line-through; text-decoration-thickness:1px; color:var(--text-3)}
+  .row.done .rmeta{color:var(--text-3)}
+
+  .row input[type=checkbox]{
+    appearance:none; width:19px; height:19px; margin:2px 0 0; flex:none;
+    border:1.5px solid var(--rule-strong); border-radius:3px; background:var(--surface);
+    cursor:pointer; position:relative;
+  }
+  .row input[type=checkbox]:hover{border-color:var(--accent)}
+  .row input[type=checkbox]:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+  .row input[type=checkbox]:checked{background:var(--accent); border-color:var(--accent)}
+  .row input[type=checkbox]:checked::after{
+    content:""; position:absolute; left:5px; top:2px; width:5px; height:10px;
+    border:solid var(--surface); border-width:0 2px 2px 0; transform:rotate(42deg);
+  }
+  .rbody{min-width:0; flex:1}
+  .rtitle{font-size:15px; font-weight:600; line-height:1.5}
+  .rmeta{font-size:13px; color:var(--text-2); margin-top:4px; line-height:1.6}
+  .chips{display:flex; flex-wrap:wrap; gap:5px; margin-top:7px}
+  .chip{
+    font-family:var(--mono); font-size:10px; letter-spacing:.06em; text-transform:uppercase;
+    padding:2px 7px; border-radius:2px; white-space:nowrap; font-weight:600; border:1px solid;
+  }
+  .chip.crit{background:var(--crit-soft); color:var(--crit); border-color:var(--crit-line)}
+  .chip.warn{background:var(--warn-soft); color:var(--warn); border-color:var(--warn-line)}
+  .chip.carry{background:var(--carry-soft); color:var(--carry); border-color:var(--carry-line)}
+  .chip.ok{background:var(--ok-soft); color:var(--ok); border-color:var(--ok-line)}
+  .chip.who{background:var(--surface-3); color:var(--text-2); border-color:var(--rule-strong)}
+
+  /* ---------- final-night block ---------- */
+  .finalcall{
+    margin-top:40px; background:var(--crit-soft); border:1px solid var(--crit-line);
+    border-radius:8px; padding:20px 22px;
+  }
+  .finalcall-head{display:flex; align-items:center; gap:10px; margin-bottom:4px}
+  .finalcall-head .fc-tag{
+    font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:.08em;
+    background:var(--crit); color:var(--on-crit); padding:3px 9px; border-radius:3px;
+  }
+  .finalcall h2{font-size:18px; font-weight:700; color:var(--crit)}
+  .finalcall p.lead{color:var(--text); font-size:14px; margin:8px 0 14px; max-width:68ch}
+  .finalcall .rows{border-color:var(--crit-line)}
+  .finalcall .row{border-top-color:var(--crit-line)}
+  .finalcall .row:hover, .finalcall .row.done{background:rgba(179,18,42,.06)}
+
+  /* ---------- bag-assignment reference ---------- */
+  .bagmap{margin-top:40px}
+  .bagmap-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:12px; margin-top:16px}
+  .bag{
+    background:var(--surface); border:1px solid var(--rule-strong); border-radius:8px;
+    padding:15px 16px;
+  }
+  .bag-title{font-family:var(--mono); font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); font-weight:700; margin-bottom:8px}
+  .bag ul{margin:0; padding-left:1.1em; font-size:13.5px; color:var(--text-2); line-height:1.8}
+  .bag ul li strong{color:var(--text)}
+
+  .legend{display:flex; flex-wrap:wrap; gap:14px; margin-top:16px; padding:12px 15px; background:var(--surface); border:1px solid var(--rule); border-radius:6px}
+  .legend div{display:flex; align-items:center; gap:7px; font-size:12.5px; color:var(--text-2)}
+
+  .foot{margin-top:48px; padding-top:20px; border-top:1px solid var(--rule); font-size:13px; color:var(--text-2)}
+  .foot h4{font-family:var(--mono); font-size:11px; letter-spacing:.13em; text-transform:uppercase; color:var(--text-3); margin-bottom:9px}
+  .foot ul{margin:0; padding-left:1.2em; display:flex; flex-direction:column; gap:5px}
+
+  @media (max-width:600px){
+    .row{flex-wrap:wrap}
+    .pouch-head .count{font-size:11px}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="eyebrow">
+      <span>行李收拾清單</span>
+      <span>2 大 1 小 · 女兒 121cm</span>
+      <span><b>出發 8/20 (四) 夜</b></span>
+    </div>
+    <h1>探險家打包清單</h1>
+    <p class="standfirst">
+      新加坡 4 天 3 夜，每一項都對應行程裡查到的實際需求——不是通用清單。
+      標<span class="chip crit" style="vertical-align:1px">必要</span>是漏了會卡住行程的東西，
+      標<span class="chip carry" style="vertical-align:1px">隨身</span>的絕對不能放進託運行李。
+    </p>
+
+    <dl class="meta-row">
+      <div class="mc"><dt>出發</dt><dd>8/20 <small>(四) 夜</small></dd></div>
+      <div class="mc"><dt>天數</dt><dd>4D3N</small></dd></div>
+      <div class="mc"><dt>託運行李</dt><dd>2 <small>件大行李箱</small></dd></div>
+      <div class="mc"><dt>隨身背包</dt><dd>3 <small>人各一個</small></dd></div>
+    </dl>
+
+    <nav class="jumpnav">
+      <a href="#doc">📋 證件與財務</a>
+      <a href="#elec">🔌 電子與充電</a>
+      <a href="#med">💊 藥品與衛生</a>
+      <a href="#clothes">👕 衣物與鞋類</a>
+      <a href="#kid">🧒 女兒專屬</a>
+      <a href="#rules">✈️ 隨身／託運規則</a>
+      <a href="#final">🌙 出發前一晚</a>
+    </nav>
+  </header>
+
+  <div class="progress-bar">
+    <div class="progress-inner">
+      <span class="ptext"><b id="pdone">0</b> / <span id="ptotal">0</span> 已打包</span>
+      <div class="track"><div class="fill" id="pfill"></div></div>
+      <span class="ptext" id="ppct">0%</span>
+      <button class="reset" id="preset" type="button">清除全部</button>
+    </div>
+  </div>
+
+  <!-- ============ 證件與財務 ============ -->
+  <section class="pouch" id="doc">
+    <div class="pouch-head"><span class="tag-hole"></span><h2>📋 證件與財務</h2><span class="count" data-count></span></div>
+    <div class="pouch-note">出門前最後檢查一次隨身包側袋，這一區全部要在身上，不要放進託運行李。</div>
+    <ul class="rows">
+      <li class="row">
+        <input type="checkbox" id="p01">
+        <div class="rbody">
+          <div class="rtitle">三本護照</div>
+          <div class="rmeta">效期需有效至 <strong>2027/2/21</strong> 之後（入境需 6 個月以上）。<strong>兒童護照效期較短最容易被忽略</strong>，出發前再翻開確認一次。</div>
+          <div class="chips"><span class="chip crit">必要</span><span class="chip carry">隨身</span><span class="chip who">爸／媽保管</span></div>
+        </div>
+      </li>
+      <li class="row">
+        <input type="checkbox" id="p02">
+        <div class="rbody">
+          <div class="rtitle">護照影本或備份照片</div>
+          <div class="rmeta">與正本分開收納（例如拍照存雲端＋另一位家長手機各存一份），萬一遺失有備援。</div>
+          <div class="chips"><span class="chip carry">隨身</span></div>
+        </div>
+      </li>
+      <li class="row">
+        <input type="checkbox" id="p03">
+        <div class="rbody">
+          <div class="rtitle">SG Arrival Card 確認信</div>
+          <div class="rmeta">送出後的確認畫面截圖，<strong>離線存在手機相簿</strong>——落地第一小時 eSIM 可能還沒通、機場 Wi-Fi 要驗證，只存 email 會打不開。</div>
+          <div class="chips"><span class="chip crit">必要</span><span class="chip carry">隨身</span></div>
+        </div>
+      </li>
+      <li class="row">
+        <input type="checkbox" id="p04">
+        <div class="rbody">
+          <div class="rtitle">機票／登機證電子憑證</div>
+          <div class="rmeta">去程與回程都截圖離線存檔。</div>
+          <div class="chips"><span class="chip carry">隨身</span></div>
+        </div>
+      </li>
+      <li class="row">
+        <input type="checkbox" id="p05">
+        <div class="rbody">
+          <div class="rtitle">M Hotel 訂房確認函</div>
+          <div class="rmeta">列印一份或截圖存檔，check-in 時可能會問。</div>
+          <div class="chips"><span class="chip carry">隨身</span></div>
+        </div>
+      </li>
+      <li class="row">
+        <input type="checkbox" id="p06">
+        <div class="rbody">
+          <div class="rtitle">旅平險保單與機場接送訂單</div>
+          <div class="rmeta">保單截圖＋接送司機的聯絡方式與訂單編號，存進手機備忘錄，路上找得到。</div>
+          <div class="chips"><span class="chip carry">隨身</span></div>
+        </div>
+      </li>
+      <li class="row">
+        <input type="checkbox" id="p07">
+        <div class="rbody">
+          <div class="rtitle">信用卡（支援海外感應支付）</div>
+          <div class="rmeta">新加坡 MRT／公車可直接用 VISA／Mastercard 感應搭乘，爸爸媽媽各帶一張。</div>
+          <div class="chips"><span class="chip carry">隨身</span><span class="chip who">爸＋媽</span></div>
+        </div>
+      </li>
+      <li class="row">
+        <input type="checkbox" id="p08">
+        <div class="rbody">
+          <div class="rtitle">SGD 小額現金</div>
+          <div class="rmeta">備 <strong>$2 / $5 / $10</strong> 紙鈔與硬幣——<strong>麥士威熟食中心多數傳統攤位不收卡</strong>，機場行李寄存與部分小攤也偏好現金。</div>
+          <div class="chips"><span class="chip crit">必要</span><span class="chip carry">隨身</span></div>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ============ 電子與充電 ============ -->
+  <section class="pouch" id="elec">
+    <div class="pouch-head"><span class="tag-hole"></span><h2>🔌 電子與充電</h2><span class="count" data-count></span></div>
+    <div class="pouch-note">新加坡為英式三孔插座（Type G），與台灣不同，插頭類設備別漏帶轉接頭。</div>
+    <ul class="rows">
+      <li class="row">
+        <input type="checkbox" id="p09">
+        <div class="rbody">
+          <div class="rtitle">手機 ×3 ＋ 充電線</div>
+          <div class="rmeta">出發前確認電池健康度沒問題，紅眼航班全程都會用到。</div>
+        </div>
+      </li>
+      <li class="row">
+        <input type="checkbox" id="p10">
+        <div class="rbody">
+          <div class="rtitle">行動電源</div>
+          <div class="rmeta">紅眼航班＋整天在外趴趴走，手機續航會吃緊。</div>
+          <div class="chips"><span class="chip warn">鋰電池規定</span><span class="chip carry">只能隨身</span></div>
+        </div>
+      </li>
+      <li class="row">
+        <input type="checkbox" id="p11">
+        <div class="rbody">
+          <div class="rtitle">萬國轉接頭 ×2–3</div>
+          <div class="rmeta">新加坡為<strong>英式三孔 Type G</strong> 插座，台灣的兩孔插頭插不進去。</div>
+        </div>
+      </li>
+      <li class="row">
+        <input type="checkbox" id="p12">
+        <div class="rbody">
+          <div class="rtitle">eSIM ×2 已提前安裝設定檔</div>
+          <div class="rmeta"><strong>安裝需要網路，出發前在台灣先裝好</strong>，落地後才不必在機場摸黑弄；設定檔裝好但先別啟用，落地再切換。</div>
+          <div class="chips"><span class="chip crit">必要</span></div>
+        </div>
+      </li>
+      <li class="row">
+        <input type="checkbox" id="p13">
+        <div class="rbody">
+          <div class="rtitle">耳機 ×3</div>
+          <div class="rmeta">紅眼航班給女兒看影片安撫用，大人也能補眠不受打擾。</div>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ============ 藥品與衛生 ============ -->
+  <section class="pouch" id="med">
+    <div class="pouch-head"><span class="tag-hole"></span><h2>💊 藥品與衛生</h2><span class="count" data-count></span></div>
+    <div class="pouch-note">液體與膏狀物若要放隨身包，單瓶需 ≤100ml、裝進透明夾鏈袋，安檢才不會被攔下。</div>
+    <ul class="rows">
+      <li class="row">
+        <input type="checkbox" id="p14">
+        <div class="rbody">
+          <div class="rtitle">女兒常備藥</div>
+          <div class="rmeta">退燒藥、腸胃藥；纜車＋滑車＋紅眼航班都有機會暈，可備暈車藥。</div>
+          <div class="chips"><span class="chip crit">必要</span><span class="chip carry">隨身</span></div>
+        </div>
+      </li>
+      <li class="row">
+        <input type="checkbox" id="p15">
+        <div class="rbody">
+          <div class="rtitle">OK 繃、生理食鹽水</div>
+        </div>
+      </li>
+      <li class="row">
+        <input type="checkbox" id="p16">
+        <div class="rbody">
+          <div class="rtitle">乾洗手、濕紙巾、面紙</div>
+          <div class="rmeta">熟食中心用餐、沙灘戲水後擦手都用得到。</div>
+        </div>
+      </li>
+      <li class="row">
+        <input type="checkbox" id="p17">
+        <div class="rbody">
+          <div class="rtitle">兒童防曬乳 ＋ 大人防曬乳</div>
+          <div class="rmeta">Day 3 空中吊椅完全暴露陽光，上車前要補塗；沙灘與戶外步道全天需要。</div>
+          <div class="chips"><span class="chip crit">必要</span></div>
+        </div>
+      </li>
+      <li class="row">
+        <input type="checkbox" id="p18">
+        <div class="rbody">
+          <div class="rtitle">防蚊液／止癢膏</div>
+          <div class="rmeta">森林谷、樹冠空中步道、沙灘周邊植被較多的地方會用到。</div>
+        </div>
+      </li>
+      <li class="row">
+        <input type="checkbox" id="p19">
+        <div class="rbody">
+          <div class="rtitle">個人慣用藥物</div>
+          <div class="rmeta">過敏藥、腸胃藥等家人平常在吃的藥，帶足 4 天份。</div>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ============ 衣物與鞋類 ============ -->
+  <section class="pouch" id="clothes">
+    <div class="pouch-head"><span class="tag-hole"></span><h2>👕 衣物與鞋類</h2><span class="count" data-count></span></div>
+    <div class="pouch-note">短程旅行不洗衣，衣物直接備 4 天份；鞋類是這趟最容易漏看的一項。</div>
+    <ul class="rows">
+      <li class="row">
+        <input type="checkbox" id="p20">
+        <div class="rbody">
+          <div class="rtitle">全包覆運動鞋 ×3</div>
+          <div class="rmeta"><strong>Day 1 Jewel 彈跳網與網狀步道嚴禁拖鞋、高跟鞋</strong>，必須穿全包覆運動鞋／休閒鞋才能玩。</div>
+          <div class="chips"><span class="chip crit">必要 · Day 1</span></div>
+        </div>
+      </li>
+      <li class="row">
+        <input type="checkbox" id="p21">
+        <div class="rbody">
+          <div class="rtitle">泳衣、泳鏡</div>
+          <div class="rmeta">Day 3 西樂索沙灘戲水／飯店泳池用。</div>
+          <div class="chips"><span class="chip who">Day 3</span></div>
+        </div>
+      </li>
+      <li class="row">
+        <input type="checkbox" id="p22">
+        <div class="rbody">
+          <div class="rtitle">薄外套／防風罩衫 ×3</div>
+          <div class="rmeta">雲霧林與花穹室內恆溫 <strong>23–25°C</strong>、濕度高，溫差大容易感冒。</div>
+          <div class="chips"><span class="chip who">Day 2</span></div>
+        </div>
+      </li>
+      <li class="row">
+        <input type="checkbox" id="p23">
+        <div class="rbody">
+          <div class="rtitle">換洗衣物（4 天份）</div>
+          <div class="rmeta">建議每人隨身包再放<strong>一套備用衣物</strong>，以防託運行李延誤或戲水弄濕。</div>
+        </div>
+      </li>
+      <li class="row">
+        <input type="checkbox" id="p24">
+        <div class="rbody">
+          <div class="rtitle">舒適涼鞋／拖鞋</div>
+          <div class="rmeta">沙灘、飯店房內穿，跟運動鞋分開帶。</div>
+        </div>
+      </li>
+      <li class="row">
+        <input type="checkbox" id="p25">
+        <div class="rbody">
+          <div class="rtitle">遮陽帽、太陽眼鏡</div>
+        </div>
+      </li>
+      <li class="row">
+        <input type="checkbox" id="p26">
+        <div class="rbody">
+          <div class="rtitle">輕便雨具（摺疊傘或雨衣）</div>
+          <div class="rmeta">8 月是雷雨季，<strong>Day 2 金沙 SkyPark 是露天場地、現場不提供雨傘</strong>，自己帶一把最保險。</div>
+          <div class="chips"><span class="chip warn">露天無傘</span></div>
+        </div>
+      </li>
+      <li class="row">
+        <input type="checkbox" id="p27">
+        <div class="rbody">
+          <div class="rtitle">快乾毛巾／沙灘巾</div>
+          <div class="rmeta">飯店大毛巾不會讓你帶去沙灘，Day 3 戲水後要擦身體用。</div>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ============ 女兒專屬 ============ -->
+  <section class="pouch" id="kid">
+    <div class="pouch-head"><span class="tag-hole"></span><h2>🧒 女兒專屬（8 歲・121cm）</h2><span class="count" data-count></span></div>
+    <div class="pouch-note">121cm 已通過 Day 1 Jewel 六項設施與 Day 3 滑車獨駕的 110cm 門檻，但空中吊椅需 135cm 才能單獨搭——這趟每次上山都會有大人陪同，不用額外準備什麼，純備忘。</div>
+    <ul class="rows">
+      <li class="row">
+        <input type="checkbox" id="p28">
+        <div class="rbody">
+          <div class="rtitle">安撫小物／玩偶</div>
+          <div class="rmeta">紅眼航班（01:35 起飛）安撫入睡用。</div>
+        </div>
+      </li>
+      <li class="row">
+        <input type="checkbox" id="p29">
+        <div class="rbody">
+          <div class="rtitle">平板／耳機＋離線影片或遊戲</div>
+          <div class="rmeta">出發前先下載好離線內容，機上沒有網路。</div>
+          <div class="chips"><span class="chip carry">隨身</span></div>
+        </div>
+      </li>
+      <li class="row">
+        <input type="checkbox" id="p30">
+        <div class="rbody">
+          <div class="rtitle">隨身零食</div>
+          <div class="rmeta">登機、排隊、轉場空檔墊肚子用。</div>
+        </div>
+      </li>
+      <li class="row">
+        <input type="checkbox" id="p31">
+        <div class="rbody">
+          <div class="rtitle">兒童防曬乳＋濕紙巾隨身版</div>
+          <div class="rmeta">跟大人瓶分開帶一小罐在她自己的小背包，走到哪補到哪。</div>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ============ 隨身/託運規則 ============ -->
+  <section class="pouch" id="rules">
+    <div class="pouch-head"><span class="tag-hole"></span><h2>✈️ 隨身包 vs 託運行李——三條硬規則</h2><span class="count" data-count></span></div>
+    <ul class="rows">
+      <li class="row">
+        <input type="checkbox" id="p32">
+        <div class="rbody">
+          <div class="rtitle">行動電源與備用鋰電池只能隨身，不可放託運行李</div>
+          <div class="rmeta">航空安全規定，放進託運行李可能在機場被要求取出重辦，甚至耽誤登機。</div>
+          <div class="chips"><span class="chip crit">硬規則</span></div>
+        </div>
+      </li>
+      <li class="row">
+        <input type="checkbox" id="p33">
+        <div class="rbody">
+          <div class="rtitle">液體／膏狀物單瓶 ≤100ml，裝透明夾鏈袋</div>
+          <div class="rmeta">防曬乳、藥用凝膠、乳液等超過瓶身容量限制会在安檢被沒收。</div>
+          <div class="chips"><span class="chip warn">硬規則</span></div>
+        </div>
+      </li>
+      <li class="row">
+        <input type="checkbox" id="p34">
+        <div class="rbody">
+          <div class="rtitle">護照、證件、藥品、貴重物品全部放隨身包</div>
+          <div class="rmeta">託運行李萬一延誤或遺失，這些東西不能沒有。落地後要用到的第一小時物品（現金、eSIM 已裝手機、確認信）也一律隨身。</div>
+          <div class="chips"><span class="chip crit">硬規則</span></div>
+        </div>
+      </li>
+      <li class="row">
+        <input type="checkbox" id="p35">
+        <div class="rbody">
+          <div class="rtitle">2 件託運大行李箱先在 Jewel L1 寄存</div>
+          <div class="rmeta">飯店 15:00 才能 check-in，落地後行李先寄放樟宜機場 Jewel L1 櫃檯（24 小時營業，大件約 SGD 10–15/件/24hr），14:00 玩完 Canopy Park 再取回。</div>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ============ 出發前一晚 ============ -->
+  <section class="finalcall" id="final">
+    <div class="finalcall-head">
+      <span class="fc-tag">8/20 (四) 晚間</span>
+      <h2>🌙 出發前一晚最終檢查</h2>
+    </div>
+    <p class="lead">離家前的最後一輪——這幾項做完才能安心關門。</p>
+    <ul class="rows">
+      <li class="row">
+        <input type="checkbox" id="p36">
+        <div class="rbody">
+          <div class="rtitle">行李秤重</div>
+          <div class="rmeta">避免機場臨櫃加收超重費，尤其去程行李還沒買伴手禮，回程會更重。</div>
+        </div>
+      </li>
+      <li class="row">
+        <input type="checkbox" id="p37">
+        <div class="rbody">
+          <div class="rtitle">手機／行動電源／相機全部充飽電</div>
+        </div>
+      </li>
+      <li class="row">
+        <input type="checkbox" id="p38">
+        <div class="rbody">
+          <div class="rtitle">護照、票券、確認信皆已離線存檔</div>
+          <div class="rmeta">機票、飯店、SG Arrival Card、保單、接送訂單、所有景點門票——截圖存進相簿，別只存在 email 裡。</div>
+        </div>
+      </li>
+      <li class="row">
+        <input type="checkbox" id="p39">
+        <div class="rbody">
+          <div class="rtitle">再次確認接送司機時間與電話</div>
+          <div class="rmeta">01:35 起飛，去程約 20:45 從家裡出發，抓 1 小時緩衝抵達桃園機場。</div>
+        </div>
+      </li>
+      <li class="row">
+        <input type="checkbox" id="p40">
+        <div class="rbody">
+          <div class="rtitle">查一次新加坡天氣預報</div>
+          <div class="rmeta">出發前 3–4 天的預報才有參考價值，決定要不要多帶件雨衣或薄外套。</div>
+        </div>
+      </li>
+      <li class="row">
+        <input type="checkbox" id="p41">
+        <div class="rbody">
+          <div class="rtitle">貴重物品與藥品確認已放進隨身包（不是託運箱）</div>
+        </div>
+      </li>
+      <li class="row">
+        <input type="checkbox" id="p42">
+        <div class="rbody">
+          <div class="rtitle">家裡門窗、瓦斯、電器確認關閉</div>
+          <div class="rmeta">出遠門最常見的遺漏，離家前繞一圈看一眼。</div>
+        </div>
+      </li>
+      <li class="row">
+        <input type="checkbox" id="p43">
+        <div class="rbody">
+          <div class="rtitle">女兒的紅眼航班小背包已備好</div>
+          <div class="rmeta">安撫小物、平板、耳機、零食、薄外套——她自己能拿的隨身包，登機前再檢查一次。</div>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ============ 行李分配參考 ============ -->
+  <section class="bagmap">
+    <h2 style="font-size:18px; font-weight:700;">🧳 行李分配參考</h2>
+    <p style="color:var(--text-2); font-size:13.5px; margin-top:8px; max-width:68ch;">實際打包時，這樣分配可以少走幾趟——託運箱裝不急用的量，隨身包裝證件、電子、藥品跟一套備用衣物。</p>
+    <div class="bagmap-grid">
+      <div class="bag">
+        <div class="bag-title">託運行李箱 × 2</div>
+        <ul>
+          <li>4 天份換洗衣物（扣掉隨身備用那套）</li>
+          <li>薄外套、拖鞋、沙灘巾</li>
+          <li>防曬乳／防蚊液大瓶裝</li>
+          <li>伴手禮預留空間（回程會變重）</li>
+        </ul>
+      </div>
+      <div class="bag">
+        <div class="bag-title">爸爸隨身包</div>
+        <ul>
+          <li>護照 ×3、信用卡、現金</li>
+          <li>行動電源、轉接頭</li>
+          <li>票券／確認信截圖（手機）</li>
+        </ul>
+      </div>
+      <div class="bag">
+        <div class="bag-title">媽媽隨身包</div>
+        <ul>
+          <li>藥品包、濕紙巾、乾洗手</li>
+          <li>防曬乳隨身瓶（≤100ml）</li>
+          <li>護照影本備份</li>
+        </ul>
+      </div>
+      <div class="bag">
+        <div class="bag-title">女兒的小背包</div>
+        <ul>
+          <li>安撫小物、平板、耳機</li>
+          <li>零食、一套備用衣物</li>
+          <li>隨身防曬乳／濕紙巾</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="legend">
+      <div><span class="chip crit">必要</span> 漏了會卡住行程</div>
+      <div><span class="chip warn">硬規則／注意</span> 航空或現場規定</div>
+      <div><span class="chip carry">隨身</span> 不可放託運行李</div>
+      <div><span class="chip who">誰／哪天</span> 對應人員或天數</div>
+    </div>
+  </section>
+
+  <div class="foot">
+    <h4>備註</h4>
+    <ul>
+      <li>本清單依 <code>itinerary_4D3N.html</code> 與行前查證內容整理，行動電源、液體限額為<strong>一般國際航空通用規定</strong>，實際登機請以航空公司公告為準。</li>
+      <li>勾選狀態存在本機瀏覽器（localStorage），清除瀏覽器資料會重置進度。</li>
+      <li>Walking Net（Jewel Day 1）截至查證時仍公告維修中，出發前請再次確認是否復開。</li>
+    </ul>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  var KEY = 'sg-packing-checklist-v1';
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('input[type=checkbox][id^="p"]'));
+  var fill = document.getElementById('pfill');
+  var done = document.getElementById('pdone');
+  var total = document.getElementById('ptotal');
+  var pct  = document.getElementById('ppct');
+
+  function store(obj){ try { localStorage.setItem(KEY, JSON.stringify(obj)); } catch(e){} }
+  function load(){ try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e){ return {}; } }
+
+  function updateSectionCounts(){
+    document.querySelectorAll('section.pouch, section.finalcall').forEach(function(sec){
+      var rows = sec.querySelectorAll('input[type=checkbox]');
+      var n = 0;
+      rows.forEach(function(b){ if (b.checked) n++; });
+      var counter = sec.querySelector('[data-count]');
+      if (counter) counter.textContent = n + ' / ' + rows.length;
+    });
+  }
+
+  function render(){
+    var n = 0, state = {};
+    boxes.forEach(function(b){
+      var row = b.closest('.row');
+      if (b.checked){ n++; row.classList.add('done'); } else { row.classList.remove('done'); }
+      state[b.id] = b.checked;
+    });
+    var p = boxes.length ? Math.round(n / boxes.length * 100) : 0;
+    fill.style.width = p + '%';
+    done.textContent = n;
+    total.textContent = boxes.length;
+    pct.textContent = p + '%';
+    updateSectionCounts();
+    store(state);
+  }
+
+  var saved = load();
+  boxes.forEach(function(b){
+    if (saved[b.id]) b.checked = true;
+    b.addEventListener('change', render);
+  });
+
+  document.getElementById('preset').addEventListener('click', function(){
+    boxes.forEach(function(b){ b.checked = false; });
+    render();
+  });
+
+  render();
+})();
+</script>
