@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新加坡 4天3夜 導遊精簡版 8/21-8/24</title>
+<style>
+    :root {
+        --primary: #0B5F57;
+        --accent: #E67E22;
+        --danger: #B3122A;
+        --warn-bg: #FFF6E5;
+        --warn-border: #E67E22;
+        --card-bg: #FFFFFF;
+        --page-bg: #F4F6F5;
+        --text: #23302D;
+        --sub: #5C6D68;
+        --border: #E1E8E5;
+    }
+    * { box-sizing: border-box; }
+    body {
+        margin: 0;
+        font-family: -apple-system, "Segoe UI", "Noto Sans TC", "PingFang TC", sans-serif;
+        background: var(--page-bg);
+        color: var(--text);
+        line-height: 1.55;
+    }
+    .wrap { max-width: 880px; margin: 0 auto; padding: 16px 14px 60px; }
+    header.top {
+        background: linear-gradient(135deg, var(--primary), #0f7a6e);
+        color: #fff;
+        padding: 20px 18px;
+        border-radius: 14px;
+        margin-bottom: 14px;
+    }
+    header.top h1 { margin: 0 0 6px; font-size: 1.35rem; }
+    header.top .sub { font-size: 0.88rem; opacity: 0.92; }
+    header.top .facts {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 8px;
+        margin-top: 14px;
+        font-size: 0.82rem;
+    }
+    header.top .facts div { background: rgba(255,255,255,0.14); border-radius: 8px; padding: 8px 10px; }
+    header.top .facts b { display: block; font-size: 0.95rem; }
+
+    nav.tabs {
+        display: flex;
+        gap: 6px;
+        overflow-x: auto;
+        margin-bottom: 14px;
+        padding-bottom: 2px;
+    }
+    nav.tabs button {
+        flex: 0 0 auto;
+        border: 1px solid var(--border);
+        background: #fff;
+        color: var(--text);
+        padding: 9px 16px;
+        border-radius: 999px;
+        font-size: 0.88rem;
+        font-weight: 600;
+        cursor: pointer;
+    }
+    nav.tabs button.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+    section.tab { display: none; }
+    section.tab.active { display: block; }
+
+    .card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 14px 16px;
+        margin-bottom: 12px;
+    }
+    .card h2 { margin: 0 0 4px; font-size: 1.1rem; color: var(--primary); }
+    .card .day-sub { font-size: 0.85rem; color: var(--sub); margin-bottom: 4px; }
+
+    ul.checklist { margin: 0; padding-left: 1.1em; font-size: 0.88rem; }
+    ul.checklist li { margin-bottom: 5px; }
+    ul.checklist li b { color: var(--danger); }
+
+    .step {
+        display: flex;
+        gap: 10px;
+        padding: 10px 0;
+        border-top: 1px solid var(--border);
+    }
+    .step:first-of-type { border-top: none; }
+    .time {
+        flex: 0 0 68px;
+        font-weight: 700;
+        font-size: 0.85rem;
+        color: var(--primary);
+        white-space: nowrap;
+    }
+    .content { flex: 1; min-width: 0; }
+    .content .title { font-weight: 700; font-size: 0.95rem; margin-bottom: 2px; }
+    .content .meta { font-size: 0.82rem; color: var(--sub); margin-bottom: 3px; }
+    .tag {
+        display: inline-block;
+        font-size: 0.74rem;
+        background: #EEF3F1;
+        color: var(--primary);
+        border-radius: 6px;
+        padding: 1px 6px;
+        margin-right: 4px;
+    }
+    .warn {
+        background: var(--warn-bg);
+        border-left: 3px solid var(--warn-border);
+        border-radius: 6px;
+        padding: 6px 10px;
+        margin-top: 6px;
+        font-size: 0.82rem;
+    }
+    .warn b { color: var(--danger); }
+    .backup {
+        font-size: 0.82rem;
+        color: var(--sub);
+        margin-top: 4px;
+    }
+    .backup b { color: var(--text); }
+
+    footer { text-align: center; font-size: 0.78rem; color: var(--sub); margin-top: 20px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+    <header class="top">
+        <h1>🇸🇬 新加坡親子 4 天 3 夜 · 導遊精簡版</h1>
+        <div class="sub">2026/8/21（五）– 8/24（一）｜2 大 1 小（女兒 8 歲 / 121cm）</div>
+        <div class="facts">
+            <div><b>去程</b>8/21 TPE→SIN 01:35–06:00</div>
+            <div><b>回程</b>8/24 SIN→TPE 12:25–17:10</div>
+            <div><b>住宿</b>M Hotel Singapore City Centre<br>81 Anson Road, S079908</div>
+            <div><b>機場往返</b>一律計程車/Grab（約20分）</div>
+        </div>
+    </header>
+
+    <nav class="tabs">
+        <button class="active" onclick="go('pre')">出發前</button>
+        <button onclick="go('d1')">Day 1</button>
+        <button onclick="go('d2')">Day 2</button>
+        <button onclick="go('d3')">Day 3</button>
+        <button onclick="go('d4')">Day 4</button>
+    </nav>
+
+    <!-- ============ 出發前 ============ -->
+    <section id="pre" class="tab active">
+        <div class="card">
+            <h2>🛑 出發前必辦（漏了會卡在關口／訂不到房）</h2>
+            <ul class="checklist">
+                <li><b>SG Arrival Card</b>電子入境卡 ×3 人——只能在抵達前 3 天內送出，抵達 8/21 ➔ 窗口是 <b>8/18–8/20</b>。務必用 ICA 官方網站，勿誤點收費代辦站。</li>
+                <li><b>三本護照效期需 2027/2/21 之後</b>（入境需 6 個月以上）。兒童護照效期較短最容易被忽略。</li>
+                <li><b>M Hotel 訂房確認函</b>——飯店免費取消：否，務必確認已訂妥。</li>
+                <li>台灣機場接送：<b>去程 8/20 約 20:45 到家</b>、<b>回程 8/24 約 17:45</b>。</li>
+                <li><b>旅平險＋不便險需在離家前生效</b>——機場或出境後多數無法投保。</li>
+                <li>所有票券／確認信<b>離線存檔＋截圖</b>（落地第一小時 eSIM 可能還沒通）。</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h2>🎟️ 需事先線上購票的項目</h2>
+            <ul class="checklist">
+                <li>濱海灣花園 Cloud Forest + Flower Dome Bundle（成人 SGD58 / 兒童 SGD41，出發前<b>再核對官網價格</b>，官網掛牌 73/51）</li>
+                <li>金沙 SkyPark 56F —— <b>務必買「高峰時段」票（17:00 入場）</b>，非高峰最晚 16:00 入場</li>
+                <li>Singapore Oceanarium（成人 SGD55 / 兒童 SGD43）</li>
+                <li>Cable Car SkyPass 1 Round Trip（成人 SGD35 / 兒童 SGD25）—— <b>勿選到 LOCALS ONLY 版本</b></li>
+                <li>Skyline Luge 2-Ride（SGD39/人，無兒童價）</li>
+                <li>時光之翼 Wings of Time —— <b>選 19:40 場，不是 20:40 場</b></li>
+                <li>星耀樟宜 Bouncing Net 套票（成人 SGD24.90 / 兒童 SGD19.90，L1/L5櫃檯會員價 SGD18.80/14.30）—— 已含 Canopy Park 一般入場，<b>不含 Canopy Bridge／Hedge Maze／Mirror Maze／Walking Net</b></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ============ DAY 1 ============ -->
+    <section id="d1" class="tab">
+        <div class="card">
+            <h2>Day 1（8/21 五）星耀樟宜 ＋ 魚尾獅公園</h2>
+            <div class="day-sub">清晨落地 → Jewel 寄行李 → 雨漩渦＋星空花園 → 15:00 飯店入住 → 魚尾獅 → 牛車水晚餐</div>
+
+            <div class="step"><div class="time">06:00</div><div class="content">
+                <div class="title">🛬 落地入境，提領行李</div>
+                <div class="meta">Jewel L1 寄放大行李（步行 2 分即達）｜約 SGD 24–30／2 件</div>
+            </div></div>
+
+            <div class="step"><div class="time">07:30</div><div class="content">
+                <div class="title">🍳 Jewel 早餐</div>
+                <div class="meta">海南寶 B2-201/202 或 翠華 #03-230（皆 08:00 開門）</div>
+            </div></div>
+
+            <div class="step"><div class="time">09:00</div><div class="content">
+                <div class="title">🌊 森林谷散步 → 10:00 雨漩渦開始放水</div>
+            </div></div>
+
+            <div class="step"><div class="time">10:00–13:00</div><div class="content">
+                <div class="title">🌿 星空花園 Canopy Park（頂樓 L5）</div>
+                <div class="meta"><span class="tag">Bouncing Net 套票</span>成人SGD24.90／兒童SGD19.90（已含 Canopy Park 一般入場，不含 Canopy Bridge/Hedge Maze/Mirror Maze/Walking Net）</div>
+                <div class="backup">順序：<b>Bouncing Net</b>（先玩，45分含安全說明）→ Discovery Slides → Foggy Bowls → Petal Garden/Topiary Walk 收尾，5項12:00前可玩完，時間寬鬆</div>
+                <div class="warn"><b>務必穿全包覆運動鞋</b>（禁拖鞋／高跟鞋），行李與滾輪包不能帶入。女兒 121cm 五項設施全部達標。</div>
+            </div></div>
+
+            <div class="step"><div class="time">13:00–14:00</div><div class="content">
+                <div class="title">🍽️ Jewel 內午餐</div>
+            </div></div>
+
+            <div class="step"><div class="time">14:00</div><div class="content">
+                <div class="title">🚖 取回行李 → 計程車直達 M Hotel</div>
+                <div class="meta">約 20–25 分／SGD 25–35</div>
+            </div></div>
+
+            <div class="step"><div class="time">15:00</div><div class="content">
+                <div class="title">🏨 Check-in ＆ 午休</div>
+                <div class="meta">官方入住時間，未提前抵達也不必碰運氣；8 樓戶外泳池可用</div>
+            </div></div>
+
+            <div class="step"><div class="time">16:30</div><div class="content">
+                <div class="title">🦁 魚尾獅公園 (Merlion Park)</div>
+                <div class="meta"><span class="tag">公車首選</span>Hub Synergy Pt 搭 10/100/196 → Fullerton Sq 下車步行 3–5 分</div>
+                <div class="backup">或 MRT：丹戎巴葛 EW15 → 萊佛士坊 EW14，步行 9 分</div>
+            </div></div>
+
+            <div class="step"><div class="time">18:00–20:00</div><div class="content">
+                <div class="title">🍚 牛車水晚餐：麥士威熟食中心 ＋ 168 鮮烤沙爹</div>
+                <div class="meta">天天海南雞飯 #01-10/11（建議 17:30 前到，19:30 打烊）｜168鮮烤沙爹在牛車水大廈2樓#02-168（非麥士威內）</div>
+                <div class="backup"><span class="tag">公車</span>Fullerton Sq → Bus 80/145/166 → Opp Maxwell Food Centre｜<span class="tag">計程車</span>6–9分 SGD7–12</div>
+                <div class="warn">多數攤位只收<b>現金</b>，備妥 SGD 小額紙鈔。</div>
+            </div></div>
+
+            <div class="step"><div class="time">20:00起</div><div class="content">
+                <div class="title">🚶 返回 M Hotel：直接步行最快</div>
+                <div class="meta">沿柏城街步行約 11 分（850m），不必轉乘｜備選：計程車 4 分 SGD8–12</div>
+            </div></div>
+        </div>
+    </section>
+
+    <!-- ============ DAY 2 ============ -->
+    <section id="d2" class="tab">
+        <div class="card">
+            <h2>Day 2（8/22 六）濱海灣花園 ＋ 金沙 SkyPark ＋ 三場夜秀</h2>
+            <div class="day-sub">雲霧林＋花穹 → OCBC Skyway → 花之幻境 → Black Tap → SkyPark → LV → Spectra → Garden Rhapsody → Borealis（全程由西向東單向走）</div>
+
+            <div class="step"><div class="time">09:30–11:30</div><div class="content">
+                <div class="title">🦕 雲霧林 (Cloud Forest) ＋ 花穹 (Flower Dome)</div>
+                <div class="meta"><span class="tag">Bundle</span>成人SGD58／兒童SGD41</div>
+                <div class="backup">MRT：太子愛德華路 CC32 → 海灣舫 CC34/DT16｜或公車 97/106/133 直達 Bayfront Stn</div>
+                <div class="warn">館內恆溫 23–25°C，記得帶薄外套。雲霧林 10:00 有第一次噴霧。</div>
+            </div></div>
+
+            <div class="step"><div class="time">11:30–12:15</div><div class="content">
+                <div class="title">🌉 OCBC Skyway 高空走廊</div>
+                <div class="meta">成人 SGD14／兒童 SGD10，每人限時 15 分鐘</div>
+            </div></div>
+
+            <div class="step"><div class="time">12:15–13:45</div><div class="content">
+                <div class="title">🍱 濱海灣午餐</div>
+                <div class="meta">華珍海鮮（花穹下方）／Satay by the Bay／金沙美食廣場 Rasapura Masters</div>
+            </div></div>
+
+            <div class="step"><div class="time">13:45–14:45</div><div class="content">
+                <div class="title">🌸 花之幻境 (Floral Fantasy) ＋ 迪士尼花藝展</div>
+                <div class="meta">已含在 Bundle 內，緊鄰海灣舫站，順路不繞路</div>
+            </div></div>
+
+            <div class="step"><div class="time">14:45–16:30</div><div class="content">
+                <div class="title">🍔 Black Tap 早鳥晚餐</div>
+                <div class="meta">The Shoppes at MBS #L1-80，人均 SGD30–50</div>
+            </div></div>
+
+            <div class="step"><div class="time">17:00–18:00</div><div class="content">
+                <div class="title">🌆 金沙空中花園觀景台 (SkyPark 56F)</div>
+                <div class="meta"><b>高峰票</b>成人SGD27.3／優待SGD24.5（會員價）</div>
+                <div class="warn"><b>必買高峰時段票！</b>非高峰最晚 16:00 入場、16:30 就結束。露天場地遇暴雨可能關閉（未滿1小時可退費）——備案：直接下樓進商場，提前去 LV 拍照。</div>
+            </div></div>
+
+            <div class="step"><div class="time">18:00–19:45</div><div class="content">
+                <div class="title">👜 LV Island Maison 水上玻璃亭拍照</div>
+                <div class="meta">Event Plaza 內，藍調時刻 19:15–19:45 最佳，出店外拍不受限</div>
+            </div></div>
+
+            <div class="step"><div class="time">20:00</div><div class="content">
+                <div class="title">💦 Spectra 燈光水舞秀</div>
+                <div class="meta">免費，Event Plaza 原地看，約15分鐘</div>
+            </div></div>
+
+            <div class="step"><div class="time">20:45–21:15</div><div class="content">
+                <div class="title">🎶 Garden Rhapsody 超級樹燈光秀 → 🌌 Borealis 極光秀</div>
+                <div class="meta">免費，Supertree Grove（Event Plaza 步行約12–15分鐘過去）</div>
+            </div></div>
+
+            <div class="step"><div class="time">21:20起</div><div class="content">
+                <div class="title">🚕 返回 M Hotel：計程車首選</div>
+                <div class="meta">超級樹叢一帶 7–8 分／SGD12–18</div>
+                <div class="backup">或公車 97/106/133（Bayfront Stn Exit B → Opp Hub Synergy Pt，14–17分）｜或 CC 環線地鐵（Bayfront → CC32，約11分）</div>
+            </div></div>
+        </div>
+    </section>
+
+    <!-- ============ DAY 3 ============ -->
+    <section id="d3" class="tab">
+        <div class="card">
+            <h2>Day 3（8/23 日）跨海纜車 ＋ 海洋館 ＋ 滑車 ＋ 煙火秀</h2>
+            <div class="day-sub">花芭山線纜車進島 → Oceanarium → RWS午餐 → 聖淘沙線纜車西行 → Fort Siloso → 滑車 → 海灘晚餐 → 時光之翼（全程單向不回頭）</div>
+
+            <div class="step"><div class="time">08:45</div><div class="content">
+                <div class="title">🚡 M Hotel → 計程車 → HarbourFront Tower 2</div>
+                <div class="meta">約5分／SGD6–10</div>
+                <div class="warn"><b>抵達後先換票！</b>線上票須在<b>20:00前</b>到售票櫃檯兌換實體券，不能直接刷QR上車。勿買到 LOCALS ONLY 版本。</div>
+            </div></div>
+
+            <div class="step"><div class="time">09:00</div><div class="content">
+                <div class="title">🚡 Mount Faber Line 纜車 → Sentosa 站</div>
+                <div class="meta">空中約15分鐘</div>
+                <div class="backup">下站步行約5分到聖淘沙捷運 Imbiah Station（monorail，非纜車站）→ 北1站到 Resorts World Station → 步行5分到 Oceanarium</div>
+            </div></div>
+
+            <div class="step"><div class="time">10:00–13:00</div><div class="content">
+                <div class="title">🐠 Singapore Oceanarium</div>
+                <div class="meta">成人SGD55／兒童SGD43｜22大展區，官網建議2-3小時</div>
+                <div class="warn">部分8月日期縮短為10:00–16:00（8/23不在名單內，<b>出發前再查一次官網</b>）</div>
+            </div></div>
+
+            <div class="step"><div class="time">13:00–14:30</div><div class="content">
+                <div class="title">🍽️ RWS WEAVE 午餐</div>
+                <div class="meta">莆田 PUTIEN #01-209／話匣子 Chatterbox #02-207／Moutarde B1-219</div>
+            </div></div>
+
+            <div class="step"><div class="time">14:30–15:10</div><div class="content">
+                <div class="title">🚝 聖淘沙捷運 → 🚡 聖淘沙線纜車西行至 Siloso Point</div>
+                <div class="meta">Resorts World Station → Imbiah Station（monorail）→ 步行5分到 Imbiah Lookout（纜車站）→ 西行到 Siloso Point</div>
+                <div class="backup"><b>備用方案</b>：若對 SkyPass 換票有疑慮，可改搭免費 <b>Sentosa Bus A</b>（Imbiah Lookout → Siloso Point，每10分一班），完全免費零風險。</div>
+            </div></div>
+
+            <div class="step"><div class="time">15:10–16:10</div><div class="content">
+                <div class="title">🏰 Fort Siloso Skywalk（西樂索炮台空中步道）</div>
+                <div class="meta">免門票，只走181公尺樹冠層步道，20–30分鐘</div>
+            </div></div>
+
+            <div class="step"><div class="time">16:30–18:15</div><div class="content">
+                <div class="title">🛼 Skyline Luge & Skyride（山腳站出發）＋ 西樂索沙灘</div>
+                <div class="meta"><span class="tag">2-Ride</span>SGD39/人（無兒童價），從 Siloso Point 搭免費 Sentosa Beach Shuttle 約15分到山腳</div>
+                <div class="warn">滑車110cm以上可自駕（女兒121cm可以）；<b>吊椅需135cm才能單獨搭，女兒每趟上山都要大人同座</b>，購票時先跟櫃檯講清楚。</div>
+                <div class="backup">⚠️ 這段搭 <b>Beach Shuttle</b>，不要搭 Bus A（Bus A 是環狀繞遠路）</div>
+            </div></div>
+
+            <div class="step"><div class="time">18:15–19:20</div><div class="content">
+                <div class="title">🍽️ 海灘晚餐</div>
+                <div class="meta">Coastes（50 Siloso Beach Walk）／Trapizza（10 Siloso Beach Walk）／Good Old Days（平價清真）</div>
+            </div></div>
+
+            <div class="step"><div class="time">19:40–20:00</div><div class="content">
+                <div class="title">🎇 時光之翼 Wings of Time</div>
+                <div class="meta">門票SGD22起</div>
+                <div class="warn"><b>選19:40場，不是20:40場</b>——訂錯場次整晚動線全毀。</div>
+            </div></div>
+
+            <div class="step"><div class="time">20:00起</div><div class="content">
+                <div class="title">🚕 返回 M Hotel</div>
+                <div class="meta"><span class="tag">首選</span>計程車直達，約9分</div>
+                <div class="backup">或 Sentosa Express（免費）到 VivoCity → 轉乘 MRT（NE紫線或CC環線），約34分</div>
+            </div></div>
+
+            <div class="warn" style="margin-top:10px;"><b>雨天／雷擊備案</b>：纜車雷雨會停駛，改叫 Grab 走聖淘沙隧道直達 RWS B1 落客區，9–12分／SGD12–18。</div>
+        </div>
+    </section>
+
+    <!-- ============ DAY 4 ============ -->
+    <section id="d4" class="tab">
+        <div class="card">
+            <h2>Day 4（8/24 一）完美收官 ＆ 歡樂返航</h2>
+            <div class="day-sub">飯店早餐退房 → 09:25 抵達機場 → 免稅店 → 12:25 起飛</div>
+
+            <div class="step"><div class="time">07:00–09:00</div><div class="content">
+                <div class="title">🍳 飯店早餐 ＆ 退房</div>
+            </div></div>
+
+            <div class="step"><div class="time">09:05–09:25</div><div class="content">
+                <div class="title">🚖 計程車直達樟宜機場</div>
+                <div class="meta">約20–25分／SGD20–30，提早3小時抵達</div>
+            </div></div>
+
+            <div class="step"><div class="time">09:25–12:00</div><div class="content">
+                <div class="title">🛍️ 報到託運 → 管制區免稅店</div>
+                <div class="meta">Bengawan Solo 斑蘭蛋糕（建議通關後第一時間購買，易售罄）／TWG Tea／Bacha Coffee／Irvins</div>
+                <div class="backup">退稅門檻：單店單日消費滿SGD100，eTRS Kiosk 在 T3 出境大廳 L2</div>
+            </div></div>
+
+            <div class="step"><div class="time">12:25</div><div class="content">
+                <div class="title">✈️ 起飛返台（SIN 12:25 → TPE 17:10）</div>
+            </div></div>
+        </div>
+    </section>
+
+    <footer>新加坡親子行程 · 導遊精簡版 · 完整研究版請見 itinerary_4D3N.html</footer>
+</div>
+
+<script>
+    function go(id) {
+        document.querySelectorAll('section.tab').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('nav.tabs button').forEach(b => b.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        event.currentTarget.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+</script>
+</body>
+</html>
