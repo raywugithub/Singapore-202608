@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>🇸🇬 新加坡 4天3夜 親子旅遊動態路線地圖 (2026/8/21 - 8/24)</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    
+    <!-- Leaflet.js CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #0B5F57;
+            --primary-light: #128277;
+            --primary-glow: rgba(11, 95, 87, 0.25);
+            --accent: #E67E22;
+            --accent-gold: #F39C12;
+            --danger: #E74C3C;
+            --bg-dark: #0F172A;
+            --panel-bg: rgba(255, 255, 255, 0.95);
+            --card-border: #E2E8F0;
+            --text-dark: #1E293B;
+            --text-muted: #64748B;
+            
+            /* Day Color Palette */
+            --color-d1: #2563EB; /* Jewel & Merlion - Royal Blue */
+            --color-d2: #059669; /* Gardens & MBS - Emerald Green */
+            --color-d3: #D97706; /* Sentosa Thrill - Amber Orange */
+            --color-d4: #7C3AED; /* Changi Airport - Purple */
+            --color-hotel: #DC2626; /* M Hotel - Crimson Red */
+            
+            /* Transport Colors */
+            --trans-taxi: #F59E0B;
+            --trans-bus: #3B82F6;
+            --trans-mrt: #8B5CF6;
+            --trans-cable: #EC4899;
+            --trans-walk: #10B981;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', 'Noto Sans TC', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-dark);
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+        }
+
+        /* App Container */
+        #app-layout {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        /* Sidebar Styling */
+        #sidebar {
+            width: 440px;
+            background: var(--panel-bg);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid var(--card-border);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            z-index: 1000;
+            box-shadow: 10px 0 35px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .sidebar-header {
+            padding: 18px 20px 14px;
+            background: linear-gradient(135deg, #0B5F57 0%, #08433D 100%);
+            color: #ffffff;
+            position: relative;
+        }
+
+        .brand-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .sidebar-header h1 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            line-height: 1.3;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sidebar-header p {
+            font-size: 0.82rem;
+            color: rgba(255, 255, 255, 0.85);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Quick View Presets */
+        .preset-bar {
+            padding: 10px 16px;
+            background: #F1F5F9;
+            border-bottom: 1px solid var(--card-border);
+            display: flex;
+            gap: 6px;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        .preset-bar::-webkit-scrollbar { display: none; }
+
+        .preset-btn {
+            background: #FFFFFF;
+            border: 1px solid #CBD5E1;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 0.76rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s ease;
+        }
+        .preset-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: #F8FAFC;
+        }
+
+        /* Day Selector Tabs */
+        .day-tabs {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            padding: 8px 12px;
+            background: #FFFFFF;
+            border-bottom: 1px solid var(--card-border);
+            gap: 6px;
+        }
+
+        .day-tab-btn {
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            padding: 8px 4px;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .day-tab-btn span.day-tag {
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+
+        .day-tab-btn:hover {
+            background: #F1F5F9;
+            color: var(--text-dark);
+        }
+
+        .day-tab-btn.active[data-day="all"] { background: #0F172A; color: #FFF; border-color: #0F172A; }
+        .day-tab-btn.active[data-day="1"] { background: var(--color-d1); color: #FFF; border-color: var(--color-d1); }
+        .day-tab-btn.active[data-day="2"] { background: var(--color-d2); color: #FFF; border-color: var(--color-d2); }
+        .day-tab-btn.active[data-day="3"] { background: var(--color-d3); color: #FFF; border-color: var(--color-d3); }
+        .day-tab-btn.active[data-day="4"] { background: var(--color-d4); color: #FFF; border-color: var(--color-d4); }
+
+        /* Transport Legend Filter */
+        .filter-legend {
+            padding: 8px 16px;
+            background: #F8FAFC;
+            border-bottom: 1px solid var(--card-border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.74rem;
+            color: var(--text-muted);
+            overflow-x: auto;
+        }
+
+        .legend-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            white-space: nowrap;
+        }
+
+        .legend-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        /* Timeline List Scroll Area */
+        .timeline-scroll {
+            flex: 1;
+            overflow-y: auto;
+            padding: 14px 16px;
+            scroll-behavior: smooth;
+        }
+
+        .timeline-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+        .timeline-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .timeline-scroll::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
+            border-radius: 10px;
+        }
+
+        /* Daily Summary Card */
+        .day-summary-card {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-left: 4px solid var(--primary);
+            border-radius: 10px;
+            padding: 12px 14px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+
+        .day-summary-card h3 {
+            font-size: 0.92rem;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .day-summary-card p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.45;
+        }
+
+        /* Timeline Items */
+        .timeline-item {
+            position: relative;
+            padding-left: 36px;
+            margin-bottom: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 6px;
+        }
+
+        /* Connecting vertical line */
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 14px;
+            top: 28px;
+            bottom: -20px;
+            width: 2px;
+            background: #E2E8F0;
+            z-index: 1;
+        }
+
+        .timeline-item:last-child::before {
+            display: none;
+        }
+
+        /* Node Badge Icon */
+        .node-badge {
+            position: absolute;
+            left: 0;
+            top: 2px;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #64748B;
+            color: #FFFFFF;
+            font-size: 0.72rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            border: 2px solid #FFFFFF;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .timeline-item:hover .node-badge {
+            transform: scale(1.15);
+            box-shadow: 0 0 12px var(--primary-glow);
+        }
+
+        .timeline-item[data-day="1"] .node-badge { background: var(--color-d1); }
+        .timeline-item[data-day="2"] .node-badge { background: var(--color-d2); }
+        .timeline-item[data-day="3"] .node-badge { background: var(--color-d3); }
+        .timeline-item[data-day="4"] .node-badge { background: var(--color-d4); }
+        .timeline-item.is-hotel .node-badge { background: var(--color-hotel); }
+
+        /* Card Content */
+        .item-card {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 10px;
+            padding: 10px 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            transition: all 0.2s ease;
+        }
+
+        .timeline-item:hover .item-card,
+        .timeline-item.active .item-card {
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(11, 95, 87, 0.12);
+            transform: translateX(3px);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+
+        .card-time {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.76rem;
+            font-weight: 700;
+            color: var(--primary);
+            background: #E8F5E9;
+            padding: 1px 6px;
+            border-radius: 4px;
+        }
+
+        .card-category {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .card-title {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.35;
+            margin-bottom: 4px;
+        }
+
+        .card-desc {
+            font-size: 0.78rem;
+            color: #475569;
+            line-height: 1.45;
+            margin-bottom: 6px;
+        }
+
+        .card-transport {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 6px;
+            background: #F1F5F9;
+            color: #334155;
+            margin-bottom: 6px;
+        }
+
+        .card-transport.taxi { background: #FEF3C7; color: #92400E; }
+        .card-transport.bus { background: #DBEAFE; color: #1E40AF; }
+        .card-transport.mrt { background: #EDE9FE; color: #5B21B6; }
+        .card-transport.cable { background: #FCE7F3; color: #9D174D; }
+        .card-transport.walk { background: #D1FAE5; color: #065F46; }
+
+        .card-actions {
+            display: flex;
+            gap: 6px;
+            margin-top: 6px;
+            padding-top: 6px;
+            border-top: 1px dashed #E2E8F0;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.74rem;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            border: 1px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            transition: all 0.15s ease;
+        }
+
+        .action-btn.locate {
+            background: #F8FAFC;
+            border-color: #CBD5E1;
+            color: var(--text-dark);
+        }
+        .action-btn.locate:hover {
+            background: var(--primary);
+            color: #FFF;
+            border-color: var(--primary);
+        }
+
+        .action-btn.nav {
+            background: #EFF6FF;
+            border-color: #BFDBFE;
+            color: #1D4ED8;
+        }
+        .action-btn.nav:hover {
+            background: #2563EB;
+            color: #FFF;
+        }
+
+        /* Map Canvas */
+        #map-container {
+            flex: 1;
+            height: 100%;
+            position: relative;
+            background: #0B1120;
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Floating Map Control Bar */
+        .map-float-bar {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .map-tool-btn {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid #CBD5E1;
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .map-tool-btn:hover {
+            background: #FFFFFF;
+            color: var(--primary);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+            transform: translateY(-1px);
+        }
+
+        /* Custom Leaflet Marker Styling */
+        .custom-map-marker {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFFFFF;
+            font-weight: 800;
+            font-size: 11px;
+            border-radius: 50%;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.35);
+            border: 2px solid #FFFFFF;
+            transition: all 0.2s ease;
+        }
+
+        .custom-map-marker.day-1 { background: var(--color-d1); }
+        .custom-map-marker.day-2 { background: var(--color-d2); }
+        .custom-map-marker.day-3 { background: var(--color-d3); }
+        .custom-map-marker.day-4 { background: var(--color-d4); }
+        .custom-map-marker.hotel { background: var(--color-hotel); }
+
+        .custom-map-marker:hover {
+            transform: scale(1.25);
+            z-index: 1000 !important;
+        }
+
+        /* Popup Styling */
+        .leaflet-popup-content-wrapper {
+            border-radius: 12px;
+            padding: 2px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .popup-box {
+            padding: 10px 12px;
+            max-width: 260px;
+        }
+
+        .popup-badge {
+            display: inline-block;
+            font-size: 0.68rem;
+            font-weight: 700;
+            color: #FFF;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-bottom: 4px;
+        }
+
+        .popup-title {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: #1E293B;
+            margin-bottom: 4px;
+            line-height: 1.3;
+        }
+
+        .popup-meta {
+            font-size: 0.78rem;
+            color: #64748B;
+            margin-bottom: 6px;
+        }
+
+        .popup-highlight {
+            font-size: 0.76rem;
+            color: #334155;
+            background: #F8FAFC;
+            border-left: 3px solid var(--primary);
+            padding: 4px 6px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+        }
+
+        .popup-nav-btn {
+            display: block;
+            text-align: center;
+            background: #2563EB;
+            color: #FFFFFF !important;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: background 0.2s ease;
+        }
+        .popup-nav-btn:hover {
+            background: #1D4ED8;
+        }
+
+        /* Mobile Drawer Button */
+        #mobile-toggle-btn {
+            display: none;
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1100;
+            background: var(--primary);
+            color: #FFFFFF;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            box-shadow: 0 6px 20px rgba(11, 95, 87, 0.4);
+            cursor: pointer;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 900px) {
+            body {
+                flex-direction: column;
+            }
+            #sidebar {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 55%;
+                border-right: none;
+                border-top: 1px solid var(--card-border);
+                transform: translateY(0);
+                border-radius: 20px 20px 0 0;
+            }
+            #sidebar.collapsed {
+                transform: translateY(calc(100% - 60px));
+            }
+            #mobile-toggle-btn {
+                display: flex;
+            }
+            .map-float-bar {
+                top: 12px;
+                right: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="app-layout">
+    <!-- Sidebar / Route Control Center -->
+    <aside id="sidebar">
+        <div class="sidebar-header">
+            <div class="brand-badge"><i class="fa-solid fa-plane-departure"></i> SINGAPORE 2026 · 4D3N GUIDE</div>
+            <h1><i class="fa-solid fa-map-location-dot"></i> 新加坡親子動態路線地圖</h1>
+            <p>
+                <span><i class="fa-solid fa-calendar-days"></i> 8/21 - 8/24</span>
+                <span><i class="fa-solid fa-hotel"></i> M Hotel 丹戎巴葛</span>
+                <span><i class="fa-solid fa-children"></i> 2大1小 (8歲)</span>
+            </p>
+        </div>
+
+        <!-- Quick Focus Preset View Bar -->
+        <div class="preset-bar">
+            <button class="preset-btn" onclick="focusPreset('all')"><i class="fa-solid fa-globe"></i> 全島視角</button>
+            <button class="preset-btn" onclick="focusPreset('hotel')"><i class="fa-solid fa-hotel"></i> M Hotel 飯店</button>
+            <button class="preset-btn" onclick="focusPreset('jewel')"><i class="fa-solid fa-tree"></i> 星耀樟宜</button>
+            <button class="preset-btn" onclick="focusPreset('marinabay')"><i class="fa-solid fa-city"></i> 濱海灣特寫</button>
+            <button class="preset-btn" onclick="focusPreset('sentosa')"><i class="fa-solid fa-umbrella-beach"></i> 聖淘沙特寫</button>
+        </div>
+
+        <!-- Day Selector Tabs -->
+        <div class="day-tabs">
+            <button class="day-tab-btn active" data-day="all" onclick="selectDay('all')">
+                <span>全部行程</span>
+                <span class="day-tag">4 天總覽</span>
+            </button>
+            <button class="day-tab-btn" data-day="1" onclick="selectDay('1')">
+                <span>Day 1</span>
+                <span class="day-tag">樟宜/魚尾獅</span>
+            </button>
+            <button class="day-tab-btn" data-day="2" onclick="selectDay('2')">
+                <span>Day 2</span>
+                <span class="day-tag">濱海灣花園</span>
+            </button>
+            <button class="day-tab-btn" data-day="3" onclick="selectDay('3')">
+                <span>Day 3</span>
+                <span class="day-tag">聖淘沙纜車</span>
+            </button>
+            <button class="day-tab-btn" data-day="4" onclick="selectDay('4')">
+                <span>Day 4</span>
+                <span class="day-tag">機場返航</span>
+            </button>
+        </div>
+
+        <!-- Transport Legend -->
+        <div class="filter-legend">
+            <span class="legend-item"><span class="legend-dot" style="background: var(--trans-taxi);"></span> 🚕 計程車</span>
+            <span class="legend-item"><span class="legend-dot" style="background: var(--trans-bus);"></span> 🚌 公車</span>
+            <span class="legend-item"><span class="legend-dot" style="background: var(--trans-mrt);"></span> 🚊 MRT地鐵</span>
+            <span class="legend-item"><span class="legend-dot" style="background: var(--trans-cable);"></span> 🚡 纜車/接駁</span>
+            <span class="legend-item"><span class="legend-dot" style="background: var(--trans-walk);"></span> 🚶 步行</span>
+        </div>
+
+        <!-- Timeline Scroll Container -->
+        <div class="timeline-scroll" id="timeline-container">
+            <!-- Dynamic Injection via JavaScript -->
+        </div>
+    </aside>
+
+    <!-- Map Canvas -->
+    <main id="map-container">
+        <div id="map"></div>
+
+        <!-- Floating Map Tools -->
+        <div class="map-float-bar">
+            <button class="map-tool-btn" onclick="toggleTileLayer()"><i class="fa-solid fa-layer-group"></i> <span id="tile-layer-name">切換地圖樣式</span></button>
+            <button class="map-tool-btn" onclick="fitAllMarkers()"><i class="fa-solid fa-expand"></i> 完整路徑視野</button>
+            <a href="itinerary_4D3N_guide.html" class="map-tool-btn" style="text-decoration:none;"><i class="fa-solid fa-book-open"></i> 返回導遊行程表</a>
+        </div>
+
+        <button id="mobile-toggle-btn" onclick="toggleSidebarMobile()">
+            <i class="fa-solid fa-list-ul"></i> 行程站點列表
+        </button>
+    </main>
+</div>
+
+<!-- Leaflet.js JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+<script>
+    // ==========================================
+    // 1. DATA DEFINITIONS (Verified Coordinates & Metadata)
+    // ==========================================
+    const ROUTE_DATA = {
+        days: {
+            "1": {
+                name: "Day 1（8/21 五）星耀樟宜 ＋ 魚尾獅 ＋ 牛車水",
+                summary: "清晨落地 → Jewel 寄行李＆雨漩渦 ➔ 15:00 M Hotel 入住 ➔ 魚尾獅公園順光拍海景 ➔ 麥士威天天海南雞飯 ＆ 168 沙爹",
+                color: "#2563EB"
+            },
+            "2": {
+                name: "Day 2（8/22 六）濱海灣雙冷室 ＋ 金沙 56F ＋ 三場夜秀",
+                summary: "雲霧林恐龍瀑布＋花穹 ➔ OCBC Skyway ➔ 花之幻境 ➔ Black Tap 早鳥漢堡 ➔ SkyPark 56F 觀景 ➔ Spectra水舞 ➔ 超級樹燈光極光秀",
+                color: "#059669"
+            },
+            "3": {
+                name: "Day 3（8/23 日）跨海花芭山纜車 ＋ 海洋館 ＋ 西樂索滑車 ＋ 煙火",
+                summary: "跨海纜車進島 ➔ 海洋館 ➔ RWS WEAVE 午餐 ➔ 聖淘沙西行纜車 ➔ 西樂索砲台空中步道 ➔ Skyline Luge 滑車 ➔ 海灘晚餐 ➔ 19:40 時光之翼煙火",
+                color: "#D97706"
+            },
+            "4": {
+                name: "Day 4（8/24 一）飯店退房 ➔ 機場 eTRS 退稅 ➔ 免稅店 ➔ 返台",
+                summary: "M Hotel 早餐退房 ➔ 09:05 計程車直達樟宜 T3 (提早 3 小時) ➔ eTRS 退稅 ➔ 斑蘭蛋糕伴手禮採購 ➔ 蝴蝶園 ➔ 12:25 起飛返台",
+                color: "#7C3AED"
+            }
+        },
+        stops: [
+            // ============ DAY 1 ============
+            {
+                id: "d1-1",
+                day: "1",
+                order: 1,
+                time: "06:00",
+                name: "樟宜機場 T1 / Jewel L1 行李寄存處",
+                lat: 1.3602,
+                lng: 103.9898,
+                category: "交通/寄存",
+                transport: { mode: "walk", text: "落地出關步行 2 分" },
+                desc: "紅眼班機落地後直奔 Jewel L1 (#01-302, 早鳥報到櫃檯旁) 寄放大行李 (約 SGD 24-30/2件)，輕裝開始旅程。",
+                highlight: "💡 Smarte Carte 24小時無現金服務，出關即存超方便。"
+            },
+            {
+                id: "d1-2",
+                day: "1",
+                order: 2,
+                time: "07:30",
+                name: "Jewel 早餐：海南寶 (The Hainan Story)",
+                lat: 1.3603,
+                lng: 103.9899,
+                category: "美食餐飲",
+                transport: { mode: "walk", text: "Jewel B2-201 步行 1 分" },
+                desc: "品嚐道地南洋早餐（咖椰吐司、海南奶茶與半熟蛋），或備選 3 樓翠華餐廳 (#03-230)。",
+                highlight: "💡 兩家皆於 08:00 前後開門，非常適合紅眼班機早餐。"
+            },
+            {
+                id: "d1-3",
+                day: "1",
+                order: 3,
+                time: "09:00-13:00",
+                name: "星耀樟宜 (雨漩渦 ＋ Canopy Park 彈跳網)",
+                lat: 1.3602,
+                lng: 103.9898,
+                category: "核心景點",
+                transport: { mode: "walk", text: "直梯上 L5 頂樓" },
+                desc: "10:00 觀賞 40 米雨漩渦震撼放水，隨後於 Canopy Park 玩 Bouncing Net 彈跳網、滑梯與霧碗花園。",
+                highlight: "⚠️ 女兒 121cm 達標，必須穿著全包覆包頭運動鞋。"
+            },
+            {
+                id: "d1-4",
+                day: "1",
+                order: 4,
+                time: "14:00",
+                name: "M Hotel Singapore City Centre (入住休息)",
+                lat: 1.2737,
+                lng: 103.8451,
+                category: "住宿大本營",
+                isHotel: true,
+                transport: { mode: "taxi", text: "🚕 計程車直達 20-25分 (SGD 25-35)" },
+                desc: "81 Anson Road。15:00 官方 Check-in，紅眼班機午後充分補眠與沖涼，8 樓有戶外泳池。",
+                highlight: "🏨 4天3夜固定大本營，周邊步行即達丹戎巴葛與麥士威。"
+            },
+            {
+                id: "d1-5",
+                day: "1",
+                order: 5,
+                time: "16:30",
+                name: "魚尾獅公園 (Merlion Park)",
+                lat: 1.2867,
+                lng: 103.8544,
+                category: "地標景點",
+                transport: { mode: "bus", text: "🚌 公車 10/100/196 (Hub Synergy Pt 03222 ➔ Fullerton Sq)" },
+                desc: "新加坡經典地標 (8.6m高)，傍晚 17:00-18:30 順光柔和海風，拍攝接水照與金沙水岸全景。",
+                highlight: "📸 步道平緩適合散步，可走無障礙禧年橋 (Jubilee Bridge)。"
+            },
+            {
+                id: "d1-6",
+                day: "1",
+                order: 6,
+                time: "18:00-20:00",
+                name: "牛車水：麥士威熟食中心 ＆ 168鮮烤沙爹",
+                lat: 1.2805,
+                lng: 103.8446,
+                category: "在地美食",
+                transport: { mode: "bus", text: "🚌 公車 80/145/166 (4站約12分) 或計程車6分" },
+                desc: "品嚐米其林必比登「天天海南雞飯」(#01-10/11) ＋ 牛車水大廈 2 樓「168 CMY 鮮烤沙爹」(#02-168)。",
+                highlight: "⚠️ 熟食中心多數攤位僅收新幣現金，請備妥小額紙鈔。"
+            },
+            {
+                id: "d1-7",
+                day: "1",
+                order: 7,
+                time: "20:00",
+                name: "返回 M Hotel (步行消食)",
+                lat: 1.2737,
+                lng: 103.8451,
+                category: "住宿大本營",
+                isHotel: true,
+                transport: { mode: "walk", text: "🚶 沿柏城街步行 850m 約 11 分" },
+                desc: "夜晚微風中漫步返回 M Hotel，沿途經過丹戎巴葛特色店屋街區，早點休息迎接 Day 2。",
+                highlight: "🌙 直線回飯店不需轉乘，安全省時。"
+            },
+
+            // ============ DAY 2 ============
+            {
+                id: "d2-1",
+                day: "2",
+                order: 1,
+                time: "09:30-11:30",
+                name: "濱海灣花園：雲霧林 (Cloud Forest) ＋ 花穹 (Flower Dome)",
+                lat: 1.2847,
+                lng: 103.8650,
+                category: "核心景點",
+                transport: { mode: "bus", text: "🚌 公車 97/106/133 (03222 ➔ Bayfront 03509 14分)" },
+                desc: "35 米高室內綠意瀑布、阿凡達空中走廊與花穹千種奇花異木。10:00 有第一次壯觀噴霧。",
+                highlight: "❄️ 館內恆溫 23-25°C，請為小孩準備薄外套防著涼。"
+            },
+            {
+                id: "d2-2",
+                day: "2",
+                order: 2,
+                time: "11:30-12:15",
+                name: "華僑銀行空中走廊 (OCBC Skyway)",
+                lat: 1.2820,
+                lng: 103.8639,
+                category: "高空體驗",
+                transport: { mode: "walk", text: "🚶 雙冷室步行 3 分" },
+                desc: "懸掛於兩座擎天巨樹之間的 22 米高空步道，俯瞰整個濱海灣花園與金沙酒店壯闊建築。",
+                highlight: "⚠️ 每人限時 15 分鐘通行，遇雷雨強風會暫停開放。"
+            },
+            {
+                id: "d2-3",
+                day: "2",
+                order: 3,
+                time: "12:15-13:45",
+                name: "濱海灣午餐：華珍海鮮 (Majestic Bay) / Satay by the Bay",
+                lat: 1.2845,
+                lng: 103.8645,
+                category: "美食餐飲",
+                transport: { mode: "walk", text: "🚶 花穹正下方" },
+                desc: "在花穹下方的華珍海鮮享用招牌海鮮點心與特色脆皮燒肉，或漫步至 Satay by the Bay 沙爹灣。",
+                highlight: "🍽️ 冷氣舒適，位置極順路，完全不走回頭路。"
+            },
+            {
+                id: "d2-4",
+                day: "2",
+                order: 4,
+                time: "13:45-14:45",
+                name: "花之幻境 (Floral Fantasy) ＆ 迪士尼花藝展",
+                lat: 1.2813,
+                lng: 103.8590,
+                category: "核心景點",
+                transport: { mode: "walk", text: "🚶 西向東單向步道 8 分" },
+                desc: "巨型垂吊花海與魔幻花藝隧道，緊鄰海灣舫地鐵站 Exit B 連通道，極為夢幻好拍。",
+                highlight: "🌸 門票已包含在 Bundle 內，順路前往金沙商場。"
+            },
+            {
+                id: "d2-5",
+                day: "2",
+                order: 5,
+                time: "14:45-16:30",
+                name: "Black Tap 早鳥晚餐 (The Shoppes at MBS)",
+                lat: 1.2830,
+                lng: 103.8592,
+                category: "美食餐飲",
+                transport: { mode: "walk", text: "🚶 金沙購物商城 #L1-80" },
+                desc: "紐約知名巨無霸漢堡、香脆薯條與浮誇狂想奶昔 (CrazyShake)，避開晚間排隊尖峰。",
+                highlight: "🍔 小朋友最愛的甜點與漢堡，提早吃晚餐體力充沛。"
+            },
+            {
+                id: "d2-6",
+                day: "2",
+                order: 6,
+                time: "17:00-18:00",
+                name: "金沙空中花園觀景台 (SkyPark 56F)",
+                lat: 1.2828,
+                lng: 103.8609,
+                category: "高空地標",
+                transport: { mode: "walk", text: "🚶 Hotel Tower 3 B1 直達電梯" },
+                desc: "金沙 56 樓無邊際高空視野，360 度俯瞰新加坡海峽船舶與市區天際線黃金日落。",
+                highlight: "🌇 已購 17:00 高峰時段票，56 秒直達電梯登頂。"
+            },
+            {
+                id: "d2-7",
+                day: "2",
+                order: 7,
+                time: "18:00-19:45",
+                name: "LV Island Maison 水上水晶宮殿 ＆ Event Plaza",
+                lat: 1.2844,
+                lng: 103.8583,
+                category: "水岸漫步",
+                transport: { mode: "walk", text: "🚶 商場水岸出口" },
+                desc: "飄浮於海灣上的全玻璃水晶建築，19:15-19:45 藍調時刻水岸光影璀璨迷人。",
+                highlight: "📸 外側木棧道完全免費外拍，無拘無束。"
+            },
+            {
+                id: "d2-8",
+                day: "2",
+                order: 8,
+                time: "20:00-20:15",
+                name: "Spectra 水幕水舞秀",
+                lat: 1.2844,
+                lng: 103.8583,
+                category: "夜間大秀",
+                transport: { mode: "walk", text: "🚶 Event Plaza 原地觀看" },
+                desc: "15 分鐘交響樂噴泉、全彩雷射投影與 12 米金字塔水幕燈光大秀（免費入場）。",
+                highlight: "💦 水岸第一排視野震撼，結束後散步前往超級樹。"
+            },
+            {
+                id: "d2-9",
+                day: "2",
+                order: 9,
+                time: "20:45-21:15",
+                name: "Supertree 燈光秀 (20:45) ＋ Borealis 極光秀 (21:00)",
+                lat: 1.2820,
+                lng: 103.8639,
+                category: "夜間大秀",
+                transport: { mode: "walk", text: "🚶 跨橋散步 12 分至超級樹" },
+                desc: "躺在超級樹下仰望音樂燈光變幻，緊接著 21:00 雲霧極光雷射投影秀，魔幻滿分。",
+                highlight: "🌌 免費戶外草地，極光音效令人沉醉。"
+            },
+            {
+                id: "d2-10",
+                day: "2",
+                order: 10,
+                time: "21:20",
+                name: "返回 M Hotel",
+                lat: 1.2737,
+                lng: 103.8451,
+                category: "住宿大本營",
+                isHotel: true,
+                transport: { mode: "taxi", text: "🚕 計程車 7-8分 (SGD 12-18) 或公車97/106" },
+                desc: "賞秀完後由超級樹搭計程車直達 M Hotel 休息，洗去一日充實疲憊。",
+                highlight: "🚕 親子夜歸首選計程車，省力又快速。"
+            },
+
+            // ============ DAY 3 ============
+            {
+                id: "d3-1",
+                day: "3",
+                order: 1,
+                time: "08:45-09:00",
+                name: "HarbourFront Tower 2 (跨海纜車站)",
+                lat: 1.2642,
+                lng: 103.8200,
+                category: "交通樞紐",
+                transport: { mode: "taxi", text: "🚕 M Hotel 出發 5 分 (SGD 6-10)" },
+                desc: "3 HarbourFront Place。在此售票處先兌換實體 Cable Car SkyPass 票券後登車。",
+                highlight: "⚠️ 線上預購票須於櫃檯換實體券，勿買到 Locals Only 版本。"
+            },
+            {
+                id: "d3-2",
+                day: "3",
+                order: 2,
+                time: "09:00-09:45",
+                name: "花芭山線纜車 (Mount Faber Line) ➔ 聖淘沙 Sentosa",
+                lat: 1.2555,
+                lng: 103.8174,
+                category: "空中全景",
+                transport: { mode: "cable", text: "🚡 空中飛行 15 分鐘跨海" },
+                desc: "乘纜車橫跨海港與森林，360 度俯瞰郵輪碼頭與聖淘沙名勝世界全貌，抵達 Sentosa Imbiah 站。",
+                highlight: "🚡 轉搭 Sentosa Express 輕軌 1 站至 Resorts World Station。"
+            },
+            {
+                id: "d3-3",
+                day: "3",
+                order: 3,
+                time: "10:00-13:00",
+                name: "新加坡海洋館 (Singapore Oceanarium)",
+                lat: 1.2582,
+                lng: 103.8206,
+                category: "核心景點",
+                transport: { mode: "walk", text: "🚶 輕軌站步行 5 分" },
+                desc: "全球頂級水族館，22 大主題展區、十萬隻海洋生物、超巨型深海觀景窗與魔鬼氈餵食秀。",
+                highlight: "🐠 室內舒適冷氣，建議停留 2.5-3 小時盡情探索。"
+            },
+            {
+                id: "d3-4",
+                day: "3",
+                order: 4,
+                time: "13:00-14:30",
+                name: "RWS WEAVE 美食園區午餐 (莆田 / 話匣子)",
+                lat: 1.2552,
+                lng: 103.8218,
+                category: "美食餐飲",
+                transport: { mode: "walk", text: "🚶 名勝世界商場內" },
+                desc: "米其林一星莆田 PUTIEN (#01-209)、話匣子海南雞飯 (#02-207) 或法式 Moutarde 甜點午餐。",
+                highlight: "🍜 各式精緻料理一應俱全，環境乾淨衛生。"
+            },
+            {
+                id: "d3-5",
+                day: "3",
+                order: 5,
+                time: "14:30-15:10",
+                name: "聖淘沙線纜車 (Sentosa Line) 西行至 Siloso Point",
+                lat: 1.2592,
+                lng: 103.8086,
+                category: "空中景觀",
+                transport: { mode: "cable", text: "🚡 Sentosa Line 纜車西行 10分 (備選 Bus A)" },
+                desc: "由 Imbiah Lookout 搭乘島內聖淘沙線纜車橫越叢林上空，直達西端 Siloso Point 站。",
+                highlight: "🚡 高空俯瞰西樂索海灘全景，亦可搭免費 Sentosa Bus A。"
+            },
+            {
+                id: "d3-6",
+                day: "3",
+                order: 6,
+                time: "15:10-16:10",
+                name: "西樂索砲台空中步道 (Fort Siloso Skywalk)",
+                lat: 1.2592,
+                lng: 103.8086,
+                category: "自然歷史",
+                transport: { mode: "walk", text: "🚶 纜車站直達步道入口" },
+                desc: "11 層樓高的透明玻璃透明觀景台與 181 公尺樹冠層空中步道，免門票飽覽海峽夕陽。",
+                highlight: "🌿 綠意盎然遮蔭佳，只走天空步道約 25 分鐘輕鬆省力。"
+            },
+            {
+                id: "d3-7",
+                day: "3",
+                order: 7,
+                time: "16:30-18:15",
+                name: "Skyline Luge 斜坡滑車 ＆ Skyride 登山吊椅",
+                lat: 1.2555,
+                lng: 103.8174,
+                category: "刺激遊樂",
+                transport: { mode: "bus", text: "🚌 免費 Beach Shuttle 15分 (Siloso Point ➔ 山腳站)" },
+                desc: "45 Siloso Beach Walk。戴安全帽搭吊椅上山，自駕滑車沿著 4 大重力彎道疾速俯衝！",
+                highlight: "⚠️ 女兒 121cm 可自駕滑車；搭乘登山吊椅需大人全程同座陪同。"
+            },
+            {
+                id: "d3-8",
+                day: "3",
+                order: 8,
+                time: "18:15-19:20",
+                name: "西樂索沙灘海景晚餐 (Coastes / Trapizza)",
+                lat: 1.2524,
+                lng: 103.8162,
+                category: "海景美食",
+                transport: { mode: "walk", text: "🚶 滑車終點步行 2 分" },
+                desc: "腳踩白沙欣賞落日晚霞，享用窯烤披薩、炸魚薯條與冰涼現榨果汁，渡假感滿分。",
+                highlight: "🏖️ 半戶外沙灘座位，設有兒童高腳椅與友善環境。"
+            },
+            {
+                id: "d3-9",
+                day: "3",
+                order: 9,
+                time: "19:40-20:00",
+                name: "時光之翼 (Wings of Time) 煙火水舞大秀",
+                lat: 1.2513,
+                lng: 103.8171,
+                category: "夜間大秀",
+                transport: { mode: "walk", text: "🚶 沙灘餐廳步行 3 分" },
+                desc: "以開放式海面為背景，融合水幕立體投影、3D 聲光特效、雷射光雕與震撼真火煙火！",
+                highlight: "🎇 務必認明 19:40 首場！20:00 完秀立刻免排隊搭車。"
+            },
+            {
+                id: "d3-10",
+                day: "3",
+                order: 10,
+                time: "20:10",
+                name: "返回 M Hotel (Beach Station 計程車站)",
+                lat: 1.2737,
+                lng: 103.8451,
+                category: "住宿大本營",
+                isHotel: true,
+                transport: { mode: "taxi", text: "🚕 Beach Station 計程車 9 分直達 (SGD 12-18)" },
+                desc: "秀場散場後 2 分鐘直達 Beach Station 計程車站，免去人擠人擠輕軌，9 分鐘直達飯店大門。",
+                highlight: "🚕 避開排隊人潮的最高效率秘訣。"
+            },
+
+            // ============ DAY 4 ============
+            {
+                id: "d4-1",
+                day: "4",
+                order: 1,
+                time: "07:00-09:00",
+                name: "M Hotel 早餐 ＆ 退房 Check-out",
+                lat: 1.2737,
+                lng: 103.8451,
+                category: "住宿大本營",
+                isHotel: true,
+                transport: { mode: "walk", text: "大廳辦理" },
+                desc: "享用飯店豐盛早餐，整理行李辦理 Check-out，準備專車前往樟宜機場 T3。",
+                highlight: "🧳 09:00 前備妥行李與護照出發。"
+            },
+            {
+                id: "d4-2",
+                day: "4",
+                order: 2,
+                time: "09:25-12:00",
+                name: "樟宜機場 T3 (eTRS 退稅 ➔ 免稅店大採購 ➔ 蝴蝶園)",
+                lat: 1.3556,
+                lng: 103.9866,
+                category: "機場伴手禮",
+                transport: { mode: "taxi", text: "🚕 計程車直達 20 分 (09:05 出發，提早 3 小時抵達)" },
+                desc: "出境大廳 L2 操作 eTRS 自助退稅 ➔ 託運報到 ➔ 出境管制區購買 Bengawan Solo 斑蘭蛋糕、TWG、Bacha 咖啡 ➔ Gate B1-B4 參觀熱帶蝴蝶園。",
+                highlight: "🍰 斑蘭蛋糕請於通關後第一時間搶購；退稅單店單日滿 SGD 100 即可辦理。"
+            },
+            {
+                id: "d4-3",
+                day: "4",
+                order: 3,
+                time: "12:25",
+                name: "起飛返台 (SIN 12:25 ➔ TPE 17:10)",
+                lat: 1.3586,
+                lng: 103.9899,
+                category: "返航航班",
+                transport: { mode: "walk", text: "T3 登機門登機" },
+                desc: "帶著滿滿的熱帶海灣回憶與伴手禮，搭乘 12:25 班機平安返回台灣（預計 17:10 抵達桃園機場）。",
+                highlight: "✈️ 4 天 3 夜新加坡親子自由行圓滿收官！"
+            }
+        ]
+    };
+
+    // ==========================================
+    // 2. MAP INITIALIZATION & TILE LAYERS
+    // ==========================================
+    const tileLayers = {
+        voyager: L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://carto.com/">CARTO</a> &copy; OpenStreetMap',
+            maxZoom: 19
+        }),
+        dark: L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://carto.com/">CARTO</a> &copy; OpenStreetMap',
+            maxZoom: 19
+        }),
+        osm: L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors',
+            maxZoom: 19
+        })
+    };
+
+    let currentTileKey = 'voyager';
+    const map = L.map('map', {
+        center: [1.2850, 103.8550],
+        zoom: 12,
+        zoomControl: true,
+        layers: [tileLayers.voyager]
+    });
+
+    // Layer Groups
+    let markerLayerGroup = L.featureGroup().addTo(map);
+    let polylineLayerGroup = L.featureGroup().addTo(map);
+
+    let activeDayFilter = 'all';
+
+    // ==========================================
+    // 3. RENDER FUNCTIONS
+    // ==========================================
+    function renderApp() {
+        renderTimeline();
+        renderMapFeatures();
+    }
+
+    function renderTimeline() {
+        const container = document.getElementById('timeline-container');
+        container.innerHTML = '';
+
+        const filterDays = (activeDayFilter === 'all') ? ['1', '2', '3', '4'] : [activeDayFilter];
+
+        filterDays.forEach(dayKey => {
+            const dayMeta = ROUTE_DATA.days[dayKey];
+            
+            // Day Summary Box
+            const summaryCard = document.createElement('div');
+            summaryCard.className = 'day-summary-card';
+            summaryCard.style.borderLeftColor = dayMeta.color;
+            summaryCard.innerHTML = `
+                <h3>
+                    <span>${dayMeta.name}</span>
+                    <span style="font-size:0.75rem; color:${dayMeta.color}; font-weight:700;"><i class="fa-solid fa-route"></i> Day ${dayKey}</span>
+                </h3>
+                <p>${dayMeta.summary}</p>
+            `;
+            container.appendChild(summaryCard);
+
+            // Timeline Items
+            const dayStops = ROUTE_DATA.stops.filter(s => s.day === dayKey);
+            dayStops.forEach((stop, index) => {
+                const item = document.createElement('div');
+                item.className = `timeline-item ${stop.isHotel ? 'is-hotel' : ''}`;
+                item.setAttribute('data-day', stop.day);
+                item.setAttribute('data-stop-id', stop.id);
+
+                const transportClass = stop.transport.mode || 'walk';
+                const transportIcon = {
+                    taxi: 'fa-taxi',
+                    bus: 'fa-bus-simple',
+                    mrt: 'fa-train-subway',
+                    cable: 'fa-cable-car',
+                    walk: 'fa-person-walking'
+                }[transportClass] || 'fa-location-dot';
+
+                item.innerHTML = `
+                    <div class="node-badge">${stop.isHotel ? '<i class="fa-solid fa-hotel"></i>' : stop.order}</div>
+                    <div class="item-card" onclick="focusStop('${stop.id}')">
+                        <div class="card-header">
+                            <span class="card-time"><i class="fa-regular fa-clock"></i> ${stop.time}</span>
+                            <span class="card-category">${stop.category}</span>
+                        </div>
+                        <div class="card-title">${stop.name}</div>
+                        <div class="card-transport ${transportClass}">
+                            <i class="fa-solid ${transportIcon}"></i> ${stop.transport.text}
+                        </div>
+                        <div class="card-desc">${stop.desc}</div>
+                        <div style="font-size:0.74rem; color:var(--primary); font-weight:600; margin-bottom:4px;">${stop.highlight}</div>
+                        <div class="card-actions">
+                            <button class="action-btn locate" onclick="event.stopPropagation(); focusStop('${stop.id}')">
+                                <i class="fa-solid fa-crosshairs"></i> 地圖定位
+                            </button>
+                            <a class="action-btn nav" href="https://www.google.com/maps/dir/?api=1&destination=${stop.lat},${stop.lng}" target="_blank" onclick="event.stopPropagation();">
+                                <i class="fa-solid fa-location-arrow"></i> Google 導航
+                            </a>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+        });
+    }
+
+    function renderMapFeatures() {
+        markerLayerGroup.clearLayers();
+        polylineLayerGroup.clearLayers();
+
+        const filterDays = (activeDayFilter === 'all') ? ['1', '2', '3', '4'] : [activeDayFilter];
+
+        // 1. Draw Markers
+        const filteredStops = ROUTE_DATA.stops.filter(s => filterDays.includes(s.day));
+
+        filteredStops.forEach(stop => {
+            const markerHtml = `
+                <div class="custom-map-marker day-${stop.day} ${stop.isHotel ? 'hotel' : ''}" style="width:30px; height:30px;">
+                    ${stop.isHotel ? '<i class="fa-solid fa-hotel" style="font-size:12px;"></i>' : stop.order}
+                </div>
+            `;
+
+            const customIcon = L.divIcon({
+                html: markerHtml,
+                className: '',
+                iconSize: [30, 30],
+                iconAnchor: [15, 15],
+                popupAnchor: [0, -18]
+            });
+
+            const marker = L.marker([stop.lat, stop.lng], { icon: customIcon }).addTo(markerLayerGroup);
+            marker.stopId = stop.id;
+
+            const popupContent = `
+                <div class="popup-box">
+                    <div class="popup-badge" style="background:${ROUTE_DATA.days[stop.day].color};">Day ${stop.day} · ${stop.time}</div>
+                    <div class="popup-title">${stop.name}</div>
+                    <div class="popup-meta"><i class="fa-solid fa-tag"></i> ${stop.category}</div>
+                    <div class="popup-highlight">${stop.desc}</div>
+                    <div style="font-size:0.72rem; color:#0B5F57; font-weight:700; margin-bottom:8px;">${stop.highlight}</div>
+                    <a class="popup-nav-btn" href="https://www.google.com/maps/dir/?api=1&destination=${stop.lat},${stop.lng}" target="_blank">
+                        <i class="fa-solid fa-diamond-turn-right"></i> 一鍵開啟 Google Maps 導航
+                    </a>
+                </div>
+            `;
+            marker.bindPopup(popupContent);
+
+            marker.on('click', () => {
+                highlightTimelineItem(stop.id);
+            });
+        });
+
+        // 2. Draw Route Polylines per Day
+        filterDays.forEach(dayKey => {
+            const dayStops = ROUTE_DATA.stops.filter(s => s.day === dayKey);
+            const latlngs = dayStops.map(s => [s.lat, s.lng]);
+            const dayColor = ROUTE_DATA.days[dayKey].color;
+
+            if (latlngs.length > 1) {
+                // Background shadow glow line
+                L.polyline(latlngs, {
+                    color: dayColor,
+                    weight: 8,
+                    opacity: 0.25,
+                    lineCap: 'round',
+                    lineJoin: 'round'
+                }).addTo(polylineLayerGroup);
+
+                // Main directional route polyline
+                L.polyline(latlngs, {
+                    color: dayColor,
+                    weight: 4,
+                    opacity: 0.85,
+                    dashArray: (dayKey === '3') ? '8, 8' : null, // Dashed for Sentosa Multi-modal
+                    lineCap: 'round',
+                    lineJoin: 'round'
+                }).addTo(polylineLayerGroup);
+            }
+        });
+
+        // Auto Fit Bounds
+        fitAllMarkers();
+    }
+
+    // ==========================================
+    // 4. INTERACTION HELPERS
+    // ==========================================
+    function selectDay(day) {
+        activeDayFilter = day;
+        document.querySelectorAll('.day-tab-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.getAttribute('data-day') === day);
+        });
+        renderApp();
+    }
+
+    function focusStop(stopId) {
+        const stop = ROUTE_DATA.stops.find(s => s.id === stopId);
+        if (!stop) return;
+
+        map.flyTo([stop.lat, stop.lng], 16, {
+            duration: 1.2,
+            easeLinearity: 0.25
+        });
+
+        markerLayerGroup.eachLayer(layer => {
+            if (layer.stopId === stopId) {
+                setTimeout(() => { layer.openPopup(); }, 600);
+            }
+        });
+
+        highlightTimelineItem(stopId);
+    }
+
+    function highlightTimelineItem(stopId) {
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            const isTarget = item.getAttribute('data-stop-id') === stopId;
+            item.classList.toggle('active', isTarget);
+            if (isTarget) {
+                item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        });
+    }
+
+    function fitAllMarkers() {
+        if (markerLayerGroup.getLayers().length > 0) {
+            map.fitBounds(markerLayerGroup.getBounds(), { padding: [50, 50], maxZoom: 15 });
+        }
+    }
+
+    function focusPreset(presetKey) {
+        const presets = {
+            all: { center: [1.2850, 103.8550], zoom: 12 },
+            hotel: { center: [1.2737, 103.8451], zoom: 16 },
+            jewel: { center: [1.3602, 103.9898], zoom: 15 },
+            marinabay: { center: [1.2835, 103.8610], zoom: 15 },
+            sentosa: { center: [1.2555, 103.8160], zoom: 14 }
+        };
+
+        if (presets[presetKey]) {
+            map.flyTo(presets[presetKey].center, presets[presetKey].zoom, {
+                duration: 1.2
+            });
+        }
+    }
+
+    function toggleTileLayer() {
+        map.removeLayer(tileLayers[currentTileKey]);
+        if (currentTileKey === 'voyager') {
+            currentTileKey = 'dark';
+            document.getElementById('tile-layer-name').innerText = '夜間暗色地圖';
+        } else if (currentTileKey === 'dark') {
+            currentTileKey = 'osm';
+            document.getElementById('tile-layer-name').innerText = 'OSM 標準地圖';
+        } else {
+            currentTileKey = 'voyager';
+            document.getElementById('tile-layer-name').innerText = '清新彩色地圖';
+        }
+        map.addLayer(tileLayers[currentTileKey]);
+    }
+
+    function toggleSidebarMobile() {
+        const sidebar = document.getElementById('sidebar');
+        sidebar.classList.toggle('collapsed');
+    }
+
+    // Initialize App
+    window.addEventListener('DOMContentLoaded', () => {
+        renderApp();
+    });
+</script>
+
+</body>
+</html>
